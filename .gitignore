@@ -1,0 +1,6 @@
+*.log
+*.pdf
+*.RData
+*.Rhistory
+*.pyc
+
