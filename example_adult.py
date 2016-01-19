@@ -1,7 +1,8 @@
 import numpy as np
-from scipy.stats import mode
+from scipy.stats import mode, itemfreq
 from scipy import delete
-from sklearn.preprocessing import StandardScaler
+import matplotlib.pylab as plt
+
 from missing_data_imputation import Imputer
 
 
@@ -45,3 +46,40 @@ data_facanal = imp.factor_analysis(x, cat_cols, missing_data_cond)
 # replace missing data with knn
 print 'imputing with K-Nearest Neighbors'
 data_knn = imp.knn(x, n_neighbors, np.mean, missing_data_cond, cat_cols)
+
+def compute_histogram(data, labels):
+    histogram = itemfreq(sorted(data))
+    for label in labels:
+        if label not in histogram[:,0]:
+            histogram = np.vstack((histogram,
+                                   np.array([[label, 0]], dtype=object)))
+    histogram = histogram[histogram[:,0].argsort()]
+    return histogram
+
+# compute histograms
+labels = np.unique(x[:,1])
+freq_data = {}
+freq_data['Raw Data'] = compute_histogram(x[:,1], labels)
+freq_data['Mode Replacement'] = compute_histogram(data_mode[:,1], labels)
+freq_data['Drop'] = compute_histogram(data_drop[:,1], labels)
+freq_data['RF prediction'] = compute_histogram(data_predicted[:,1], labels)
+freq_data['PCA Imputation'] = compute_histogram(data_facanal[:,1], labels)
+freq_data['KNN Imputation'] = compute_histogram(data_knn[:,1], labels)
+
+# plot histograms given feature with missing data
+n_methods = len(freq_data.keys())
+bins = np.arange(len(labels))
+width = .25
+fig, ax = plt.subplots(figsize=(12,8))
+
+for i in xrange(n_methods):
+    key = sorted(freq_data.keys())[i]
+    offset = i*2*width/float(n_methods)
+    ax.bar(bins+offset, freq_data[key][:,1].astype(int), width, label=key,
+           color=plt.cm.hot(i/float(n_methods)), align='center')
+
+ax.set_xticks(bins + width)
+ax.set_xticklabels(labels, rotation=45)
+plt.legend()
+plt.tight_layout()
+plt.show()
