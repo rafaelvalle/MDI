@@ -1,5 +1,5 @@
 # MDI
-Missing Data Imputation Python Library (v. 0.1)
+Missing Data Imputation Python Library (version 0.1)
 
 This repository offers techniques for handling missing data and encoding categorical data such that it is appropriate to neural network classifiers and other tasks. We provide six different imputation strategies and include examples using the ADULT dataset.
 
