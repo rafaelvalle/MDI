@@ -77,8 +77,23 @@ class Imputer(object):
 
 
     def one_hot(self, x, missing_data_cond, in_place=False):
-        # create a one-hot row for each observation to mark whether or not
-        # values are present
+        """Create a one-hot row for each observation
+
+        Parameters
+        ----------
+        x : np.ndarray
+            Matrix with categorical data, where rows are observations and
+            columns are features
+
+        missing_data_cond : function
+            Method that takes one value and returns True if it represents
+            missing data or false otherwise.
+
+        Returns
+        -------
+        data : np.ndarray
+            Matrix with categorical data replaced with one-hot rows
+        """
 
         if in_place:
             data = x
@@ -347,7 +362,8 @@ class Imputer(object):
         Parameters
         ----------
         x : np.ndarray
-            Matrix with categorical data
+            Matrix with categorical data, where rows are observations and
+            columns are features
 
         cols: tuple <int>
             Index of columns with categorical data
