@@ -3,7 +3,7 @@ Missing Data Imputation Python Library (version 0.1)
 
 This repository offers techniques for handling missing data and encoding categorical data such that it is appropriate to neural network classifiers and other tasks. We provide six different imputation strategies and include examples using the ADULT dataset.
 
-## Techniques for handling missing data
+## Techniques for handling categorical missing data
 We categorize proposed imputation methods into six groups listed below [1]:
 
 **Case substitution**
