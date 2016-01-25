@@ -26,5 +26,7 @@ Perform factor analysis (e.g., principal component analysis (PCA)) on the design
 
 ## ADULT Dataset example ##
 The figure below shows frequency of job category in the ADULT dataset before
-and after the imputation techniques above were used.
+and after the imputation techniques above were used.  
 Code can be found [here](example_adult.py)
+
+![ADULT dataset Imputation](data_hist_imput.png)
