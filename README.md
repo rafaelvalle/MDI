@@ -23,3 +23,8 @@ Train a prediction model (e.g., random forests) to predict the missing value.
 
 **Factor analysis**
 Perform factor analysis (e.g., principal component analysis (PCA)) on the design matrix, project the design matrix onto the first N eigenvectors and replace the missing values by the values that might be given by the projected design matrix.
+
+## ADULT Dataset example ##
+The figure below shows frequency of job category in the ADULT dataset before
+and after the imputation techniques above were used.
+Code can be found [here](example_adult.py)
