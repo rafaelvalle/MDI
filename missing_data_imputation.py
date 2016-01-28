@@ -120,7 +120,8 @@ class Imputer(object):
 
     def knn(self, x, k, summary_func, missing_data_cond, cat_cols,
             in_place=False, verbose=False):
-        """ Replace missing values with the mean or median of knn
+        """ Replace missing values with the summary function of K-Nearest
+        Neighbors
 
         Parameters
         ----------
