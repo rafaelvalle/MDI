@@ -29,6 +29,7 @@ x = np.delete(x, miss_data_rows, axis=0)
 x = x[:1000]
 ratios = np.arange(10, 100, 10)
 
+
 def pert_data(x, cat_cols, ratio, missing_data_symbol, in_place=False):
     """Perturbs data by substituting existing values with missing data symbol
     such that each feature has a minimum missing data ratio
@@ -175,7 +176,7 @@ for col in miss_data_cols:
                               key)
         axis += 1
 
-plt.savefig('conf_matrix_miss_ratio_{}.png'.format(ratio), dpi=300)
+plt.savefig('mcar_conf_matrix_miss_ratio_{}.png'.format(ratio), dpi=300)
 
 
 #######################
@@ -222,4 +223,4 @@ axes.flat[-1].legend(loc='best', prop={'size': 8},
                         shadow=True, fancybox=True)
 axes.flat[-1].set_title('Error rates')
 
-plt.savefig('dist_error_miss_ratio_{}.png'.format(ratio), dpi=300)
+plt.savefig('mcar_dist_error_miss_ratio_{}.png'.format(ratio), dpi=300)
