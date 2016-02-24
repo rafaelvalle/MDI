@@ -23,27 +23,46 @@ class Imputer(object):
         """
 
     def drop(self, x, missing_data_cond):
+        """ Drops all observations that have missing data
+
+        Parameters
+        ----------
+        x : np.ndarray
+            Matrix with categorical data, where rows are observations and
+            columns are features
+
+        missing_data_cond : function
+            Method that takes one value and returns True if it represents
+            missing data or false otherwise.
+        """
+
         # drop observations with missing values
         return x[np.sum(missing_data_cond(x), axis=1) == 0]
-
 
     def replace(self, x, missing_data_cond, in_place=False):
         """ Replace missing data with a random observation with data
 
+        Parameters
+        ----------
+        x : np.ndarray
+            Matrix with categorical data, where rows are observations and
+            columns are features
+
+        missing_data_cond : function
+            Method that takes one value and returns True if it represents
+            missing data or false otherwise.
         """
         if in_place:
             data = x
         else:
             data = np.copy(x)
 
-
         for col in xrange(x.shape[1]):
-            nan_ids = missing_data_cond(x[:,col])
+            nan_ids = missing_data_cond(x[:, col])
             val_ids = np.random.choice(np.where(nan_ids == False)[0],
                                        np.sum(nan_ids == True))
             data[nan_ids, col] = data[val_ids, col]
         return data
-
 
     def summarize(self, x, summary_func, missing_data_cond, in_place=False):
         """ Substitutes missing values with a statistical summary of each
@@ -75,7 +94,6 @@ class Imputer(object):
 
         return data
 
-
     def one_hot(self, x, missing_data_cond, in_place=False):
         """Create a one-hot row for each observation
 
@@ -105,21 +123,21 @@ class Imputer(object):
         miss_cols_uniq = np.unique(miss_cols)
 
         for miss_col in miss_cols_uniq:
-            uniq_vals, indices = np.unique(data[:,miss_col],
-                                          return_inverse=True)
+            uniq_vals, indices = np.unique(data[:, miss_col],
+                                           return_inverse=True)
 
             data = np.column_stack((data, np.eye(uniq_vals.shape[0],
                                                  dtype=int)[indices]))
 
         # remove categorical columns with missing data
         data = np.delete(data, miss_cols, 1)
-        # val_cols = [n for n in xrange(data.shape[1]) if n not in miss_cols_uniq]
+        # val_cols = [n for n in xrange(data.shape[1])
+        #             if n not in miss_cols_uniq]
         # data = data[:, val_cols]
         return data
 
-
     def knn(self, x, k, summary_func, missing_data_cond, cat_cols,
-            in_place=False, verbose=False):
+            in_place=False):
         """ Replace missing values with the summary function of K-Nearest
         Neighbors
 
@@ -131,18 +149,16 @@ class Imputer(object):
         """
 
         def row_col_from_condensed_idx(n_obs, row):
-            b = 1 -2 * n_obs
+            b = 1 - 2 * n_obs
             x = np.floor((-b - np.sqrt(b**2 - 8*row))/2).astype(int)
             y = row + x*(b + x + 2)/2 + 1
             return (x, y)
-
 
         def condensed_idx_from_row_col(row, col, n_rows):
             if row > col:
                 row, col = col, row
 
             return row*n_rows + col - row*(row+1)/2 - row - 1
-
 
         if in_place:
             data = x
@@ -158,11 +174,13 @@ class Imputer(object):
         col = 0
         cat_ids_comp = []
         while col < max(cat_cols):
-            if isinstance(data_complete[0, col], basestring) and not data_complete[0, col].isdigit():
+            if isinstance(data_complete[0, col], basestring) \
+                    and not data_complete[0, col].isdigit():
                 cat_ids_comp.append(col)
             col += 1
 
-        data_complete = imp.binarize_data(data_complete, cat_ids_comp).astype(float)
+        data_complete = imp.binarize_data(data_complete,
+                                          cat_ids_comp).astype(float)
 
         # normalize features
         scaler = StandardScaler().fit(data_complete)
@@ -174,6 +192,7 @@ class Imputer(object):
 
         # compute distance matrix with nan values set to 0.0
         print 'Computing distance matrix'
+        # change such that p(dist(x,y)) is the new metric
         dist_cond = pdist(data_complete, metric='euclidean')
 
         print 'Substituting missing values'
@@ -184,7 +203,7 @@ class Imputer(object):
 
             # get indices of distances in condensed form
             ids_cond = [condensed_idx_from_row_col(miss_row_idx, idx, n_obs)
-                         for idx in xrange(n_obs) if idx not in miss_rows]
+                        for idx in xrange(n_obs) if idx not in miss_rows]
             ids_cond = np.array(ids_cond, dtype=int)
 
             # compute k-nearest neighbors
@@ -198,15 +217,17 @@ class Imputer(object):
 
             # cols with missing data
             obs_nan_cols = np.where(missing_data_cond(x[miss_row_idx]))[0]
+            if len(good_obs_ids) >= k:
+                # get feature mode value given knn
+                knn_mean_vals, _ = mode(data[:, obs_nan_cols][good_obs_ids])
 
-            # get feature mode value given knn
-            knn_mean_vals, _ = mode(data[:,obs_nan_cols][good_obs_ids])
-            if verbose:
-                print 'Substituting {}-th of {} total \n Value {}'.format(j,
-                    len(miss_rows), knn_mean_vals)
-            data[miss_row_idx, obs_nan_cols] = knn_mean_vals.flatten()
+                if (j % (len(miss_rows) / 5)) == 0:
+                    print 'Substituting {}-th of {} total \n Value {}'.format(j,
+                        len(miss_rows), knn_mean_vals)
+                data[miss_row_idx, obs_nan_cols] = knn_mean_vals.flatten()
+            else:
+                print 'Observation {} has not enough neigbhors'.format(j)
         return data
-
 
     def predict(self, x, cat_cols, missing_data_cond, in_place=False):
         """ Uses random forest for predicting missing values
@@ -214,7 +235,7 @@ class Imputer(object):
         Parameters
         ----------
         cat_cols : int tuple
-            Index of columns that are categorical
+            index of columns that are categorical
 
         """
 
@@ -238,7 +259,7 @@ class Imputer(object):
         for cat_col in cat_cols:
             factors, labels = pd.factorize(data[:, cat_col])
             factor_labels[cat_col] = labels
-            data_factorized[:,cat_col] = factors
+            data_factorized[:, cat_col] = factors
 
         # values are integers, convert accordingly
         data_factorized = data_factorized.astype(int)
@@ -272,9 +293,8 @@ class Imputer(object):
 
         return data
 
-
     def factor_analysis(self, x, cat_cols, missing_data_cond, threshold=0.9,
-                        in_place = False):
+                        in_place=False):
         """ Performs principal component analisis and replaces missing data with
         values obtained from the data projected onto N principal components
 
@@ -302,7 +322,7 @@ class Imputer(object):
 
         # questionable whether high variance = high importance.
         u, s, vt = svds(data_factorized, data_factorized.shape[1] - 1,
-                        which = 'LM')
+                        which='LM')
 
         # find number of eigenvalues that explain 90% of variance
         n_pcomps = 1
@@ -354,10 +374,11 @@ class Imputer(object):
             factors_labels[col] = (factors_labels)
             data[:,col] = factors
 
-        return data, factor_labels
+        return data, factors_labels
 
 
-    def binarize_data(self, x, cols, one_minus_one=True, in_place=False):
+    def binarize_data(self, x, cols, miss_data_symbol=False,
+                      one_minus_one=True, in_place=False):
         """Replace column in cols with one-hot representation of cols
 
         Parameters
@@ -380,6 +401,7 @@ class Imputer(object):
         else:
             data = np.copy(x)
 
+
         for col in cols:
             uniq_vals, indices = np.unique(data[:,col],
                                           return_inverse=True)
@@ -390,6 +412,12 @@ class Imputer(object):
             else:
                 data = np.column_stack((data, np.eye(uniq_vals.shape[0],
                                                      dtype=int)[indices]))
+            # add missing data column to feature
+            if miss_data_symbol is not False and \
+                    miss_data_symbol not in uniq_vals:
+                data = np.column_stack((data,
+                                        -one_minus_one * np.ones((len(data), 1),
+                                                                  dtype=int)))
 
         # remove columns with categorical variables
         val_cols = [n for n in xrange(data.shape[1]) if n not in cols]
