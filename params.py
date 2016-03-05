@@ -20,6 +20,7 @@ feats_test_folder = "data/test/features/"
 labels_test_folder = "data/test/labels/"
 perturb_folder = "data/perturbed/"
 scalers_folder = "data/scalers/"
+imputed_folder = "data/imputed"
 
 # neural network parameters
 nnet_params_dict = {}
