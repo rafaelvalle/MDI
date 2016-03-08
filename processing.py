@@ -8,31 +8,6 @@ def set_trace():
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
 
-def impute(data, imputer, imp_method, params_dict):
-    imp_data = None
-
-    if imp_method == 'RandomReplace':
-        imp_data = imputer.replace(data, params_dict['miss_data_cond'])
-    elif imp_method == 'Summary':
-        imp_data = imputer.summarize(data,
-                                    params_dict['summary_func'],
-                                    params_dict['miss_data_cond'])
-    elif imp_method == 'RandomForest':
-        imp_data = imputer.predict(data,
-                                   params_dict['cat_cols'],
-                                   params_dict['miss_data_cond'])
-    elif imp_method == 'PCA':
-        imp_data = imputer.factor_analysis(data,
-                                           params_dict['cat_cols'],
-                                           params_dict['miss_data_cond'])
-    elif imp_method == 'KNN':
-        set_trace()
-        imp_data = imputer.knn(data,
-                               params_dict['n_neighbors'],
-                               params_dict['knn_summary_func'],
-                               params_dict['miss_data_cond'],
-                               params_dict['cat_cols'])
-    return imp_data
 
 def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
                     in_place=False):
@@ -122,4 +97,3 @@ def compute_error_rate(y, y_hat, feat_imp_ids):
         error_rate[col] = errors / float(len(ids))
 
     return error_rate
-
