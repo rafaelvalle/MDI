@@ -45,19 +45,17 @@ for ratio in ratios:
     pert_data, _ = perturbate_data(x, params_dict['cat_cols'], ratio, monotone,
                                    params_dict['miss_data_symbol'])
 
-    set_trace()
-     path = os.path.join(perturb_folder,
+    path = os.path.join(perturb_folder,
                         'adult_train_pert_mono_{}_ratio_{}.csv'.format(monotone,
                                                                        ratio))
     # save perturbed data to disk as csv
     print '\tSaving perturbed data to {}'.format(path)
     np.savetxt(path, pert_data, delimiter=",", fmt="%s")
 
-    # for imp_method in imp_methods:
-    for imp_method in []:
+    for imp_method in imp_methods:
         print '\tImputing with {}'.format(imp_method)
         imp = Imputer()
-        data = impute(x, imp, imp_method, params_dict)
+        data = impute(pert_data, imp, imp_method, params_dict)
 
         path = "data/imputed/{}_mono_{}_ratio_{}.csv".format(imp_method,
                                                              monotone,
