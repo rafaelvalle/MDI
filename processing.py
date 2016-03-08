@@ -86,7 +86,7 @@ def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
             miss_dict[col].append(row)
         """
     else:
-        # slow version
+        # slow
         row_col_miss = defaultdict(zero)
         miss_dict = defaultdict(list)
         i = 0
