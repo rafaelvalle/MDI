@@ -4,7 +4,7 @@ from scipy.stats import mode
 # imputation parameters
 params_dict = {}
 # imp_methods = ['RandomReplace', 'Summary', 'RandomForest', 'PCA', 'KNN']
-imp_methods = ['RandomReplace', 'Summary', 'RandomForest', 'PCA']
+imp_methods = ('KNN',)
 params_dict['miss_data_symbol'] = '?'
 params_dict['miss_data_cond'] = lambda x: x == params_dict['miss_data_symbol']
 params_dict['cat_cols'] = (1, 3, 4, 5, 6, 7, 8, 12)
@@ -28,3 +28,6 @@ nnet_params_dict['alphas'] = (1, 4, 9)
 nnet_params_dict['batch_sizes'] = (32, 512, 4096)
 nnet_params_dict['gammas'] = np.array([ 0.1 ,  0.01])
 nnet_params_dict['max_epoch'] = 50
+
+# random number seed
+rand_num_seed = 1
