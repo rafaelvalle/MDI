@@ -31,7 +31,7 @@ def impute(data, imputer, imp_method, params_dict):
                                params_dict['n_neighbors'],
                                params_dict['knn_summary_func'],
                                params_dict['miss_data_cond'],
-                               params_dict['cat_col'])
+                               params_dict['cat_cols'])
     return imp_data
 
 def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
