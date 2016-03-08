@@ -20,13 +20,14 @@ feats_test_folder = "data/test/features/"
 labels_test_folder = "data/test/labels/"
 perturb_folder = "data/perturbed/"
 scalers_folder = "data/scalers/"
+imputed_folder = "data/imputed"
 
 # neural network parameters
 nnet_params_dict = {}
 nnet_params_dict['n_folds'] = 3
 nnet_params_dict['alphas'] = (1, 4, 9)
 nnet_params_dict['batch_sizes'] = (32, 512, 4096)
-nnet_params_dict['gammas'] = np.array([ 0.1 ,  0.01])
+nnet_params_dict['gammas'] = np.array([0.1, 0.01], dtype=np.float32)
 nnet_params_dict['max_epoch'] = 50
 
 # random number seed
