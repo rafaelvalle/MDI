@@ -26,10 +26,12 @@ def impute(data, imputer, imp_method, params_dict):
                                            params_dict['cat_cols'],
                                            params_dict['miss_data_cond'])
     elif imp_method == 'KNN':
+        set_trace()
         imp_data = imputer.knn(data,
                                params_dict['n_neighbors'],
                                params_dict['knn_summary_func'],
-                               params_dict['miss_data_cond'])
+                               params_dict['miss_data_cond'],
+                               params_dict['cat_cols'])
     return imp_data
 
 def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
@@ -86,7 +88,7 @@ def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
             miss_dict[col].append(row)
         """
     else:
-        # slow version
+        # slow
         row_col_miss = defaultdict(zero)
         miss_dict = defaultdict(list)
         i = 0

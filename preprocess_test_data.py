@@ -1,17 +1,21 @@
 import numpy as np
 import cPickle as pickle
-import os
+import os, random
 from scipy import delete
 from missing_data_imputation import Imputer
 from processing import impute
 from params import imp_methods, params_dict, scalers_folder
 from params import feats_test_folder, labels_test_folder
+from params import rand_num_seed
 
 
 def set_trace():
     from IPython.core.debugger import Pdb
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
+
+np.random.seed(rand_num_seed)
+random.seed(rand_num_seed)
 
 # load features and labels
 x = np.genfromtxt('data/adult-test-raw', delimiter=', ', dtype=object)

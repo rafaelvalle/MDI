@@ -1,18 +1,22 @@
 import numpy as np
 import cPickle as pkl
-import os
+import os, random
 from scipy import delete
 from sklearn.preprocessing import StandardScaler
 from missing_data_imputation import Imputer
 from processing import impute, perturbate_data
 from params import imp_methods, params_dict, scalers_folder
 from params import feats_train_folder, labels_train_folder, perturb_folder
+from params import rand_num_seed
 
 
 def set_trace():
     from IPython.core.debugger import Pdb
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
+
+np.random.seed(rand_num_seed)
+random.seed(rand_num_seed)
 
 # load features and labels
 x = np.genfromtxt('data/adult-train-raw', delimiter=', ', dtype=object)
@@ -41,14 +45,16 @@ for ratio in ratios:
     pert_data, _ = perturbate_data(x, params_dict['cat_cols'], ratio, monotone,
                                    params_dict['miss_data_symbol'])
 
-    path = os.path.join(perturb_folder,
+    set_trace()
+     path = os.path.join(perturb_folder,
                         'adult_train_pert_mono_{}_ratio_{}.csv'.format(monotone,
                                                                        ratio))
     # save perturbed data to disk as csv
     print '\tSaving perturbed data to {}'.format(path)
     np.savetxt(path, pert_data, delimiter=",", fmt="%s")
 
-    for imp_method in imp_methods:
+    # for imp_method in imp_methods:
+    for imp_method in []:
         print '\tImputing with {}'.format(imp_method)
         imp = Imputer()
         data = impute(x, imp, imp_method, params_dict)
