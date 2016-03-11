@@ -1,11 +1,9 @@
 # code adapted from lasagne tutorial
 # http://lasagne.readthedocs.org/en/latest/user/tutorial.html
 
-import sys, time, os
-from ntpath import basename
-from os.path import splitext
+import time
+import os
 from itertools import product
-import cPickle as pickle
 import numpy as np
 from sklearn.cross_validation import KFold
 import theano
@@ -13,13 +11,15 @@ from theano import tensor as T
 import lasagne
 from params import nnet_params_dict, feats_train_folder
 
+
 def set_trace():
     from IPython.core.debugger import Pdb
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
 
-def build_network(input_var, shape, nonlins, depth=2, 
-                  widths=(1000,1000, 10), drops=(0.2, 0.5)): 
+
+def build_network(input_var, shape, nonlins, depth=2,
+                  widths=(1000, 1000, 10), drops=(0.2, 0.5)):
     """
     Parameters
     ----------
@@ -28,16 +28,16 @@ def build_network(input_var, shape, nonlins, depth=2,
     shape : tuple of int or None (batchsize, rows, cols)
         Shape of the input. Any element can be set to None to indicate that
         dimension is not fixed at compile time
-        
+
     """
 
     # GlorotUniform is the default mechanism for initializing weights
     for i in range(depth):
         if i == 0:
             network = lasagne.layers.InputLayer(shape=shape,
-                                                input_var=input_var) 
+                                                input_var=input_var)
         else:
-            network = lasagne.layers.DenseLayer(network, 
+            network = lasagne.layers.DenseLayer(network,
                                                 widths[i],
                                                 nonlinearity=nonlins[i])
         if drops[i] != None:
@@ -49,8 +49,10 @@ def build_network(input_var, shape, nonlins, depth=2,
 def floatX(X):
     return np.asarray(X, dtype=theano.config.floatX)
 
+
 def zerosX(X):
-	return np.zeros(X, dtype=theano.config.floatX)
+    return np.zeros(X, dtype=theano.config.floatX)
+
 
 def init_weights(shape):
     return theano.shared(floatX(np.random.randn(*shape) * 0.01))
@@ -69,6 +71,7 @@ def model(X, w_h, w_o):
     pyx = T.nnet.softmax(T.dot(h, w_o))
     return pyx
 
+
 def iterate_minibatches(inputs, targets, batchsize, shuffle=False):
     assert len(inputs) == len(targets)
     if shuffle:
@@ -81,10 +84,11 @@ def iterate_minibatches(inputs, targets, batchsize, shuffle=False):
             excerpt = slice(start_idx, start_idx + batchsize)
         yield inputs[excerpt], targets[excerpt]
 
+
 def batch_ids(batch_size, x_train, train_idx):
     # change to iterator
     ids = zip(range(0, len(x_train[train_idx]), batch_size),
-        range(batch_size, len(x_train[train_idx]), batch_size))
+              range(batch_size, len(x_train[train_idx]), batch_size))
     return ids
 
 verbose = True
@@ -94,14 +98,14 @@ for (include, train_filename, test_filename) in filepaths:
     if include == '1':
         print '\nExecuting {}'.format(train_filename)
         # Load training and test sets
-        x_train = np.load(os.path.join(feats_train_folder, 
+        x_train = np.load(os.path.join(feats_train_folder,
                                        train_filename)).astype(np.float32)
 
-        y_train = x_train[:,-1].astype(int)
-        #y_train = (np.eye(2, dtype=np.float32)[x_train[:,-1].astype(int)])
+        y_train = x_train[:, -1].astype(int)
+        # y_train = (np.eye(2, dtype=np.float32)[x_train[:,-1].astype(int)])
 
         # remove label column from x_train
-        x_train = x_train[:,:-1]
+        x_train = x_train[:, :-1]
 
         # Network topology
         n_inputs = x_train.shape[1]
@@ -136,14 +140,14 @@ for (include, train_filename, test_filename) in filepaths:
             batch_size = int(params_mat[param_idx, 2])
             shape = (batch_size, x_train.shape[1])
 
-            # specify input and target theano data types 
+            # specify input and target theano data types
             input_var = T.fmatrix('input_var')
             # input_var = T.fvector()
             target_var = T.ivector()
-            #target_var = T.fmatrix()
-            
+            # target_var = T.fmatrix()
+
             # build neural network model
-            network = build_network(input_var, shape, nonlins, depth, widths, 
+            network = build_network(input_var, shape, nonlins, depth, widths,
                                     drops)
 
             # create loss expression for training
@@ -151,8 +155,8 @@ for (include, train_filename, test_filename) in filepaths:
             py_x = model(input_var, w_h, w_o)
             y_x = T.argmax(py_x, axis=1)
 
-            cost = T.mean(T.nnet.categorical_crossentropy(py_x, target_var), 
-			  dtype=theano.config.floatX)
+            cost = T.mean(T.nnet.categorical_crossentropy(py_x, target_var),
+                          dtype=theano.config.floatX)
             """
             prediction = lasagne.layers.get_output(network)
             loss = lasagne.objectives.categorical_crossentropy(prediction,
@@ -165,10 +169,10 @@ for (include, train_filename, test_filename) in filepaths:
             updates = sgd(cost, params, gamma=gamma)
             """
             params = lasagne.layers.get_all_params(network, trainable=True)
-            updates = lasagne.updates.adadelta(loss, params, 
+            updates = lasagne.updates.adadelta(loss, params,
                                                learning_rate=gamma,
                                                rho=decay_rate)
-   
+
             # create loss expression for validation and classification accuracy
             # Deterministic forward pass to disable droupout layers
             test_prediction = lasagne.layers.get_output(network,
@@ -178,8 +182,7 @@ for (include, train_filename, test_filename) in filepaths:
                                                             target_var)
             test_loss = test_loss.mean()
             test_acc = T.mean(T.eq(T.argmax(test_prediction, axis=1),
-            target_var),
-                              dtype=theano.config.floatX)
+                                   target_var), dtype=theano.config.floatX)
 
             # compile functions for performing training step and returning
             # corresponding training loss
@@ -210,46 +213,48 @@ for (include, train_filename, test_filename) in filepaths:
                     train_err = 0
                     train_batches = 0
                     start_time = time.time()
-                    for start, end in batch_ids(batch_size, x_train, 
+                    for start, end in batch_ids(batch_size, x_train,
                                                 train_idx):
                         train_err += train_fn(x_train[train_idx][start:end],
                                               y_train[train_idx][start:end])
                         train_batches += 1
 
-
                     val_err = 0
                     val_acc = 0
                     val_batches = 0
-                    for start, end in batch_ids(batch_size, x_train, 
+                    for start, end in batch_ids(batch_size, x_train,
                                                 train_idx):
                         err, acc = val_fn(x_train[val_idx], y_train[val_idx])
-                        test_err += err
-                        test_acc += acc
-                        test_batches += 1
+                        val_err += err
+                        val_acc += acc
+                        val_batches += 1
 
-                    error_rate = (1 - (test_acc / test_batches)) * 100
-                    test_loss = test_err / test_batches
+                    val_err_rate = (1 - (val_acc / val_batches)) * 100
+                    val_loss = val_err / val_batches
 
                     print("Final results:")
-                    print("  test loss:\t\t\t{:.6f}".format(test_loss))
-                    print("  test error rate:\t\t{:.2f} %".format(error_rate))
+                    print("  test loss:\t\t\t{:.6f}".format(val_loss))
+                    print("  test error rate:\t\t{:.2f} %".format(val_err_rate))
 
                 error_rates.append(1 - test_acc)
-                test_costs.append(test_err)
-                running_time.append(np.around((time.time() - start_time) / 60., 1))
+                test_costs.append(val_err)
+                running_time.append(np.around((time.time() - start_time) / 60.,
+                                              1))
                 fold += 1
 
-            params_mat[param_idx, 3] = np.mean(error_rate)
-            params_mat[param_idx, 4] = np.mean(test_cost)
+            params_mat[param_idx, 3] = np.mean(val_err_rate)
+            params_mat[param_idx, 4] = np.mean(val_loss)
             params_mat[param_idx, 5] = np.mean(running_time)
 
-            print 'alpha {} gamma {} batchsize {} error rate {} test cost {} running time {}'.format(params_mat[param_idx,0],
-                params_mat[param_idx,1],
-                params_mat[param_idx,2],
-                params_mat[param_idx,3],
-                params_mat[param_idx,4],
-                params_mat[param_idx,5])
-
+            print('alpha {} gamma {} batchsize {}'
+                  'error rate {} test cost {}'
+                  'running time {}'.format(params_mat[param_idx, 0],
+                                           params_mat[param_idx, 1],
+                                           params_mat[param_idx, 2],
+                                           params_mat[param_idx, 3],
+                                           params_mat[param_idx, 4],
+                                           params_mat[param_idx, 5]))
 
         # Save params matrix to disk
-        params_mat.dump('results/train/{}_results.np'.format(train_filename[:-3]))
+        params_mat.dump(('results/train/{}_results.np'
+                         ''.format(train_filename[:-3])))
