@@ -26,7 +26,6 @@ def impute(data, imputer, imp_method, params_dict):
                                            params_dict['cat_cols'],
                                            params_dict['miss_data_cond'])
     elif imp_method == 'KNN':
-        set_trace()
         imp_data = imputer.knn(data,
                                params_dict['n_neighbors'],
                                params_dict['knn_summary_func'],
