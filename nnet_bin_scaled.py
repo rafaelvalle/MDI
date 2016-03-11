@@ -15,14 +15,14 @@ def set_trace():
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
 
-
 def floatX(X):
     return np.asarray(X, dtype=theano.config.floatX)
 
+def zerosX(X):
+	return np.zeros(X, dtype=theano.config.floatX)
 
 def init_weights(shape):
     return theano.shared(floatX(np.random.randn(*shape) * 0.01))
-
 
 def sgd(cost, params, gamma):
     grads = T.grad(cost=cost, wrt=params)
@@ -30,7 +30,6 @@ def sgd(cost, params, gamma):
     for p, g in zip(params, grads):
         updates.append([p, p - g * gamma])
     return updates
-
 
 def model(X, w_h, w_o):
     h = T.nnet.sigmoid(T.dot(X, w_h))
@@ -44,8 +43,8 @@ for (include, train_filename, test_filename) in filepaths:
     if include == '1':
         print '\nExecuting {}'.format(train_filename)
         # Load training and test sets
-        x_train = np.load(os.path.join(feats_train_folder, train_filename))
-        y_train = (np.eye(2)[x_train[:,-1].astype(int)])
+        x_train = np.load(os.path.join(feats_train_folder, train_filename)).astype(np.float32)
+        y_train = (np.eye(2, dtype=np.float32)[x_train[:,-1].astype(int)])
 
         # remove label column from x_train
         x_train = x_train[:,:-1]
@@ -64,11 +63,12 @@ for (include, train_filename, test_filename) in filepaths:
         # Dictionary to store results
         results_dict = {}
 
-        params_mat = np.array([x for x in product(alphas, gammas, batch_sizes)])
+        params_mat = np.array([x for x in product(alphas, gammas, batch_sizes)], 
+			       dtype=theano.config.floatX)
         params_mat = np.column_stack((params_mat,
-                                         np.zeros(params_mat.shape[0]),
-                                         np.zeros(params_mat.shape[0]),
-                                         np.zeros(params_mat.shape[0])))
+                                         zerosX(params_mat.shape[0]),
+                                         zerosX(params_mat.shape[0]),
+                                         zerosX(params_mat.shape[0])))
 
         for param_idx in xrange(params_mat.shape[0]):
             alpha = params_mat[param_idx, 0]
@@ -87,7 +87,9 @@ for (include, train_filename, test_filename) in filepaths:
             py_x = model(X, w_h, w_o)
             y_x = T.argmax(py_x, axis=1)
 
-            cost = T.mean(T.nnet.categorical_crossentropy(py_x, Y))
+            cost = T.mean(T.nnet.categorical_crossentropy(py_x, Y), 
+			  dtype=theano.config.floatX)
+
             params = [w_h, w_o]
 
             updates = sgd(cost, params, gamma=gamma)
