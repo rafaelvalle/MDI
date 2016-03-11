@@ -121,4 +121,3 @@ def compute_error_rate(y, y_hat, feat_imp_ids):
         error_rate[col] = errors / float(len(ids))
 
     return error_rate
-
