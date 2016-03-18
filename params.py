@@ -34,7 +34,7 @@ nnet_params_dict['batch_sizes'] = (64, 512, 4096)
 nnet_params_dict['gammas'] = np.array([0.1, 0.01], dtype=np.float32)
 nnet_params_dict['decay_rate'] = 0.95
 nnet_params_dict['max_epoch'] = 50
-nnet_params_dict['widths'] = (0, 1000, 2)
+nnet_params_dict['widths'] = [0, 1000, 2]
 nnet_params_dict['nonlins'] = (None, lasagne.nonlinearities.rectify,
 lasagne.nonlinearities.softmax)
 nnet_params_dict['drops'] = (0.2, 0.5, None)
