@@ -104,6 +104,7 @@ for (include, train_filename, test_filename) in filepaths:
         x_train = x_train[:,:-1]
 
         # Network topology
+        n_obs = x_train.shape[0]
         n_inputs = x_train.shape[1]
         n_outputs = len(np.unique(y_train))
 
@@ -136,12 +137,26 @@ for (include, train_filename, test_filename) in filepaths:
             batch_size = int(params_mat[param_idx, 2])
             shape = (batch_size, x_train.shape[1])
 
+            # choose n_hidden nodes according to ...
+            n_hidden = int((n_obs / depth) / (alpha*(n_inputs+n_outputs)))
+
+            for i in range(1, depth-1):
+                widths[i] = n_hidden
+
             # specify input and target theano data types 
             input_var = T.fmatrix('input_var')
             # input_var = T.fvector()
             target_var = T.ivector()
             #target_var = T.fmatrix()
             
+
+            model_str = ('\nalpha {} gamma {} batch size {} '
+                         'n_hidden {} depth {}' 
+                         '\nnonlins {}'
+                         '\ndrops {}'.format(alpha, gamma, batch_size,
+                                             n_hidden, depth, nonlins,
+                                             drops))
+            print model_str
             # build neural network model
             network = build_network(input_var, shape, nonlins, depth, widths, 
                                     drops)
@@ -178,8 +193,7 @@ for (include, train_filename, test_filename) in filepaths:
                                                             target_var)
             test_loss = test_loss.mean()
             test_acc = T.mean(T.eq(T.argmax(test_prediction, axis=1),
-            target_var),
-                              dtype=theano.config.floatX)
+                                   target_var), dtype=theano.config.floatX)
 
             # compile functions for performing training step and returning
             # corresponding training loss
@@ -193,29 +207,23 @@ for (include, train_filename, test_filename) in filepaths:
                                      outputs=[test_loss, test_acc],
                                      allow_input_downcast=True)
 
-            model_str = 'alpha {} gamma {} batch size {}'.format(alpha,
-                                                                 gamma,
-                                                                 batch_size)
-            print model_str
-
             # create kfold iterator
             kf = KFold(x_train.shape[0], n_folds=n_folds)
             error_rates = []
-            test_costs = []
+            val_costs = []
             running_time = []
 
             fold = 1
+            start_time = time.time()
             for train_idx, val_idx in kf:
                 for i in range(max_epoch):
                     train_err = 0
                     train_batches = 0
-                    start_time = time.time()
                     for start, end in batch_ids(batch_size, x_train, 
                                                 train_idx):
                         train_err += train_fn(x_train[train_idx][start:end],
                                               y_train[train_idx][start:end])
                         train_batches += 1
-
 
                     val_err = 0
                     val_acc = 0
@@ -223,33 +231,37 @@ for (include, train_filename, test_filename) in filepaths:
                     for start, end in batch_ids(batch_size, x_train, 
                                                 train_idx):
                         err, acc = val_fn(x_train[val_idx], y_train[val_idx])
-                        test_err += err
-                        test_acc += acc
-                        test_batches += 1
+                        val_err += err
+                        val_acc += acc
+                        val_batches += 1
 
-                    error_rate = (1 - (test_acc / test_batches)) * 100
-                    test_loss = test_err / test_batches
+                    error_rate = (1 - (val_acc / val_batches)) * 100
+                    val_loss = val_err / val_batches
 
                     print("Final results:")
-                    print("  test loss:\t\t\t{:.6f}".format(test_loss))
-                    print("  test error rate:\t\t{:.2f} %".format(error_rate))
+                    print("  val loss:\t\t\t{:.6f}".format(val_loss))
+                    print("  val error rate:\t\t{:.2f} %".format(error_rate))
 
-                error_rates.append(1 - test_acc)
-                test_costs.append(test_err)
-                running_time.append(np.around((time.time() - start_time) / 60., 1))
+                error_rates.append(error_rate)
+                val_costs.append(val_err)
+                running_time.append(np.around((time.time() - 
+                                               start_time) / 60., 1))
                 fold += 1
 
-            params_mat[param_idx, 3] = np.mean(error_rate)
-            params_mat[param_idx, 4] = np.mean(test_cost)
+            params_mat[param_idx, 3] = np.mean(error_rates)
+            params_mat[param_idx, 4] = np.mean(val_costs)
             params_mat[param_idx, 5] = np.mean(running_time)
 
-            print 'alpha {} gamma {} batchsize {} error rate {} test cost {} running time {}'.format(params_mat[param_idx,0],
-                params_mat[param_idx,1],
-                params_mat[param_idx,2],
-                params_mat[param_idx,3],
-                params_mat[param_idx,4],
-                params_mat[param_idx,5])
+            print('alpha {} gamma {} batchsize {} error rate {} '
+                  'validation cost {} ' 
+                  'running time {}'.format(params_mat[param_idx,0],
+                                           params_mat[param_idx,1],
+                                           params_mat[param_idx,2],
+                                           params_mat[param_idx,3],
+                                           params_mat[param_idx,4],
+                                           params_mat[param_idx,5]))
 
 
         # Save params matrix to disk
-        params_mat.dump('results/train/{}_results.np'.format(train_filename[:-3]))
+        params_mat.dump(('results/train/{}'
+                         '_results.np').format(train_filename[:-3]))
