@@ -141,7 +141,6 @@ for (include, train_filename, test_filename) in filepaths:
             batch_size = int(params_mat[param_idx, 2])
             shape = (batch_size, x_train.shape[1])
 
-<<<<<<< HEAD
             # choose n_hidden nodes according to ...
             n_hidden = int((n_obs / depth) / (alpha*(n_inputs+n_outputs)))
 
@@ -215,7 +214,7 @@ for (include, train_filename, test_filename) in filepaths:
             # create kfold iterator
             kf = KFold(x_train.shape[0], n_folds=n_folds)
             error_rates = []
-            val_costs = []
+            val_losses = []
             running_time = []
 
             fold = 1
@@ -224,12 +223,7 @@ for (include, train_filename, test_filename) in filepaths:
                 for i in range(max_epoch):
                     train_err = 0
                     train_batches = 0
-<<<<<<< HEAD
                     for start, end in batch_ids(batch_size, x_train, 
-=======
-                    start_time = time.time()
-                    for start, end in batch_ids(batch_size, x_train,
->>>>>>> 2c3917e6d43bd76762f910fe6aa0e0da74ccb099
                                                 train_idx):
                         train_err += train_fn(x_train[train_idx][start:end],
                                               y_train[train_idx][start:end])
@@ -245,7 +239,6 @@ for (include, train_filename, test_filename) in filepaths:
                         val_acc += acc
                         val_batches += 1
 
-<<<<<<< HEAD
                     error_rate = (1 - (val_acc / val_batches)) * 100
                     val_loss = val_err / val_batches
 
@@ -254,13 +247,13 @@ for (include, train_filename, test_filename) in filepaths:
                     print("  val error rate:\t\t{:.2f} %".format(error_rate))
 
                 error_rates.append(error_rate)
-                val_costs.append(val_err)
+                val_losses.append(val_loss)
                 running_time.append(np.around((time.time() - 
                                                start_time) / 60., 1))
                 fold += 1
 
             params_mat[param_idx, 3] = np.mean(error_rates)
-            params_mat[param_idx, 4] = np.mean(val_costs)
+            params_mat[param_idx, 4] = np.mean(val_losses)
             params_mat[param_idx, 5] = np.mean(running_time)
 
             print('alpha {} gamma {} batchsize {} error rate {} '
@@ -276,34 +269,3 @@ for (include, train_filename, test_filename) in filepaths:
         # Save params matrix to disk
         params_mat.dump(('results/train/{}'
                          '_results.np').format(train_filename[:-3]))
-=======
-                    val_err_rate = (1 - (val_acc / val_batches)) * 100
-                    val_loss = val_err / val_batches
-
-                    print("Final results:")
-                    print("  test loss:\t\t\t{:.6f}".format(val_loss))
-                    print("  test error rate:\t\t{:.2f} %".format(val_err_rate))
-
-                error_rates.append(1 - test_acc)
-                test_costs.append(val_err)
-                running_time.append(np.around((time.time() - start_time) / 60.,
-                                              1))
-                fold += 1
-
-            params_mat[param_idx, 3] = np.mean(val_err_rate)
-            params_mat[param_idx, 4] = np.mean(val_loss)
-            params_mat[param_idx, 5] = np.mean(running_time)
-
-            print('alpha {} gamma {} batchsize {}'
-                  'error rate {} test cost {}'
-                  'running time {}'.format(params_mat[param_idx, 0],
-                                           params_mat[param_idx, 1],
-                                           params_mat[param_idx, 2],
-                                           params_mat[param_idx, 3],
-                                           params_mat[param_idx, 4],
-                                           params_mat[param_idx, 5]))
-
-        # Save params matrix to disk
-        params_mat.dump(('results/train/{}_results.np'
-                         ''.format(train_filename[:-3])))
->>>>>>> 2c3917e6d43bd76762f910fe6aa0e0da74ccb099
