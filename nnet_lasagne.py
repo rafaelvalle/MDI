@@ -218,8 +218,8 @@ for (include, train_filename, test_filename) in filepaths:
             running_time = []
 
             fold = 1
-            start_time = time.time()
             for train_idx, val_idx in kf:
+                start_time = time.time()
                 for i in range(max_epoch):
                     train_err = 0
                     train_batches = 0
