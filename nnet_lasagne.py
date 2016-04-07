@@ -18,23 +18,23 @@ def set_trace():
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
 
 
-def build_network(input_var, shape, nonlins, depth=2,
+def build_network(input_var, input_shape, nonlins, depth=2,
                   widths=(1000, 1000, 10), drops=(0.2, 0.5)):
     """
     Parameters
     ----------
     input_var : Theano symbolic variable or None (default: None)
         Variable representing a  network input.
-    shape : tuple of int or None (batchsize, rows, cols)
-        Shape of the input. Any element can be set to None to indicate that
-        dimension is not fixed at compile time
+    input_shape : tuple of int or None (batchsize, rows, cols)
+        input_shape of the input. Any element can be set to None to indicate
+        that dimension is not fixed at compile time
 
     """
 
     # GlorotUniform is the default mechanism for initializing weights
     for i in range(depth):
         if i == 0:
-            network = lasagne.layers.InputLayer(shape=shape,
+            network = lasagne.layers.InputLayer(shape=input_shape,
                                                 input_var=input_var)
         else:
             network = lasagne.layers.DenseLayer(network,
@@ -148,7 +148,7 @@ for (include, train_filename, test_filename) in filepaths:
                 widths[i] = n_hidden
 
             model_str = ('\nalpha {} gamma {} batch size {} '
-                         'n_hidden {} depth {}' 
+                         'n_hidden {} depth {}'
                          '\nnonlins {}'
                          '\ndrops {}'.format(alpha, gamma, batch_size,
                                              n_hidden, depth, nonlins,
@@ -156,10 +156,8 @@ for (include, train_filename, test_filename) in filepaths:
             print model_str
 
             # specify input and target theano data types
-            input_var = T.fmatrix('input_var')
-            # input_var = T.fvector()
-            target_var = T.ivector()
-            # target_var = T.fmatrix()
+            input_var = T.fmatrix('input')
+            target_var = T.ivector('target')
 
             # build neural network model
             network = build_network(input_var, shape, nonlins, depth, widths,
@@ -223,7 +221,7 @@ for (include, train_filename, test_filename) in filepaths:
                 for i in range(max_epoch):
                     train_err = 0
                     train_batches = 0
-                    for start, end in batch_ids(batch_size, x_train, 
+                    for start, end in batch_ids(batch_size, x_train,
                                                 train_idx):
                         train_err += train_fn(x_train[train_idx][start:end],
                                               y_train[train_idx][start:end])
@@ -248,7 +246,7 @@ for (include, train_filename, test_filename) in filepaths:
 
                 error_rates.append(error_rate)
                 val_losses.append(val_loss)
-                running_time.append(np.around((time.time() - 
+                running_time.append(np.around((time.time() -
                                                start_time) / 60., 1))
                 fold += 1
 
@@ -257,14 +255,13 @@ for (include, train_filename, test_filename) in filepaths:
             params_mat[param_idx, 5] = np.mean(running_time)
 
             print('alpha {} gamma {} batchsize {} error rate {} '
-                  'validation cost {} ' 
-                  'running time {}'.format(params_mat[param_idx,0],
-                                           params_mat[param_idx,1],
-                                           params_mat[param_idx,2],
-                                           params_mat[param_idx,3],
-                                           params_mat[param_idx,4],
-                                           params_mat[param_idx,5]))
-
+                  'validation cost {} '
+                  'running time {}'.format(params_mat[param_idx, 0],
+                                           params_mat[param_idx, 1],
+                                           params_mat[param_idx, 2],
+                                           params_mat[param_idx, 3],
+                                           params_mat[param_idx, 4],
+                                           params_mat[param_idx, 5]))
 
         # Save params matrix to disk
         params_mat.dump(('results/train/{}'
