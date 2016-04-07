@@ -4,8 +4,10 @@ from scipy.spatial.distance import pdist, squareform
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import NearestNeighbors
 from scipy.sparse.linalg import svds
 from scipy.stats import mode
+from collections import defaultdict
 
 
 def set_trace():
@@ -94,7 +96,7 @@ class Imputer(object):
 
         return data
 
-    def one_hot(self, x, missing_data_cond, in_place=False):
+    def one_hot(self, x, missing_data_cond, weighted=False, in_place=False):
         """Create a one-hot row for each observation
 
         Parameters
@@ -102,10 +104,12 @@ class Imputer(object):
         x : np.ndarray
             Matrix with categorical data, where rows are observations and
             columns are features
-
         missing_data_cond : function
             Method that takes one value and returns True if it represents
             missing data or false otherwise.
+        weighted : bool
+            Replaces one-hot by n_classes-hot.
+
 
         Returns
         -------
@@ -125,9 +129,12 @@ class Imputer(object):
         for miss_col in miss_cols_uniq:
             uniq_vals, indices = np.unique(data[:, miss_col],
                                            return_inverse=True)
-
-            data = np.column_stack((data, np.eye(uniq_vals.shape[0],
-                                                 dtype=int)[indices]))
+            if weighted:
+                data = np.column_stack((data, np.eye(uniq_vals.shape[0],
+                    dtype=int)[indices]*uniq_vals.shape[0]))
+            else:
+                data = np.column_stack((data, np.eye(uniq_vals.shape[0],
+                                                     dtype=int)[indices]))
 
         # remove categorical columns with missing data
         data = np.delete(data, miss_cols, 1)
@@ -137,7 +144,7 @@ class Imputer(object):
         return data
 
     def knn(self, x, k, summary_func, missing_data_cond, cat_cols,
-            in_place=False):
+        weighted=False, in_place=False):
         """ Replace missing values with the summary function of K-Nearest
         Neighbors
 
@@ -147,18 +154,7 @@ class Imputer(object):
             Number of nearest neighbors to be used
 
         """
-
-        def row_col_from_condensed_idx(n_obs, row):
-            b = 1 - 2 * n_obs
-            x = np.floor((-b - np.sqrt(b**2 - 8*row))/2).astype(int)
-            y = row + x*(b + x + 2)/2 + 1
-            return (x, y)
-
-        def condensed_idx_from_row_col(row, col, n_rows):
-            if row > col:
-                row, col = col, row
-
-            return row*n_rows + col - row*(row+1)/2 - row - 1
+        #global mask
 
         if in_place:
             data = x
@@ -168,7 +164,7 @@ class Imputer(object):
         imp = Imputer()
 
         # first transform features with categorical missing data into one hot
-        data_complete = imp.one_hot(data, missing_data_cond)
+        data_complete = imp.one_hot(data, missing_data_cond, weighted=weighted)
 
         # binarize complete categorical variables and convert to int
         col = 0
@@ -185,48 +181,28 @@ class Imputer(object):
         # normalize features
         scaler = StandardScaler().fit(data_complete)
         data_complete = scaler.transform(data_complete)
+        # create dict with missing rows and respective columns
+        missing = defaultdict(list)
+        map(lambda (x,y): missing[x].append(y),
+            np.argwhere(missing_data_cond(data)))
+        # create mask to build NearestNeighbors with complete observations only
+        mask = np.ones(len(data_complete), bool)
+        mask[missing.keys()] = False
+        # fit nearest neighbors and get knn ids of missing observations
+        print 'Computing k-nearest neighbors'
+        nbrs = NearestNeighbors(n_neighbors=k+1, metric='euclidean').fit(
+            data_complete[mask])
+        ids = nbrs.kneighbors(data_complete[missing.keys()],
+                              return_distance=False)
 
-        # get indices of observations with nan
-        miss_rows = np.unique(np.where(missing_data_cond(data))[0])
-        n_obs = data_complete.shape[0]
-
-        # compute distance matrix with nan values set to 0.0
-        print 'Computing distance matrix'
-        # change such that p(dist(x,y)) is the new metric
-        dist_cond = pdist(data_complete, metric='euclidean')
+        def substituteValues(i):
+            row = missing.keys()[i]
+            cols = missing[row]
+            data[row, cols] = mode(data[mask][ids[i]][:,cols])[0].flatten()
 
         print 'Substituting missing values'
-        # substitute missing values with mode of knn
-        # this code must be optimized for speed!!!
-        for j in xrange(len(miss_rows)):
-            miss_row_idx = miss_rows[j]
-
-            # get indices of distances in condensed form
-            ids_cond = [condensed_idx_from_row_col(miss_row_idx, idx, n_obs)
-                        for idx in xrange(n_obs) if idx not in miss_rows]
-            ids_cond = np.array(ids_cond, dtype=int)
-
-            # compute k-nearest neighbors
-            knn_ids_cond = ids_cond[np.argsort(dist_cond[ids_cond])[:k]]
-            rows, cols = row_col_from_condensed_idx(n_obs, knn_ids_cond)
-
-            # swap if necessary
-            good_obs_ids = np.array([a for a in cols if a != miss_row_idx] +
-                                    [b for b in rows if b != miss_row_idx],
-                                    dtype=int)
-
-            # cols with missing data
-            obs_nan_cols = np.where(missing_data_cond(x[miss_row_idx]))[0]
-            if len(good_obs_ids) >= k:
-                # get feature mode value given knn
-                knn_mean_vals, _ = mode(data[:, obs_nan_cols][good_obs_ids])
-
-                if (j % (len(miss_rows) / 5)) == 0:
-                    print 'Substituting {}-th of {} total \n Value {}'.format(j,
-                        len(miss_rows), knn_mean_vals)
-                data[miss_row_idx, obs_nan_cols] = knn_mean_vals.flatten()
-            else:
-                print 'Observation {} has not enough neigbhors'.format(j)
+        map(substituteValues, xrange(len(missing)))
+        set_trace()
         return data
 
     def predict(self, x, cat_cols, missing_data_cond, in_place=False):
