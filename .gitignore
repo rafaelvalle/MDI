@@ -3,4 +3,5 @@
 *.RData
 *.Rhistory
 *.pyc
-
+.DS_Store
+.ropeproject
