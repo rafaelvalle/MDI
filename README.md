@@ -30,3 +30,11 @@ and after the imputation techniques above were used.
 Code can be found [here](example_adult.py)
 
 ![ADULT dataset Imputation](data_hist_imput.png)
+
+## TODO
+**Artificially perturb the data to generate missing observations**
+**Compare with random forest classification R-**
+**Impute with Logistic Regression, Random Forest and SVM - R**
+**Compute error bars for prediction accuracy - J**
+**Use Non-Negative Matrix Factorization instead of PCA - R**
+**Add python file that has a fit and predict function for the best models - R**
