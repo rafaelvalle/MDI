@@ -1,12 +1,16 @@
 import numpy as np
 from scipy.stats import itemfreq
 from collections import defaultdict
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC as SVM
 
 
 def set_trace():
     from IPython.core.debugger import Pdb
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
+
 
 def impute(data, imputer, imp_method, params_dict):
     imp_data = None
@@ -15,12 +19,40 @@ def impute(data, imputer, imp_method, params_dict):
         imp_data = imputer.replace(data, params_dict['miss_data_cond'])
     elif imp_method == 'Summary':
         imp_data = imputer.summarize(data,
-                                    params_dict['summary_func'],
-                                    params_dict['miss_data_cond'])
+                                     params_dict['summary_func'],
+                                     params_dict['miss_data_cond'])
     elif imp_method == 'RandomForest':
+        clf = RandomForestClassifier(
+            n_estimators=100, criterion='gini', max_depth=None,
+            min_samples_split=2, min_samples_leaf=1,
+            min_weight_fraction_leaf=0.0, max_features='auto',
+            max_leaf_nodes=None, bootstrap=True, oob_score=False, n_jobs=1,
+            random_state=None, verbose=0, warm_start=False, class_weight=None)
         imp_data = imputer.predict(data,
                                    params_dict['cat_cols'],
-                                   params_dict['miss_data_cond'])
+                                   params_dict['miss_data_cond'],
+                                   clf)
+
+    elif imp_method == 'SVM':
+        clf = SVM(
+            C=1.0, kernel='rbf', degree=3, gamma='auto', coef0=0.0,
+            shrinking=True, probability=False, tol=0.001, cache_size=200,
+            class_weight=None, verbose=False, max_iter=-1,
+            decision_function_shape=None, random_state=None)
+        imp_data = imputer.predict(data,
+                                   params_dict['cat_cols'],
+                                   params_dict['miss_data_cond'],
+                                   clf)
+    elif imp_method == 'LogisticRegression':
+        clf = LogisticRegression(
+            penalty='l2', dual=False, tol=0.0001, C=1.0, fit_intercept=True,
+            intercept_scaling=1, class_weight=None, random_state=None,
+            solver='liblinear', max_iter=100, multi_class='ovr', verbose=0,
+            warm_start=False, n_jobs=1)
+        imp_data = imputer.predict(data,
+                                   params_dict['cat_cols'],
+                                   params_dict['miss_data_cond'],
+                                   clf)
     elif imp_method == 'PCA':
         imp_data = imputer.factor_analysis(data,
                                            params_dict['cat_cols'],
@@ -32,6 +64,7 @@ def impute(data, imputer, imp_method, params_dict):
                                params_dict['miss_data_cond'],
                                params_dict['cat_cols'])
     return imp_data
+
 
 def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
                     in_place=False):
