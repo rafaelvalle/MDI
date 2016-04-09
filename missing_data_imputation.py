@@ -1,9 +1,6 @@
 import numpy as np
 import pandas as pd
-from scipy.spatial.distance import pdist, squareform
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import NearestNeighbors
 from scipy.sparse.linalg import svds
 from scipy.stats import mode
@@ -131,7 +128,7 @@ class Imputer(object):
                                            return_inverse=True)
             if weighted:
                 data = np.column_stack((data, np.eye(uniq_vals.shape[0],
-                    dtype=int)[indices]*uniq_vals.shape[0]))
+                                        dtype=int)[indices]*uniq_vals.shape[0]))
             else:
                 data = np.column_stack((data, np.eye(uniq_vals.shape[0],
                                                      dtype=int)[indices]))
@@ -144,7 +141,7 @@ class Imputer(object):
         return data
 
     def knn(self, x, k, summary_func, missing_data_cond, cat_cols,
-        weighted=False, in_place=False):
+            weighted=False, in_place=False):
         """ Replace missing values with the summary function of K-Nearest
         Neighbors
 
@@ -154,8 +151,6 @@ class Imputer(object):
             Number of nearest neighbors to be used
 
         """
-        #global mask
-
         if in_place:
             data = x
         else:
@@ -183,7 +178,7 @@ class Imputer(object):
         data_complete = scaler.transform(data_complete)
         # create dict with missing rows and respective columns
         missing = defaultdict(list)
-        map(lambda (x,y): missing[x].append(y),
+        map(lambda (x, y): missing[x].append(y),
             np.argwhere(missing_data_cond(data)))
         # create mask to build NearestNeighbors with complete observations only
         mask = np.ones(len(data_complete), bool)
@@ -198,14 +193,14 @@ class Imputer(object):
         def substituteValues(i):
             row = missing.keys()[i]
             cols = missing[row]
-            data[row, cols] = mode(data[mask][ids[i]][:,cols])[0].flatten()
+            data[row, cols] = mode(data[mask][ids[i]][:, cols])[0].flatten()
 
         print 'Substituting missing values'
         map(substituteValues, xrange(len(missing)))
         set_trace()
         return data
 
-    def predict(self, x, cat_cols, missing_data_cond, in_place=False):
+    def predict(self, x, cat_cols, missing_data_cond, clf, in_place=False):
         """ Uses random forest for predicting missing values
 
         Parameters
@@ -251,14 +246,13 @@ class Imputer(object):
             y_train = data_factorized[valid_obs, miss_col]
 
             # train random forest classifier
-            rf_clf = RandomForestClassifier(n_estimators=100)
-            rf_clf.fit(data_train, y_train)
+            clf.fit(data_train, y_train)
 
             # given current feature, find obs with missing vals
             miss_obs_iddata = miss_rows[miss_cols == miss_col]
 
             # predict missing values
-            y_hat = rf_clf.predict(data_factorized[:, valid_cols][miss_obs_iddata])
+            y_hat = clf.predict(data_factorized[:, valid_cols][miss_obs_iddata])
 
             # replace missing data with prediction
             data_factorized[miss_obs_iddata, miss_col] = y_hat
@@ -306,8 +300,8 @@ class Imputer(object):
             n_pcomps += 1
 
         # compute data projected onto principal components space
-        data_factor_proj = np.dot(u[:,-n_pcomps:],
-                   np.dot(np.diag(s[-n_pcomps:]), vt[-n_pcomps:,]))
+        data_factor_proj = np.dot(
+            u[:, -n_pcomps:], np.dot(np.diag(s[-n_pcomps:]), vt[-n_pcomps:, ]))
 
         # get missing data indices
         nans = np.argwhere(missing_data_cond(x))
@@ -320,7 +314,6 @@ class Imputer(object):
             data[obs_ids, col] = factor_labels[col][proj_cats]
 
         return data
-
 
     def factorize_data(self, x, cols, in_place=False):
         """Replace column in cols with one-hot representation of cols
@@ -346,12 +339,11 @@ class Imputer(object):
 
         factors_labels = {}
         for col in cols:
-            factors, labels = pd.factorize(data[:,col])
+            factors, labels = pd.factorize(data[:, col])
             factors_labels[col] = (factors_labels)
-            data[:,col] = factors
+            data[:, col] = factors
 
         return data, factors_labels
-
 
     def binarize_data(self, x, cols, miss_data_symbol=False,
                       one_minus_one=True, in_place=False):
@@ -377,23 +369,21 @@ class Imputer(object):
         else:
             data = np.copy(x)
 
-
         for col in cols:
-            uniq_vals, indices = np.unique(data[:,col],
-                                          return_inverse=True)
+            uniq_vals, indices = np.unique(data[:, col], return_inverse=True)
 
             if one_minus_one:
-                data = np.column_stack((data,
-                    (np.eye(uniq_vals.shape[0], dtype=int)[indices] * 2) - 1))
+                data = np.column_stack(
+                    (data,
+                     (np.eye(uniq_vals.shape[0], dtype=int)[indices] * 2) - 1))
             else:
                 data = np.column_stack((data, np.eye(uniq_vals.shape[0],
                                                      dtype=int)[indices]))
             # add missing data column to feature
             if miss_data_symbol is not False and \
                     miss_data_symbol not in uniq_vals:
-                data = np.column_stack((data,
-                                        -one_minus_one * np.ones((len(data), 1),
-                                                                  dtype=int)))
+                data = np.column_stack(
+                    (data, -one_minus_one * np.ones((len(data), 1), dtype=int)))
 
         # remove columns with categorical variables
         val_cols = [n for n in xrange(data.shape[1]) if n not in cols]
