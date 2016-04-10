@@ -185,7 +185,7 @@ class Imputer(object):
         mask[missing.keys()] = False
         # fit nearest neighbors and get knn ids of missing observations
         print 'Computing k-nearest neighbors'
-        nbrs = NearestNeighbors(n_neighbors=k+1, metric='euclidean').fit(
+        nbrs = NearestNeighbors(n_neighbors=k, metric='euclidean').fit(
             data_complete[mask])
         ids = nbrs.kneighbors(data_complete[missing.keys()],
                               return_distance=False)
@@ -199,7 +199,8 @@ class Imputer(object):
         map(substituteValues, xrange(len(missing)))
         return data
 
-    def predict(self, x, cat_cols, missing_data_cond, clf, in_place=False):
+    def predict(self, x, cat_cols, missing_data_cond, clf, inc_miss=True,
+                in_place=False):
         """ Uses random forest for predicting missing values
 
         Parameters
@@ -216,10 +217,13 @@ class Imputer(object):
 
         # find rows and columns with missing data
         miss_rows, miss_cols = np.where(missing_data_cond(data))
-
         miss_cols_uniq = np.unique(miss_cols)
-        valid_cols = [n for n in xrange(data.shape[1])
-                      if n not in miss_cols_uniq]
+
+        if inc_miss:
+            valid_cols = np.arange(data.shape[1])
+        else:
+            valid_cols = [n for n in xrange(data.shape[1])
+                          if n not in miss_cols_uniq]
 
         # factorize valid cols
         data_factorized = np.copy(data)
@@ -236,8 +240,8 @@ class Imputer(object):
 
         # update each column with missing features
         for miss_col in miss_cols_uniq:
-            # edatatract valid observations given current column missing data
-            valid_obs = [n for n in xrange(data.shape[0])
+            # extract valid observations given current column missing data
+            valid_obs = [n for n in xrange(len(data))
                          if data[n, miss_col] != '?']
 
             # prepare independent and dependent variables, valid obs only
@@ -256,7 +260,7 @@ class Imputer(object):
             # replace missing data with prediction
             data_factorized[miss_obs_iddata, miss_col] = y_hat
 
-        # replace values on original data data
+        # replace values on original data
         for col in factor_labels.keys():
             data[:, col] = factor_labels[col][data_factorized[:, col]]
 
