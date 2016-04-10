@@ -197,7 +197,6 @@ class Imputer(object):
 
         print 'Substituting missing values'
         map(substituteValues, xrange(len(missing)))
-        set_trace()
         return data
 
     def predict(self, x, cat_cols, missing_data_cond, clf, in_place=False):
