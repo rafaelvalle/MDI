@@ -22,7 +22,7 @@ if __name__ == '__main__':
         if include == '1':
             print ('\nExecuting bayesian parameter optimization'
                    '\n{}').format(train_filename)
-            # Load training and test sets
+            # Load training and validation sets
             data = np.load(os.path.join(feats_train_folder,
                                         train_filename)).astype(np.float32)
     # Run parameter optimization forever
