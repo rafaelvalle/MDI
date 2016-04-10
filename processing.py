@@ -22,23 +22,14 @@ def impute(data, imputer, imp_method, params_dict):
                                      params_dict['summary_func'],
                                      params_dict['miss_data_cond'])
     elif imp_method == 'RandomForest':
-        clf = RandomForestClassifier(
-            n_estimators=100, criterion='gini', max_depth=None,
-            min_samples_split=2, min_samples_leaf=1,
-            min_weight_fraction_leaf=0.0, max_features='auto',
-            max_leaf_nodes=None, bootstrap=True, oob_score=False, n_jobs=1,
-            random_state=None, verbose=0, warm_start=False, class_weight=None)
+        clf = RandomForestClassifier(n_estimators=100, criterion='gini')
         imp_data = imputer.predict(data,
                                    params_dict['cat_cols'],
                                    params_dict['miss_data_cond'],
                                    clf)
 
     elif imp_method == 'SVM':
-        clf = SVM(
-            C=1.0, kernel='rbf', degree=3, gamma='auto', coef0=0.0,
-            shrinking=True, probability=False, tol=0.001, cache_size=200,
-            class_weight=None, verbose=False, max_iter=-1,
-            decision_function_shape=None, random_state=None)
+        clf = SVM(C=1.0, kernel='rbf', degree=3)
         imp_data = imputer.predict(data,
                                    params_dict['cat_cols'],
                                    params_dict['miss_data_cond'],
@@ -46,9 +37,7 @@ def impute(data, imputer, imp_method, params_dict):
     elif imp_method == 'LogisticRegression':
         clf = LogisticRegression(
             penalty='l2', dual=False, tol=0.0001, C=1.0, fit_intercept=True,
-            intercept_scaling=1, class_weight=None, random_state=None,
-            solver='liblinear', max_iter=100, multi_class='ovr', verbose=0,
-            warm_start=False, n_jobs=1)
+            intercept_scaling=1)
         imp_data = imputer.predict(data,
                                    params_dict['cat_cols'],
                                    params_dict['miss_data_cond'],
@@ -63,6 +52,8 @@ def impute(data, imputer, imp_method, params_dict):
                                params_dict['knn_summary_func'],
                                params_dict['miss_data_cond'],
                                params_dict['cat_cols'])
+    else:
+        raise Exception("Imputation method {} is not valid".format(imp_method))
     return imp_data
 
 
