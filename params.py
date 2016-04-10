@@ -4,9 +4,8 @@ import lasagne
 
 # imputation parameters
 params_dict = {}
-imp_methods = ('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegreesion',
+imp_methods = ('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
                'SVM', 'KNN', 'PCA')
-imp_methods = ('KNN',)
 params_dict['miss_data_symbol'] = '?'
 params_dict['miss_data_cond'] = lambda x: x == params_dict['miss_data_symbol']
 params_dict['cat_cols'] = (1, 3, 4, 5, 6, 7, 8, 12)
