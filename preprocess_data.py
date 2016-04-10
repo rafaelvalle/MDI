@@ -1,6 +1,7 @@
 import numpy as np
 import cPickle as pkl
-import os, random
+import os
+import random
 from scipy import delete
 from sklearn.preprocessing import StandardScaler
 from missing_data_imputation import Imputer
@@ -30,8 +31,6 @@ labels = labels.reshape((-1, 1))
 
 # save labels in binary and one-hot representations
 labels.dump(os.path.join(labels_train_folder, 'labels_bin.np'))
-(np.eye(2)[labels]).astype(int).dump(os.path.join(labels_train_folder,
-                                                  'labels_bin_onehot.np'))
 
 # remove redundant education-number and labels features
 x = delete(x, (4, 14), 1)
@@ -67,7 +66,7 @@ for ratio in ratios:
         # scale continuous variables and convert categorial to one-hot
         # store the scaler objects to be used on the test set
         scaler_path = os.path.join(scalers_folder,
-                               "{}_scaler".format(imp_method))
+                                   "{}_scaler".format(imp_method))
 
         if os.path.isfile(scaler_path):
             scaler_dict = pkl.load(open(scaler_path, "rb"))
@@ -85,7 +84,6 @@ for ratio in ratios:
         # filename is imputation method dependent
         scaler_dict["{}_ratio_{}".format(imp_method, ratio)] = scaler
         pkl.dump(scaler_dict, open(scaler_path, 'wb'))
-
 
         # binarize scaled data
         data_scaled_bin = imp.binarize_data(data_scaled,
