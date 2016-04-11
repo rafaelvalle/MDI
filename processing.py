@@ -3,7 +3,7 @@ from scipy.stats import itemfreq
 from collections import defaultdict
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC as SVM
+from sklearn.svm import LinearSVC as SVM
 
 
 def set_trace():
@@ -29,7 +29,10 @@ def impute(data, imputer, imp_method, params_dict):
                                    clf)
 
     elif imp_method == 'SVM':
-        clf = SVM(C=1.0, kernel='rbf', degree=3)
+        clf = SVM(
+            penalty='l2', loss='squared_hinge', dual=True, tol=0.0001, C=1.0, multi_class='ovr', 
+            fit_intercept=True, intercept_scaling=1, class_weight=None, verbose=0, 
+            random_state=None, max_iter=1000)
         imp_data = imputer.predict(data,
                                    params_dict['cat_cols'],
                                    params_dict['miss_data_cond'],
