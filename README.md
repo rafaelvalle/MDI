@@ -1,7 +1,7 @@
 # MDI
 Missing Data Imputation Python Library (version 0.1)
 
-This repository offers techniques for handling missing data and encoding categorical data such that it is appropriate to neural network classifiers and other tasks. We provide six different imputation strategies and include examples using the ADULT dataset. Will soon include data, python and latex code for a wip paper on MDI, Random Forest and Neural Networks.
+This repository offers techniques for handling missing data and encoding categorical data such that it is appropriate to neural network classifiers and other tasks. We provide six different imputation strategies and include examples using the Adult dataset. Will soon include data, python and latex code for a wip paper on MDI, Random Forest and Neural Networks.
 
 ## Techniques for handling categorical missing data
 We categorize proposed imputation methods into six groups listed below:
@@ -24,17 +24,22 @@ Train a prediction model (e.g., random forests) to predict the missing value.
 **Factor analysis**
 Perform factor analysis (e.g., principal component analysis (PCA)) on the design matrix, project the design matrix onto the first N eigenvectors and replace the missing values by the values that might be given by the projected design matrix.
 
-## ADULT Dataset example ##
-The figure below shows frequency of job category in the ADULT dataset before
+## Adult Dataset example ##
+The figure below shows frequency of job category in the Adult dataset before
 and after the imputation techniques above were used.  
 Code can be found [here](example_adult.py)
 
-![ADULT dataset Imputation](data_hist_imput.png)
+![Adult dataset Imputation](adult_hist.png)
+
+## Congresssional voting records dataset example ##
+Code can be found [here](example_votes.py)
+
+![Congresssional voting records dataset imputation](votes_hist.png)
 
 ## TODO
-**Artificially perturb the data to generate missing observations**
-**Compare with random forest classification R-**
-**Impute with Logistic Regression, Random Forest and SVM - R**
+**Artificially perturb the data to generate missing observations** DONE
+**Compare with random forest classification- J**
+**Impute with Logistic Regression, Random Forest and SVM - R** DONE
 **Compute error bars for prediction accuracy - J**
 **Use Non-Negative Matrix Factorization instead of PCA - R**
 **Add python file that has a fit and predict function for the best models - R**
