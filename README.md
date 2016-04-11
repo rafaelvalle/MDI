@@ -37,9 +37,15 @@ Code can be found [here](example_votes.py)
 ![Congresssional voting records dataset imputation](votes_hist.png)
 
 ## TO DO
+
 **Artificially perturb the data to generate missing observations DONE** 
+
 **Compare with random forest classification- J**
+
 **Impute with Logistic Regression, Random Forest and SVM - R DONE** 
+
 **Compute error bars for prediction accuracy - J**
+
 **Use Non-Negative Matrix Factorization instead of PCA - R**
+
 **Add python file that has a fit and predict function for the best models - R**
