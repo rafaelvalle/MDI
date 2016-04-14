@@ -113,7 +113,7 @@ def run_trial(data, nnet_params, hyperparameter_space, train_function):
 
 
 def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
-                     model_directory, train_function):
+                     model_directory, train_function, model_name='best_model'):
     """Run parameter optimization given some train function, writing out results
     Parameters
     ----------
@@ -168,4 +168,4 @@ def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
         if (not np.isnan(best_objective) and
                 best_objective == np.nanmin(ss.objective_values)):
             deepdish.io.save(
-                os.path.join(model_directory, 'best_model.h5'), best_model)
+                os.path.join(model_directory, model_name+'.h5'), best_model)
