@@ -1,34 +1,42 @@
-""" Search for good hyperparameters for classifiction using the manually
-perturbed (missing data) ADULT dataset.
-"""
+#!/usr/bin/python
 
+""" Search for good hyperparameters for classifiction using the manually
+perturbed (missing data) ADULT and VOTES datasets.
+"""
 import os
+import argparse
 import numpy as np
 import neural_networks
 import bayesian_parameter_optimization as bpo
 from params import nnet_params, hyperparameter_space, feats_train_folder
-
-RESULTS_PATH = 'results/'
+from params import TRIAL_DIRECTORY, MODEL_DIRECTORY
 
 
 if __name__ == '__main__':
-    # Construct paths
-    trial_directory = os.path.join(RESULTS_PATH, 'parameter_trials')
-    model_directory = os.path.join(RESULTS_PATH, 'model')
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "include_path", type=str,
+        help="Path to CSV file with rows as 'include ?, train_file, test_file'")
+    parser.add_argument(
+        "dataset_index", type=int,
+        help="Row index of datasets in include_path to be analyzed")
 
-    # train on every perturbed dataset
-    filepaths = np.loadtxt("include_data.csv", dtype=object, delimiter=",")
-    for (include, train_filename, test_filename) in filepaths:
-        if include == '1':
-            print ('\nExecuting bayesian parameter optimization'
-                   '\n{}').format(train_filename)
-            # Load training and validation sets
-            data = np.load(os.path.join(feats_train_folder,
-                                        train_filename)).astype(np.float32)
-    # Run parameter optimization forever
+    args = parser.parse_args()
+
+    filepaths = np.loadtxt(args.include_path, dtype=object, delimiter=",")
+    model_name = os.path.basename(filepaths[args.dataset_index, 1])[:-3]
+    print("\nExecuting bayesian parameter optimization\n{}").format(model_name)
+
+    # Load training and validation sets and convert them to float32
+    data = np.load(
+        os.path.join(feats_train_folder, filepaths[args.dataset_index, 1]))
+    data = data.astype(np.float32)
+
+    # Run parameter optimization FOREVER
     bpo.parameter_search(data,
                          nnet_params,
                          hyperparameter_space,
-                         trial_directory,
-                         model_directory,
-                         neural_networks.train)
+                         TRIAL_DIRECTORY,
+                         MODEL_DIRECTORY,
+                         neural_networks.train,
+                         model_name)
