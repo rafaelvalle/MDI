@@ -77,11 +77,9 @@ def train(data, layers, updates_fn, batch_size=16, epoch_size=128,
                             'validate_objective': 0.0}
 
             # compute validation cost and objective
-            #for data_validate in data['validate']:
             cost, obj = validate_fn(data['validate'][:, :-1],
                                     data['validate'][:, -1])
-            #epoch_result['validate_cost'] += cost
-            #epoch_result['validate_objective'] += obj
+
             epoch_result['validate_cost'] = cost  #  / float(batch_size)
             epoch_result['validate_objective'] = obj #  / float(batch_size)
 
