@@ -2,6 +2,7 @@
 
 """This function loads the best models trained so far and use them to make
 predictions using the datasets in the given include file"""
+
 import os
 import argparse
 import cPickle as pkl
@@ -10,9 +11,9 @@ import theano
 from theano import tensor as T
 import lasagne
 import deepdish
-from params import feats_test_folder, MODEL_DIRECTORY, RESULTS_PATH
-from params import nnet_params, hyperparameter_space
 import neural_networks
+from params import feats_test_folder, MODEL_DIRECTORY, RESULTS_PATH
+from params import nnet_params
 
 
 def set_trace():
@@ -62,7 +63,6 @@ if __name__ == '__main__':
                 inputs=[input_var, target_var], outputs=[obj_fn])
 
             # compute predictions. last column is target variable
-            set_trace()
             obj_val = validate_fn(data[:, :-1].astype(input_var.dtype),
                                   data[:, -1].astype(target_var.dtype))
             model_preds[model_name] = obj_val
