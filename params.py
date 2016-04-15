@@ -26,6 +26,7 @@ results_test_folder = "results/test"
 perturb_folder = "data/perturbed/"
 scalers_folder = "data/scalers/"
 imputed_folder = "data/imputed"
+IMAGES_DIRECTORY = "images/"
 RESULTS_PATH = 'results/'
 TRIAL_DIRECTORY = os.path.join(RESULTS_PATH, 'parameter_trials')
 MODEL_DIRECTORY = os.path.join(RESULTS_PATH, 'model')
