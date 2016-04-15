@@ -1,0 +1,7 @@
+0,votes_KNN_bin_scaled_mono_True_ratio_0.1.np
+0,votes_LogisticRegression_bin_scaled_mono_True_ratio_0.1.np
+0,votes_PCA_bin_scaled_mono_True_ratio_0.1.np
+0,votes_RandomForest_bin_scaled_mono_True_ratio_0.1.np
+1,votes_RandomReplace_bin_scaled_mono_True_ratio_0.1.np
+0,votes_Summary_bin_scaled_mono_True_ratio_0.1.np
+0,votes_SVM_bin_scaled_mono_True_ratio_0.1.np
