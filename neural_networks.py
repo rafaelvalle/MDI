@@ -61,7 +61,6 @@ def train(data, layers, updates_fn, batch_size=16, epoch_size=128,
     current_val_cost = np.inf
     train_cost = 0.0
 
-    # set_trace()
     for n, (x_batch, y_batch) in enumerate(train_data_iterator):
         train_cost += train_fn(x_batch, y_batch)
 
@@ -80,8 +79,8 @@ def train(data, layers, updates_fn, batch_size=16, epoch_size=128,
             cost, obj = validate_fn(data['validate'][:, :-1],
                                     data['validate'][:, -1])
 
-            epoch_result['validate_cost'] = cost  #  / float(batch_size)
-            epoch_result['validate_objective'] = obj #  / float(batch_size)
+            epoch_result['validate_cost'] = float(cost)
+            epoch_result['validate_objective'] = float(obj)
 
             # Test whether this validate cost is the new smallest
             if epoch_result['validate_cost'] < current_val_cost:
