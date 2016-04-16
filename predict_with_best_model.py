@@ -69,4 +69,4 @@ if __name__ == '__main__':
             print("{} error rate on test set: {}").format(model_name, obj_val)
 
     # dump dictionary
-    pkl.dump(model_preds, open(os.path.join(RESULTS_PATH, 'results.np', 'wb')))
+    pkl.dump(model_preds, open(os.path.join(RESULTS_PATH, 'results.np'), 'wb'))
