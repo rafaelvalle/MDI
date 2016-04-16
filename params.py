@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import os
 import numpy as np
 from scipy.stats import mode
@@ -7,12 +9,13 @@ import lasagne
 params_dict = {}
 imp_methods = ('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
                'SVM', 'KNN', 'PCA')
-imp_methods = ('KNN', )
 params_dict['miss_data_symbol'] = '?'
 params_dict['miss_data_cond'] = lambda x: x == params_dict['miss_data_symbol']
-params_dict['cat_cols'] = (1, 3, 4, 5, 6, 7, 8, 12)
+params_dict['cat_cols'] = (1, 3, 4, 5, 6, 7, 8, 12) # Adult
 params_dict['non_cat_cols'] = (0, 2, 9, 10, 11)
-params_dict['n_neighbors'] = 5
+# params_dict['cat_cols'] = (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16) # votes
+# params_dict['non_cat_cols'] = ()
+params_dict['n_neighbors'] = 3 # keep this <5 for votes
 params_dict['summary_func'] = lambda x: mode(x)[0]
 params_dict['knn_summary_func'] = np.mean
 
@@ -30,7 +33,6 @@ IMAGES_DIRECTORY = "images/"
 RESULTS_PATH = 'results/'
 TRIAL_DIRECTORY = os.path.join(RESULTS_PATH, 'parameter_trials')
 MODEL_DIRECTORY = os.path.join(RESULTS_PATH, 'model')
-
 
 # neural network parameter not to be explored with bayesian parameter estimation
 nnet_params = {'n_folds': 1,
