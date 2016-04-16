@@ -21,6 +21,7 @@ def set_trace():
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
 
+dataname = 'votes' 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -69,4 +70,4 @@ if __name__ == '__main__':
             print("{} error rate on test set: {}").format(model_name, obj_val)
 
     # dump dictionary
-    pkl.dump(model_preds, open(os.path.join(RESULTS_PATH, 'results.np'), 'wb'))
+    pkl.dump(model_preds, open(os.path.join(RESULTS_PATH, '{}_results.np'.format(dataname)), 'wb'))
