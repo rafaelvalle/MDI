@@ -39,7 +39,7 @@ x = delete(x, (4, 14), 1)
 
 # enumerate parameters
 monotone = True
-ratios = np.arange(.1, .5, .1)
+ratios = np.arange(0, .5, .1)
 
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)

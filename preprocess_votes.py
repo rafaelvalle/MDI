@@ -52,7 +52,8 @@ print 'Preparing train data for {}'.format(dataname)
 
 # enumerate parameters
 monotone = True
-ratios = np.arange(.1, .2, .1)
+ratios = np.arange(0, .2, .1)
+
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
     pert_data, _ = perturbate_data(
