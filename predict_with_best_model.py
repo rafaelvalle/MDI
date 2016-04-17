@@ -15,13 +15,29 @@ import neural_networks
 from params import feats_test_folder, MODEL_DIRECTORY, RESULTS_PATH
 from params import nnet_params
 
+dataname = 'votes' 
 
 def set_trace():
     from IPython.core.debugger import Pdb
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
 
-dataname = 'votes' 
+def dumpclean(obj):
+    if type(obj) == dict:
+        for k, v in obj.items():
+            if hasattr(v, '__iter__'):
+                print k
+                dumpclean(v)
+            else:
+                print '%s : %s' % (k, v)
+    elif type(obj) == list:
+        for v in obj:
+            if hasattr(v, '__iter__'):
+                dumpclean(v)
+            else:
+                print v
+    else:
+        print obj
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -71,3 +87,6 @@ if __name__ == '__main__':
 
     # dump dictionary
     pkl.dump(model_preds, open(os.path.join(RESULTS_PATH, '{}_results.np'.format(dataname)), 'wb'))
+
+    # print dictionary
+    dumpclean(model_preds)
