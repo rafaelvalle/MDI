@@ -8,7 +8,7 @@ from scipy import delete
 from sklearn.preprocessing import StandardScaler
 from missing_data_imputation import Imputer
 from processing import impute, perturbate_data
-from params import imp_methods, params_dict, scalers_folder
+from params import imp_methods, adult_params, scalers_folder
 from params import feats_train_folder, labels_train_folder, perturb_folder
 from params import rand_num_seed
 
@@ -43,8 +43,8 @@ ratios = np.arange(0, .5, .1)
 
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
-    pert_data, _ = perturbate_data(x, params_dict['cat_cols'], ratio, monotone,
-                                   params_dict['miss_data_symbol'])
+    pert_data, _ = perturbate_data(x, adult_params['cat_cols'], ratio, monotone,
+                                   adult_params['miss_data_symbol'])
 
     path = os.path.join(perturb_folder,
                         'adult_train_pert_mono_{}_ratio_{}.csv'.format(monotone,
@@ -56,7 +56,7 @@ for ratio in ratios:
     for imp_method in imp_methods:
         print '\tImputing with {}'.format(imp_method)
         imp = Imputer()
-        data = impute(pert_data, imp, imp_method, params_dict)
+        data = impute(pert_data, imp, imp_method, adult_params)
 
         path = "data/imputed/{}_mono_{}_ratio_{}.csv".format(imp_method,
                                                              monotone,
@@ -76,11 +76,11 @@ for ratio in ratios:
             scaler_dict = {}
 
         scaler = StandardScaler()
-        scaler = scaler.fit(data[:, params_dict['non_cat_cols']].astype(float))
+        scaler = scaler.fit(data[:, adult_params['non_cat_cols']].astype(float))
 
         data_scaled = np.copy(data)
-        data_scaled[:, params_dict['non_cat_cols']] = scaler.transform(
-            data[:, params_dict['non_cat_cols']].astype(float))
+        data_scaled[:, adult_params['non_cat_cols']] = scaler.transform(
+            data[:, adult_params['non_cat_cols']].astype(float))
 
         # key is imputation method and ratio dependent
         # filename is imputation method dependent
@@ -89,8 +89,8 @@ for ratio in ratios:
 
         # binarize scaled data
         data_scaled_bin = imp.binarize_data(data_scaled,
-                                            params_dict['cat_cols'],
-                                            params_dict['miss_data_symbol'])
+                                            adult_params['cat_cols'],
+                                            adult_params['miss_data_symbol'])
         # convert to float
         data_scaled_bin = data_scaled_bin.astype(float)
 
