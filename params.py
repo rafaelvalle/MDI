@@ -5,19 +5,34 @@ import numpy as np
 from scipy.stats import mode
 import lasagne
 
+
+# random number seed
+rand_num_seed = 1
+
 # imputation parameters
-params_dict = {}
 imp_methods = ('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
                'SVM', 'KNN', 'PCA')
-params_dict['miss_data_symbol'] = '?'
-params_dict['miss_data_cond'] = lambda x: x == params_dict['miss_data_symbol']
-# params_dict['cat_cols'] = (1, 3, 4, 5, 6, 7, 8, 12) # Adult
-# params_dict['non_cat_cols'] = (0, 2, 9, 10, 11)
-params_dict['cat_cols'] = (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16) # votes
-params_dict['non_cat_cols'] = ()
-params_dict['n_neighbors'] = 3 # keep this <5 for votes
-params_dict['summary_func'] = lambda x: mode(x)[0]
-params_dict['knn_summary_func'] = np.mean
+imp_methods = ('PCA',)
+
+adult_params = {
+    'miss_data_symbol': '?',
+    'miss_data_cond': lambda x: x == '?',
+    'cat_cols': (1, 3, 4, 5, 6, 7, 8, 12),
+    'non_cat_cols': (0, 2, 9, 10, 11),
+    'n_neighbors': 5,
+    'summary_func': lambda x: mode(x)[0],
+    'knn_summary_func': np.mean
+}
+
+votes_params = {
+    'miss_data_symbol': '?',
+    'miss_data_cond': lambda x: x == '?',
+    'cat_cols': np.arange(0, 16), # labels are not included in imputation
+    'non_cat_cols': (),
+    'n_neighbors': 3,
+    'summary_func': lambda x: mode(x)[0],
+    'knn_summary_func': np.mean
+}
 
 # folder paths
 feats_train_folder = "data/train/features/"
@@ -49,9 +64,6 @@ nnet_params = {'n_folds': 1,
                                    lasagne.nonlinearities.softmax),
                'update_func': lasagne.updates.adadelta,
                'drops': (None, 0.2, 0.5, None)}
-
-# random number seed
-rand_num_seed = 1
 
 # hyperparameter space to be explored using bayesian parameter optimization
 hyperparameter_space = {
