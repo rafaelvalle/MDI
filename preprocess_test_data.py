@@ -2,11 +2,12 @@
 
 import numpy as np
 import cPickle as pickle
-import os, random
+import os
+import random
 from scipy import delete
 from missing_data_imputation import Imputer
 from processing import impute
-from params import imp_methods, params_dict, scalers_folder
+from params import imp_methods, adult_params, scalers_folder
 from params import feats_test_folder, labels_test_folder
 from params import rand_num_seed
 
@@ -39,7 +40,7 @@ imp = Imputer()
 
 for imp_method in imp_methods:
     print 'Imputing with {}'.format(imp_method)
-    data = impute(x, imp, imp_method, params_dict)
+    data = impute(x, imp, imp_method, adult_params)
 
     # load respective scaler
     scaler_path = os.path.join(scalers_folder,
@@ -49,11 +50,11 @@ for imp_method in imp_methods:
     for name, scaler in scaler_dict.items():
         # scale and binarize, adding one col for missing value in all categ vars
         data_scaled = np.copy(data)
-        data_scaled[:, params_dict['non_cat_cols']] = scaler.transform(
-            data[:, params_dict['non_cat_cols']].astype(float))
+        data_scaled[:, adult_params['non_cat_cols']] = scaler.transform(
+            data[:, adult_params['non_cat_cols']].astype(float))
         data_scaled_bin = imp.binarize_data(data_scaled,
-                                            params_dict['cat_cols'],
-                                            params_dict['miss_data_symbol'])
+                                            adult_params['cat_cols'],
+                                            adult_params['miss_data_symbol'])
         # convert to float
         data_scaled_bin = data_scaled_bin.astype(float)
 
