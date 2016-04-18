@@ -312,8 +312,9 @@ class Imputer(object):
         # update data given projection
         for col in np.unique(nans[:, 1]):
             obs_ids = nans[nans[:, 1] == col, 0]
-            proj_cats = np.clip(data_factor_proj[obs_ids, col],
-                                0, len(factor_labels[col])-1).astype(int)
+            proj_cats = np.clip(
+                data_factor_proj[obs_ids, col], 0, len(factor_labels[col])-1)
+            proj_cats = proj_cats.round().astype(int)
             data[obs_ids, col] = factor_labels[col][proj_cats]
 
         return data
