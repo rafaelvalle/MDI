@@ -15,12 +15,14 @@ import neural_networks
 from params import feats_test_folder, MODEL_DIRECTORY, RESULTS_PATH
 from params import nnet_params
 
-dataname = 'votes' 
+dataname = 'votes'
+
 
 def set_trace():
     from IPython.core.debugger import Pdb
     import sys
     Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
+
 
 def dumpclean(obj):
     if type(obj) == dict:
@@ -86,7 +88,8 @@ if __name__ == '__main__':
             print("{} error rate on test set: {}").format(model_name, obj_val)
 
     # dump dictionary
-    pkl.dump(model_preds, open(os.path.join(RESULTS_PATH, '{}_results.np'.format(dataname)), 'wb'))
+    pkl.dump(model_preds, open(
+        os.path.join(RESULTS_PATH, '{}_results.np'.format(dataname)), 'wb'))
 
     # print dictionary
     dumpclean(model_preds)
