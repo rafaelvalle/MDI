@@ -267,7 +267,7 @@ class Imputer(object):
         return data
 
     def factor_analysis(self, x, cat_cols, missing_data_cond, threshold=0.9,
-                        in_place=False):
+                        technique='PCA', in_place=False):
         """ Performs principal component analisis and replaces missing data with
         values obtained from the data projected onto N principal components
 
@@ -292,19 +292,22 @@ class Imputer(object):
             data_factorized[:, cat_col] = factors
 
         data_factorized = data_factorized.astype(float)
+        if technique == 'PCA':
+            # questionable whether high variance = high importance.
+            u, s, vt = svds(data_factorized, data_factorized.shape[1] - 1,
+                            which='LM')
 
-        # questionable whether high variance = high importance.
-        u, s, vt = svds(data_factorized, data_factorized.shape[1] - 1,
-                        which='LM')
+            # find number of eigenvalues that explain 90% of variance
+            n_pcomps = 1
+            while sum(s[-n_pcomps:]) / sum(s) < threshold:
+                n_pcomps += 1
 
-        # find number of eigenvalues that explain 90% of variance
-        n_pcomps = 1
-        while sum(s[-n_pcomps:]) / sum(s) < threshold:
-            n_pcomps += 1
-
-        # compute data projected onto principal components space
-        data_factor_proj = np.dot(
-            u[:, -n_pcomps:], np.dot(np.diag(s[-n_pcomps:]), vt[-n_pcomps:, ]))
+            # compute data projected onto principal components space
+            data_factor_proj = np.dot(
+                u[:, -n_pcomps:], np.dot(np.diag(s[-n_pcomps:]),
+                                         vt[-n_pcomps:, ]))
+        else:
+            raise Exception("Technique {} is not supported".format(technique))
 
         # get missing data indices
         nans = np.argwhere(missing_data_cond(x))
