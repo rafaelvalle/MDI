@@ -47,6 +47,9 @@ labels_test.dump(os.path.join(
 votes_train = delete(votes_train, 0, 1)
 votes_test = delete(votes_test, 0, 1)
 
+# save votes training data
+np.savetxt('data/votes_train.csv', votes_train, delimiter=",", fmt="%s")
+
 # For training data
 print 'Preparing train data for {}'.format(dataname)
 
