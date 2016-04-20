@@ -12,6 +12,11 @@ from params import nnet_params, hyperparameter_space, feats_train_folder
 from params import TRIAL_DIRECTORY, MODEL_DIRECTORY
 
 
+def set_trace():
+    from IPython.core.debugger import Pdb
+    import sys
+    Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -36,7 +41,7 @@ if __name__ == '__main__':
     bpo.parameter_search(data,
                          nnet_params,
                          hyperparameter_space,
-                         TRIAL_DIRECTORY,
+                         os.path.join(TRIAL_DIRECTORY, model_name),
                          MODEL_DIRECTORY,
                          neural_networks.train,
                          model_name)
