@@ -37,8 +37,13 @@ Code can be found [here](example_votes.py)
 ![Congresssional voting records dataset imputation](votes_hist.png)
 
 ## TO DO
+** Modify plot_results to include hyperparameters tried **
 
-**Artificially perturb the data to generate missing observations DONE** 
+** Modify predict_with_best_model to print best model params R**
+
+**Compare with classification using one-hot data R**
+
+**Artificially perturb the data to generate missing observations R DONE** 
 
 **Compare with random forest classification- J**
 
@@ -48,4 +53,4 @@ Code can be found [here](example_votes.py)
 
 **Use Non-Negative Matrix Factorization instead of PCA - R**
 
-**Add python file that has a fit and predict function for the best models - R**
+**Add python file that has a fit and predict function for the best models - R DONE**
