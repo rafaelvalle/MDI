@@ -48,7 +48,8 @@ def impute(data, imputer, imp_method, params_dict):
     elif imp_method == 'PCA':
         imp_data = imputer.factor_analysis(data,
                                            params_dict['cat_cols'],
-                                           params_dict['miss_data_cond'])
+                                           params_dict['miss_data_cond'],
+                                           technique='PCA')
     elif imp_method == 'KNN':
         imp_data = imputer.knn(data,
                                params_dict['n_neighbors'],
