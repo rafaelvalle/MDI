@@ -29,15 +29,12 @@ labels = labels.reshape((-1, 1))
 
 # save labels in binary and one-hot representations
 labels.dump(os.path.join(labels_test_folder, 'labels_bin_test.np'))
-(np.eye(2)[labels.astype(int)]).astype(int).dump(
-    os.path.join(labels_test_folder, 'labels_onehot_test.np'))
 
 # remove redundant education-number and labels features
 x = delete(x, (4, 14), 1)
 
 # instantiate Imputer
 imp = Imputer()
-
 for imp_method in imp_methods:
     print 'Imputing with {}'.format(imp_method)
     data = impute(x, imp, imp_method, adult_params)
@@ -48,6 +45,7 @@ for imp_method in imp_methods:
 
     scaler_dict = pickle.load(open(scaler_path, "rb"))
     for name, scaler in scaler_dict.items():
+        print 'Scaling with {}'.format(name)
         # scale and binarize, adding one col for missing value in all categ vars
         data_scaled = np.copy(data)
         data_scaled[:, adult_params['non_cat_cols']] = scaler.transform(

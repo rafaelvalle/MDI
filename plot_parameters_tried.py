@@ -70,6 +70,9 @@ def plot_3d(params_dir):
 def plot_2d(params_dir):
     model_dirs = [name for name in os.listdir(params_dir)
                   if os.path.isdir(os.path.join(params_dir, name))]
+    if len(model_dirs) == 0:
+      model_dirs = [params_dir]
+
 
     colors = plt.get_cmap('plasma')
     plt.figure(figsize=(20, 10))
