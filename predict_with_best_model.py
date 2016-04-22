@@ -70,6 +70,10 @@ if __name__ == '__main__':
             # load best network model so far
             parameters = deepdish.io.load(
                 os.path.join(MODEL_DIRECTORY, model_name+'.h5'))
+
+            for i in xrange(len(parameters)):
+                parameters[i] = parameters[i].astype('float32')
+
             lasagne.layers.set_all_param_values(network, parameters)
 
             # set up neural network functions for predictions
