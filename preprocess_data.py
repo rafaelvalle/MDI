@@ -45,6 +45,9 @@ for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
     pert_data, _ = perturbate_data(x, adult_params['cat_cols'], ratio, monotone,
                                    adult_params['miss_data_symbol'])
+    print "\tRatio is {} of {}".format(
+            np.sum(pert_data == adult_params['miss_data_symbol']), 
+            len(pert_data) * len(adult_params['cat_cols']))
 
     path = os.path.join(perturb_folder,
                         'adult_train_pert_mono_{}_ratio_{}.csv'.format(monotone,
