@@ -81,7 +81,6 @@ freq_data = {}
 freq_data['Raw data'] = compute_histogram(x[:,1], labels)
 # freq_data['Drop missing'] = compute_histogram(data_drop[:,1], labels)
 freq_data['Random replace'] = compute_histogram(data_replace[:,1], labels)
-freq_data['Mode replacement'] = compute_histogram(data_mode[:,1], labels)
 freq_data['Summary'] = compute_histogram(data_mode[:,1], labels)
 freq_data['Random forests'] = compute_histogram(data_rf[:,1], labels)
 freq_data['SVM'] = compute_histogram(data_svm[:,1], labels)
@@ -101,7 +100,7 @@ for i in xrange(n_methods):
     ax.bar(bins+offset, freq_data[key][:,1].astype(int), width, label=key,
            color=plt.cm.hot(i/float(n_methods)), align='center')
 
-ax.set_xlabel('Work class', size=15)
+ax.set_xlabel('Work class categories', size=15)
 ax.set_ylabel('Count', size=15)
 ax.set_title('Adult training set (N= 32,561)', size=15, fontweight='bold')
 ax.set_xticks(bins + width)

@@ -78,7 +78,6 @@ freq_data = {}
 freq_data['Raw data'] = compute_histogram(x[:,1], labels)
 # freq_data['Drop missing'] = compute_histogram(data_drop[:,1], labels)
 freq_data['Random replace'] = compute_histogram(data_replace[:,1], labels)
-freq_data['Mode replacement'] = compute_histogram(data_mode[:,1], labels)
 freq_data['Summary'] = compute_histogram(data_mode[:,1], labels)
 freq_data['Random forests'] = compute_histogram(data_rf[:,1], labels)
 freq_data['SVM'] = compute_histogram(data_svm[:,1], labels)
