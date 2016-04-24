@@ -21,9 +21,9 @@ missing_data_cond = lambda x: x == '?'
 cat_cols = (1, 3, 4, 5, 6, 7, 8, 12)
 n_neighbors = 5
 
-# drop observations with missing variables
-print 'imputing with drop'
-data_drop = imp.drop(x, missing_data_cond)
+# # drop observations with missing variables
+# print 'imputing with drop'
+# data_drop = imp.drop(x, missing_data_cond)
 
 # replace missing values with random existing values
 print 'imputing with random replacement'
@@ -79,14 +79,14 @@ def compute_histogram(data, labels):
 labels = np.unique(x[:,1])
 freq_data = {}
 freq_data['Raw data'] = compute_histogram(x[:,1], labels)
-freq_data['Drop missing'] = compute_histogram(data_drop[:,1], labels)
+# freq_data['Drop missing'] = compute_histogram(data_drop[:,1], labels)
 freq_data['Mode replacement'] = compute_histogram(data_mode[:,1], labels)
-freq_data['Random replacement'] = compute_histogram(data_replace[:,1], labels)
-freq_data['RF prediction'] = compute_histogram(data_rf[:,1], labels)
-freq_data['SVM prediction'] = compute_histogram(data_svm[:,1], labels)
-freq_data['Logistic prediction'] = compute_histogram(data_svm[:,1], labels)
-freq_data['PCA imputation'] = compute_histogram(data_facanal[:,1], labels)
-freq_data['KNN imputation'] = compute_histogram(data_knn[:,1], labels)
+freq_data['Summary'] = compute_histogram(data_replace[:,1], labels)
+freq_data['Random forests'] = compute_histogram(data_rf[:,1], labels)
+freq_data['SVM'] = compute_histogram(data_svm[:,1], labels)
+freq_data['Logistic regression'] = compute_histogram(data_svm[:,1], labels)
+freq_data['PCA'] = compute_histogram(data_facanal[:,1], labels)
+freq_data['KNN'] = compute_histogram(data_knn[:,1], labels)
 
 # plot histograms given feature with missing data
 n_methods = len(freq_data.keys())
@@ -100,9 +100,9 @@ for i in xrange(n_methods):
     ax.bar(bins+offset, freq_data[key][:,1].astype(int), width, label=key,
            color=plt.cm.hot(i/float(n_methods)), align='center')
 
-ax.set_xlabel('Job categories', size=15)
+ax.set_xlabel('Work class', size=15)
 ax.set_ylabel('Count', size=15)
-ax.set_title('Adult dataset (training set; N = 488,415)', size=15, fontweight='bold')
+ax.set_title('Adult training set (N= 32,561)', size=15, fontweight='bold')
 ax.set_xticks(bins + width)
 ax.set_xticklabels(labels, rotation=45)
 plt.legend(loc=2)
