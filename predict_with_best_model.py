@@ -15,7 +15,7 @@ import neural_networks
 from params import feats_test_folder, MODEL_DIRECTORY, RESULTS_PATH
 from params import nnet_params
 
-dataname = 'votes'
+dataname = 'adult'
 
 
 def set_trace():
