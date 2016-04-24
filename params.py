@@ -12,7 +12,6 @@ rand_num_seed = 1
 # imputation parameters
 imp_methods = ('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
                'SVM', 'KNN', 'PCA')
-imp_methods = ('PCA',)
 
 adult_params = {
     'miss_data_symbol': '?',
