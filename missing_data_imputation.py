@@ -1,5 +1,5 @@
 import numpy as np
-import pandas as pd
+# import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import NearestNeighbors
 from scipy.sparse.linalg import svds
@@ -135,9 +135,6 @@ class Imputer(object):
 
         # remove categorical columns with missing data
         data = np.delete(data, miss_cols, 1)
-        # val_cols = [n for n in xrange(data.shape[1])
-        #             if n not in miss_cols_uniq]
-        # data = data[:, val_cols]
         return data
 
     def knn(self, x, k, summary_func, missing_data_cond, cat_cols,
@@ -231,7 +228,8 @@ class Imputer(object):
         # factorize categorical variables and store transformation
         factor_labels = {}
         for cat_col in cat_cols:
-            factors, labels = pd.factorize(data[:, cat_col])
+            # factors, labels = pd.factorize(data[:, cat_col])
+            labels, factors = np.unique(data[:, cat_col], return_inverse=True)
             factor_labels[cat_col] = labels
             data_factorized[:, cat_col] = factors
 
@@ -287,7 +285,8 @@ class Imputer(object):
         # factorize categorical variables and store encoding
         factor_labels = {}
         for cat_col in cat_cols:
-            factors, labels = pd.factorize(x[:, cat_col])
+            # factors, labels = pd.factorize(x[:, cat_col])
+            labels, factors = np.unique(x[:, cat_col], return_inverse=True)
             factor_labels[cat_col] = labels
             data_factorized[:, cat_col] = factors
 
@@ -323,7 +322,7 @@ class Imputer(object):
         return data
 
     def factorize_data(self, x, cols, in_place=False):
-        """Replace column in cols with one-hot representation of cols
+        """Replace column in cols with factors of cols
 
         Parameters
         ----------
@@ -336,7 +335,7 @@ class Imputer(object):
         Returns
         -------
         d : np.ndarray
-            Matrix with categorical data replaced with one-hot rows
+            Matrix with categorical data replaced with factors
         """
 
         if in_place:
@@ -346,8 +345,9 @@ class Imputer(object):
 
         factors_labels = {}
         for col in cols:
-            factors, labels = pd.factorize(data[:, col])
-            factors_labels[col] = (factors_labels)
+            # factors, labels = pd.factorize(data[:, col])
+            labels, factors = np.unique(data[:, col], return_inverse=True)
+            factors_labels[col] = labels
             data[:, col] = factors
 
         return data, factors_labels
@@ -375,7 +375,6 @@ class Imputer(object):
             data = x
         else:
             data = np.copy(x)
-
         for col in cols:
             uniq_vals, indices = np.unique(data[:, col], return_inverse=True)
 
