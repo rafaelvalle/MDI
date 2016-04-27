@@ -61,18 +61,31 @@ if __name__ == '__main__':
                 os.path.join(feats_test_folder, test_path)).astype(np.float32)
 
             # Fit Tree Classifiers
-            clfs = {'DTC(max_depth=32)': 
+            clfs = {
+
+                    'DTC(max_depth=4)': 
+                        DecisionTreeClassifier(max_depth=4),
+                    'DTC(max_depth=8)': 
+                        DecisionTreeClassifier(max_depth=8),
+                    'DTC(max_depth=16)': 
+                        DecisionTreeClassifier(max_depth=16),
+                    'DTC(max_depth=32)': 
                         DecisionTreeClassifier(max_depth=32),
                     'DTC(max_depth=256)': 
                         DecisionTreeClassifier(max_depth=256),
                     'DTC(max_depth=1024)': 
                         DecisionTreeClassifier(max_depth=1024),
+                    'RFC(max_depth=4)': 
+                        RandomForestClassifier(max_depth=4),
+                    'RFC(max_depth=8)': 
+                        RandomForestClassifier(max_depth=8),
+                    'RFC(max_depth=16)': 
+                        RandomForestClassifier(max_depth=16),
                     'RFC(max_depth=32)': 
                         RandomForestClassifier(max_depth=32),
                     'RFC(max_depth=256)': 
-                        RandomForestClassifier(max_depth=256)}
+                        RandomForestClassifier(max_depth=256),
                     'RFC(max_depth=1024)': 
-                       
                         RandomForestClassifier(max_depth=1024)}
 
             for model_name, clf in clfs.items():
