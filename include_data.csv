@@ -33,3 +33,8 @@
 1,SVM_bin_scaled_mono_True_ratio_0.2.np,SVM_ratio_0.2_bin_scaled_test.np
 1,SVM_bin_scaled_mono_True_ratio_0.3.np,SVM_ratio_0.3_bin_scaled_test.np
 1,SVM_bin_scaled_mono_True_ratio_0.4.np,SVM_ratio_0.4_bin_scaled_test.np
+1,Identity_bin_scaled_mono_True_ratio_0.0.np,Identity_ratio_0.0_bin_scaled_test.np
+1,Identity_bin_scaled_mono_True_ratio_0.1.np,Identity_ratio_0.1_bin_scaled_test.np
+1,Identity_bin_scaled_mono_True_ratio_0.2.np,Identity_ratio_0.2_bin_scaled_test.np
+1,Identity_bin_scaled_mono_True_ratio_0.3.np,Identity_ratio_0.3_bin_scaled_test.np
+1,Identity_bin_scaled_mono_True_ratio_0.4.np,Identity_ratio_0.4_bin_scaled_test.np
