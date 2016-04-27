@@ -56,6 +56,8 @@ def impute(data, imputer, imp_method, params_dict):
                                params_dict['knn_summary_func'],
                                params_dict['miss_data_cond'],
                                params_dict['cat_cols'])
+    elif imp_method == 'Identity':
+        imp_data = data
     else:
         raise Exception("Imputation method {} is not valid".format(imp_method))
     return imp_data
