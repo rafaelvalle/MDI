@@ -17,6 +17,8 @@ def impute(data, imputer, imp_method, params_dict):
 
     if imp_method == 'RandomReplace':
         imp_data = imputer.replace(data, params_dict['miss_data_cond'])
+    elif imp_method == 'Drop':
+        imp_data = imputer.drop(data, params_dict['miss_data_cond'])
     elif imp_method == 'Summary':
         imp_data = imputer.summarize(data,
                                      params_dict['summary_func'],
@@ -29,18 +31,13 @@ def impute(data, imputer, imp_method, params_dict):
                                    clf)
 
     elif imp_method == 'SVM':
-        clf = SVM(penalty='l2', loss='squared_hinge', dual=True, tol=0.0001,
-                  C=1.0, multi_class='ovr', fit_intercept=True,
-                  intercept_scaling=1, class_weight=None, verbose=0,
-                  random_state=None, max_iter=1000)
+        clf = SVM()
         imp_data = imputer.predict(data,
                                    params_dict['cat_cols'],
                                    params_dict['miss_data_cond'],
                                    clf)
     elif imp_method == 'LogisticRegression':
-        clf = LogisticRegression(
-            penalty='l2', dual=False, tol=0.0001, C=1.0, fit_intercept=True,
-            intercept_scaling=1)
+        clf = LogisticRegression()
         imp_data = imputer.predict(data,
                                    params_dict['cat_cols'],
                                    params_dict['miss_data_cond'],

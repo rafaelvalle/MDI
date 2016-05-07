@@ -8,7 +8,7 @@ from scipy import delete
 from sklearn.preprocessing import StandardScaler
 from missing_data_imputation import Imputer
 from processing import impute, perturbate_data
-from params import imp_methods, adult_params, scalers_folder
+from params import adult_params, scalers_folder
 from params import feats_train_folder, labels_train_folder, perturb_folder
 from params import rand_num_seed
 
@@ -56,7 +56,7 @@ for ratio in ratios:
     print '\tSaving perturbed data to {}'.format(path)
     np.savetxt(path, pert_data, delimiter=",", fmt="%s")
 
-    for imp_method in imp_methods:
+    for imp_method in adult_params['imp_methods']:
         print '\tImputing with {}'.format(imp_method)
         imp = Imputer()
         data = impute(pert_data, imp, imp_method, adult_params)

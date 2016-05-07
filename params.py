@@ -10,17 +10,17 @@ import lasagne
 rand_num_seed = 1
 
 # imputation parameters
-imp_methods = ('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
-               'SVM', 'KNN', 'PCA', 'Identity')
 
 adult_params = {
     'miss_data_symbol': '?',
     'miss_data_cond': lambda x: x == '?',
     'cat_cols': (1, 3, 4, 5, 6, 7, 8, 12),
     'non_cat_cols': (0, 2, 9, 10, 11),
+    'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
+               'SVM', 'KNN','PCA', 'Identity'),
     'n_neighbors': 5,
+    'knn_summary_func': np.mean,
     'summary_func': lambda x: mode(x)[0],
-    'knn_summary_func': np.mean
 }
 
 votes_params = {
@@ -28,9 +28,9 @@ votes_params = {
     'miss_data_cond': lambda x: x == '?',
     'cat_cols': np.arange(0, 16), # labels are not included in imputation
     'non_cat_cols': (),
-    'n_neighbors': 3,
-    'summary_func': lambda x: mode(x)[0],
-    'knn_summary_func': np.mean
+    'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression', #no KNN
+               'SVM', 'PCA', 'Identity'), 
+    'summary_func': lambda x: mode(x)[0]
 }
 
 # folder paths

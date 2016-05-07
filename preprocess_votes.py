@@ -7,7 +7,7 @@ from scipy import delete
 from sklearn.cross_validation import train_test_split
 from missing_data_imputation import Imputer
 from processing import impute, perturbate_data
-from params import imp_methods, votes_params
+from params import votes_params
 from params import feats_train_folder, labels_train_folder, perturb_folder
 from params import feats_test_folder, labels_test_folder
 from params import rand_num_seed
@@ -55,7 +55,7 @@ print 'Preparing train data for {}'.format(dataname)
 
 # enumerate parameters
 monotone = True
-ratios = np.arange(0, .2, .1)
+ratios = np.arange(0, .5, .1)
 
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
@@ -70,7 +70,7 @@ for ratio in ratios:
     print '\tSaving perturbed data to {}'.format(path)
     np.savetxt(path, pert_data, delimiter=",", fmt="%s")
     # impute data given imp_methods in params.py
-    for imp_method in imp_methods:
+    for imp_method in votes_params['imp_methods']:
         print '\tImputing with {}'.format(imp_method)
         imp = Imputer()
         data = impute(pert_data, imp, imp_method, votes_params)
@@ -105,7 +105,7 @@ for ratio in ratios:
 print 'Preparing test data for {}'.format(dataname)
 # instantiate Imputer
 imp = Imputer()
-for imp_method in imp_methods:
+for imp_method in votes_params['imp_methods']:
     print 'Imputing with {}'.format(imp_method)
     data = impute(votes_test, imp, imp_method, votes_params)
     # scaling is not needed for votes data

@@ -7,7 +7,7 @@ import random
 from scipy import delete
 from missing_data_imputation import Imputer
 from processing import impute
-from params import imp_methods, adult_params, scalers_folder
+from params import adult_params, scalers_folder
 from params import feats_test_folder, labels_test_folder
 from params import rand_num_seed
 
@@ -35,7 +35,7 @@ x = delete(x, (4, 14), 1)
 
 # instantiate Imputer
 imp = Imputer()
-for imp_method in imp_methods:
+for imp_method in adult_params['imp_methods']:
     print 'Imputing with {}'.format(imp_method)
     data = impute(x, imp, imp_method, adult_params)
 
