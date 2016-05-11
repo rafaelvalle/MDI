@@ -25,6 +25,9 @@ if __name__ == '__main__':
     parser.add_argument(
         "dataset_index", type=int,
         help="Row index of datasets in include_path to be analyzed")
+    parser.add_argument(
+        "dataset", type=str,
+        help="Dataset name (adult or votes")
 
     args = parser.parse_args()
 
@@ -41,7 +44,7 @@ if __name__ == '__main__':
     bpo.parameter_search(data,
                          nnet_params,
                          hyperparameter_space,
-                         os.path.join(TRIAL_DIRECTORY, model_name),
+                         os.path.join(TRIAL_DIRECTORY+"_"+args.dataset, model_name),
                          MODEL_DIRECTORY,
                          neural_networks.train,
                          model_name)
