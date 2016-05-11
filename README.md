@@ -38,16 +38,10 @@ Code can be found [here](example_votes.py)
 
 ## TO DO
 
-** Make sure that PCA only operates on complete features - R**
+**Compute error bars for prediction accuracy for each classifier/method - J**
 
-** Modify predict_with_best_model to print best model params - R**
-
-**Compare with classification using one-hot data and data with missing values dropped - R**
-
-**Compare with random forest classification - J**
-
-**Compute error bars for prediction accuracy - J**
-
-**Perturb more than 10% of data for votes (may need to lower k neighbors) - J**
+**Make sure that PCA only operates on complete features - R**
 
 **Use Non-Negative Matrix Factorization instead of PCA - R**
+
+
