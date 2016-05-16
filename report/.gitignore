@@ -1,0 +1,7 @@
+.DS_Store
+*.out
+*.aux
+*.log
+*.bbl
+*.bbg
+*.gz

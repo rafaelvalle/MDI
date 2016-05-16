@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: mdi-nnets.aux
+The style file: ieee.bst
+Database file #1: refs.bib
+Warning--empty journal in schlimmer1987
+You've used 12 entries,
+            2120 wiz_defined-function locations,
+            576 strings with 5515 characters,
+and the built_in function-call counts, 4020 in all, are:
+= -- 409
+> -- 145
+< -- 3
++ -- 60
+- -- 46
+* -- 261
+:= -- 645
+add.period$ -- 36
+call.type$ -- 12
+change.case$ -- 58
+chr.to.int$ -- 0
+cite$ -- 13
+duplicate$ -- 164
+empty$ -- 340
+format.name$ -- 46
+if$ -- 858
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 11
+newline$ -- 62
+num.names$ -- 24
+pop$ -- 62
+preamble$ -- 1
+purify$ -- 46
+quote$ -- 0
+skip$ -- 127
+stack$ -- 0
+substring$ -- 297
+swap$ -- 43
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 48
+warning$ -- 1
+while$ -- 44
+width$ -- 14
+write$ -- 129
+(There was 1 warning)
