@@ -65,8 +65,7 @@
 }\hfill }
 
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm \st{MISSING DATA IMPUTATION FOR NEURAL NETWORKS}
-\\ANALYZING MISSING DATA IMPUTATION IN DECISION TREES, RANDOM FORESTS AND NEURAL NETWORKS} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
 
 \renewcommand{\thefootnote}{}
 $\ $\par
@@ -74,9 +73,8 @@ $\ $\par
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont \vspace{0.8pc}
-\centerline{\large\bf \st{MISSING DATA IMPUTATION FOR NEURAL NETWORKS}
-}
-\vspace{2pt} \centerline{\large\bf ANALYZING MISSING DATA IMPUTATION IN RANDOM FORESTS AND NEURAL NETWORKS}
+\centerline{\large\bf COMPARING MISSING DATA IMPUTATION METHODS}
+\vspace{2pt} \centerline{\large\bf  FOR SUPERVISED CLASSIFICATION}
 \vspace{.4cm} \centerline{Jason Poulos and Rafael Valle} \vspace{.4cm} \centerline{\it
 University of California, Berkeley} \vspace{.55cm} \fontsize{9}{11.5pt plus.8pt minus
 .6pt}\selectfont
@@ -85,22 +83,15 @@ University of California, Berkeley} \vspace{.55cm} \fontsize{9}{11.5pt plus.8pt 
 
 \begin{quotation}
 \noindent {\it Abstract:}
-This paper investigates the effects of missing categorical data imputation on classification
+This paper compares methods for imputing missing categorical data for classification
 tasks using random forests, decision trees and neural networks.
 Researchers analyzing survey data typically choose decision trees or random
 forests for classification tasks, largely because these models, unlike neural
 networks and others, do not require imputing missing data nor encoding categorical
-variables \st{are not easy to handle with neural networks}. 
-We start by investigating techniques for missing categorical data imputation
-and categorical data encoding. 
-\st{such that it is appropriate to neural network classifiers}. We
-experiment on two benchmark datasets with missing categorical data,
+variables. We start by investigating techniques for missing categorical data imputation
+and categorical data encoding. We experiment on two benchmark datasets with missing categorical data,
 comparing a neural network with decision trees and random forests classifiers
-trained on data imputed with different techniques \st{differently imputed
-data} and various levels of perturbation. We beat the state-of-the-art test
-error on both datasets \st{using a random forests classifier, either trained
-on data imputed with logistic regression or data with one-hot encoding. We}
-and conclude from the results that the performance of the classifiers and imputation strategies generally depend on the nature and proportion of missing data. \par
+trained on data imputed with different techniques and various levels of perturbation. We beat the state-of-the-art test error on both datasets and conclude from the results that the performance of the classifiers and imputation strategies generally depend on the nature and proportion of missing data. \par
 
 \vspace{9pt}
 \noindent {\it Key words and phrases:}
@@ -117,6 +108,8 @@ missing data, imputation methods, neural networks, random forests, decision
 
 \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont
 
+\newpage %move intro to second page
+
 \setcounter{chapter}{1}
 \setcounter{equation}{0} %-1
 \noindent {\bf 1. Introduction} 
@@ -124,13 +117,9 @@ missing data, imputation methods, neural networks, random forests, decision
 Missing data is a common problem in survey data in various domains. Random
 Forests and other decision tree methods are the method of choice for survey
 data, largely because missing data must be pre-processed to be suited for models
-that require numerical input, such as neural networks.\st{are not easy to handle with neural
-networks}. Imputing missing data and encoding categorical variables requires
-special attention, as the imputation can considerably disturb the original
+that require numerical input, such as neural networks. Imputing missing data and encoding categorical variables requires special attention, as the imputation can considerably disturb the original
 distribution of the data and a wrong encoding can produce a wrong distance
-metric between categorical variables. \st{We investigate techniques for handling
-missing categorical data such that it is appropriate to neural network
-classifiers.} We investigate techniques for handling missing categorical data
+metric between categorical variables. We investigate techniques for handling missing categorical data
 and analyze their effects on the distribution of features. We set-up two
 classification tasks to assess the performance of neural network classifiers in
 comparison with decision tree and random forests classifiers trained on
@@ -147,11 +136,9 @@ After briefly reviewing related works in Section 2 we experiment on benchmark da
 \setcounter{equation}{0} %-1
 \noindent {\bf 2. Related work}
 
-\noindent {\bf 2.1. \st{Neural networks for classification with categorical and
-continuous features} Encoding categorical data}\label{section:encoding}
+\noindent {\bf 2.1. Encoding categorical data}\label{section:encoding}
 
-Common techniques for handling categorical data \st{in
-neural networks} include encoding the categorical values into numeric values,
+Common techniques for handling categorical data  include encoding the categorical values into numeric values,
 factors, or using binary encoding, one-hot. These techniques, however, have some drawbacks
 including unnecessarily increasing model complexity or feature
 dimensionality \textbf{(isn't model complexity increased due to increase in feature
@@ -171,8 +158,7 @@ might not be suitable for problems where the decision boundary between classes
 is described by a second-order polynomial \textbf{are you sure? what about
 algebraic decision trees? check wiki...}, for example \citep{fayyad1996data}.
 
-\noindent {\bf 2.2. \st{Techniques for handling missing data}Missing Data
-Imputation} \label{section:techniques}
+\noindent {\bf 2.2. Missing Data Imputation} \label{section:techniques}
 Several techniques for data imputation (i.e., replace missing values with plausible ones) and
 direct estimation (i.e., all missing data is analyzed using a maximum likelihood
 approach \textbf{not always maximum likelihood, say we use Regression, which
@@ -191,15 +177,12 @@ Train a classification algorithm --- such as logistic regression, random forests
 %Perform factor analysis (e.g., PCA) on the design matrix, project the design matrix onto the first $N$ eigenvectors and replace the missing values by the values that might be given by the projected design matrix.
 
 \item[Random replacement] 
-    The observation with missing data is randomly replaced with another
-\st{non-sampled observation} complete observation randomly sampled.
+    The observation with missing data is randomly replaced with another complete observation randomly sampled.
 
 \item[Mode replacement]
 Replace the missing data with the mode of the corresponding feature vector of the training set.
 
-\item[One-hot] \st{Create a binary variable to indicate whether or not a
-    specific feature is missing.} Create a binary feature vector to indicate
-    which variable is present.
+\item[One-hot] Create a binary feature vector to indicate which variable is present.
 
 \end{labeling}
 
@@ -312,12 +295,12 @@ The code used for this project is available on Github (\url{https://github.com/r
 \noindent {\large\bf Acknowledgements}
 
 %Write the acknowledgements here.
-We thank Isabelle Guyon for advice and the idea for the paper. We also thank Joan Bruna and seminar participants at the University of California, Berkeley for comments. This material is based upon work supported by the National Science Foundation Graduate Research Fellowship under Grant No. DGE 1106400. Any opinion, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.
+We thank Isabelle Guyon for advice and the idea for the paper. We also thank Joan Bruna and seminar participants at the University of California, Berkeley, for comments. This material is based upon work supported by the National Science Foundation Graduate Research Fellowship under Grant No. DGE 1106400. Any opinion, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.
 \par
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR NEURAL NETWORKS} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
 
 \bibhang=1.7pc
 \bibsep=2pt
@@ -325,7 +308,7 @@ We thank Isabelle Guyon for advice and the idea for the paper. We also thank Joa
 \renewcommand\bibname{\large \bf References} 
 \clearpage
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR NEURAL NETWORKS} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
 %\begin{thebibliography}{11}
 %\expandafter\ifx\csname
 %natexlab\endcsname\relax\def\natexlab#1{#1}\fi
