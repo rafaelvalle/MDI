@@ -1,16 +1,4 @@
 \begin{thebibliography}{}
-\expandafter\ifx\csname
-natexlab\endcsname\relax\def\natexlab#1{#1}\fi
-\expandafter\ifx\csname url\endcsname\relax
-  \def\url#1{\texttt{#1}}\fi
-\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL
-}\fi
-
-\bibitem[Batista and Monard, 2003]{batista2003analysis}
-Batista, G.~E. and Monard, M.~C. (2003).
-\newblock An analysis of four missing data treatment methods for supervised
-  learning.
-\newblock {\em Applied Artificial Intelligence}, 17(5-6):519--533.
 
 \bibitem[Brouwer, 2002]{brouwer2002feed}
 Brouwer, R.~K. (2002).
@@ -43,6 +31,11 @@ Kohavi, R. (1996).
 Lichman, M. (2013).
 \newblock {UCI} machine learning repository.
 
+\bibitem[Little and Rubin, 2014]{little2014}
+Little, R.~J. and Rubin, D.~B. (2014).
+\newblock {\em Statistical analysis with missing data}.
+\newblock John Wiley \& Sons.
+
 \bibitem[Schlimmer, 1987]{schlimmer1987}
 Schlimmer, J.~C. (1987).
 \newblock Concept acquisition through representational adjustment.
@@ -57,6 +50,11 @@ Snoek, J., Larochelle, H., and Adams, R.~P. (2012).
 \newblock Practical bayesian optimization of machine learning algorithms.
 \newblock In {\em Advances in neural information processing systems}, pages
   2951--2959.
+
+\bibitem[Tsiatis, 2007]{tsiatis2007}
+Tsiatis, A. (2007).
+\newblock {\em Semiparametric theory and missing data}.
+\newblock Springer Science \& Business Media.
 
 \bibitem[Wang et~al., 2008]{wang2008categorical}
 Wang, H., Xing, G., and Chen, K. (2008).

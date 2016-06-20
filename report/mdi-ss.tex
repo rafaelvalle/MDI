@@ -95,9 +95,7 @@ trained on data imputed with different techniques and various levels of perturba
 
 \vspace{9pt}
 \noindent {\it Key words and phrases:}
-missing data, imputation methods, neural networks, random forests, decision
-    trees
-%Balanced incomplete block design, Hadamard matrix, nearly balanced incomplete block design, orthogonal array.
+missing data, survey data, imputation methods,  neural networks, random forests, decision trees
 \par
 \end{quotation}\par
 
@@ -114,29 +112,49 @@ missing data, imputation methods, neural networks, random forests, decision
 \setcounter{equation}{0} %-1
 \noindent {\bf 1. Introduction} 
 
-Missing data is a common problem in survey data in various domains. Random
-Forests and other decision tree methods are the method of choice for survey
-data, largely because missing data must be pre-processed to be suited for models
-that require numerical input, such as neural networks. Imputing missing data and encoding categorical variables requires special attention, as the imputation can considerably disturb the original
-distribution of the data and a wrong encoding can produce a wrong distance
-metric between categorical variables. We investigate techniques for handling missing categorical data
-and analyze their effects on the distribution of features. We set-up two
-classification tasks to assess the performance of neural network classifiers in
-comparison with decision tree and random forests classifiers trained on
-differently imputed data and for various degrees of perturbation. \textbf{I
-think we should say more about missing data and categorical variable encoding,
-including refs.} 
+Missing data is a common problem in survey data used for applications in various domains, such as social science and marketing. Sources of missing values in survey data typically include unit nonresponse, where a subset of individuals do not complete the survey, and item nonresponse, where missing values are concentrated on particular questions \citep{little2014}. For supervised classification tasks, the objective is to fit a model on categorically labeled training data in order to categorize new examples. The ability of researchers to accurately fit a model model may be compromised by missing data, depending on the underlying missing data mechanism. In this paper, we focus on data that are nonmissing at random (NMAR), which occurs when the probability of an example having a missing value may depend on the missing data itself. There is an inherent nonidentifiabiltiy problem when the missing data mechanism is NMAR because we cannot observe the true value of missing data \citep{tsiatis2007}. Item nonresponse in surveys is typically handled by imputation methods, which are used to estimate a value for missing data. However, imputation methods assume data missing at random (MAR), which occurs when the probability of missingness depends only on the observed data. 
 
-After briefly reviewing related works in Section 2 we experiment on benchmark datasets and compare our results with the state-of-the-art in Section 3. Finally, we draw conclusions in Section 4.
+The objective of the present study is to compare the out-of-sample performance of three popular machine learning classifiers --- decision trees, random forests, and neural networks --- trained on either differently-imputed or non-imputed survey datasets that contain various degrees of missing categorical data. Decision trees and random forests are typically used for survey data because missing data must be pre-processed to be suited for models that require numerical input, such as neural networks. Imputing missing data and encoding categorical variables requires special attention, because imputation can bias the model if the missing data are NMAR and wrong encoding can produce a wrong distance metric between categorical variables. The results of the study will provide guidance to applied researchers on how to handle missing data in survey datasets and which classifier to use. 
+
+This manuscript is organized as follows: Section 2 describes missing data mechanisms and describe methods imputing missing data; Section 3 describes our experiments on two benchmark datasets and discusses the results; Section 4 concludes and offers areas for future research. 
+
 \par
 
 \lhead[\footnotesize\thepage\fancyplain{}\leftmark]{}\rhead[]{\fancyplain{}\rightmark\footnotesize\thepage}%Put this line in Page 2
 
 \setcounter{chapter}{2}
 \setcounter{equation}{0} %-1
-\noindent {\bf 2. Related work}
+\noindent {\bf 2. Missing data mechanisms and methods for imputing missing categorical data}
 
-\noindent {\bf 2.1. Encoding categorical data}\label{section:encoding}
+Summarize section here. 
+
+\noindent {\bf 2.1. Missing data mechanisms}
+
+Formal statement of missing data mechanisms
+
+%\citep{tsiatis2007}
+%
+%types of missing data
+%	MCAR (missing completely at random): The probability of missingness is independent of the data.
+%	MAR (missing at random): The probability of missingness depends only on the observed data.
+%	NMAR (nonmissing at random): The probability of missingness may also depend on the unobservable 	part of the data.
+%		
+%	MAR assumption alleviates the identifiability problems of MNAR because the probability of missingness depends on the variables that are observed on all subjects
+%		
+%		
+%\citep{little2014}
+%
+%Missing data pattern vs. missing data mechanism 
+%	pattern describes which values are observed and which are missing
+%	mechanism describes relationship between missingness and the values of variables in the data
+%
+%Assumption: missingness indicators hide true values that are meaningful for analysis 
+%
+%The complete-data analysis that ignores NMAR missing-data mechanism is biased
+
+\noindent {\bf 2.2. Encoding categorical data}\label{section:encoding} 
+
+\textbf{We should merge this with the subsection below}
 
 Common techniques for handling categorical data  include encoding the categorical values into numeric values,
 factors, or using binary encoding, one-hot. These techniques, however, have some drawbacks
@@ -158,33 +176,35 @@ might not be suitable for problems where the decision boundary between classes
 is described by a second-order polynomial \textbf{are you sure? what about
 algebraic decision trees? check wiki...}, for example \citep{fayyad1996data}.
 
-\noindent {\bf 2.2. Missing Data Imputation} \label{section:techniques}
+\noindent {\bf 2.3. Methods for imputing missing categorical data} \label{section:techniques} 
+
+\textbf{Include more references here}
 Several techniques for data imputation (i.e., replace missing values with plausible ones) and
 direct estimation (i.e., all missing data is analyzed using a maximum likelihood
 approach \textbf{not always maximum likelihood, say we use Regression, which
 usually is not done via ML, or NN to predict the
-value} have been proposed \citep{de2003prevention}. We compare seven different imputation techniques within the following five categories which are commonly found in the previous work on missing data imputation \citep{batista2003analysis}:
+value} have been proposed \citep{de2003prevention}. 
 
-\begin{labeling}{MDI}
+%\citep{batista2003analysis}
+%
+%Analyze the use of $k$-nearest neighbors as an imputation method 
+%
+%Find $k$-nearest neighbors imputation can outperform internal methods used by decision trees to treat missing data and mean/mode imputation 
+%
+%Advantage of imputation is that missing data treatment is independent of the learning algorithm used
+%
+%\citep{malarvizhi2012}
+%
+%\citep{silva2011}
+%
+%\citep{efron1994}
+%
+%\citep{li2004}
+%
+%\citep{liu2016}
+%
+%\citep{lo2009}
 
-\item[$k$-nearest-neighbors ($k$-NN)]
-Compute the $k$-NN of the observation with missing data and assign the mode of the $k$-neighbors to the missing data.
-
-\item[Classification algorithm]
-Train a classification algorithm --- such as logistic regression, random forests or support vector machines (SVMs) --- to classify missing data given existing data. 
-
-%\item[Principal component analysis (PCA)]
-%Perform factor analysis (e.g., PCA) on the design matrix, project the design matrix onto the first $N$ eigenvectors and replace the missing values by the values that might be given by the projected design matrix.
-
-\item[Random replacement] 
-    The observation with missing data is randomly replaced with another complete observation randomly sampled.
-
-\item[Mode replacement]
-Replace the missing data with the mode of the corresponding feature vector of the training set.
-
-\item[One-hot] Create a binary feature vector to indicate which variable is present.
-
-\end{labeling}
 
 \par
 
@@ -194,6 +214,8 @@ Replace the missing data with the mode of the corresponding feature vector of th
 \setcounter{chapter}{3}
 \setcounter{equation}{0} %-1
 \noindent {\bf 3. Experiments} 
+
+% Section summary here
 
 \noindent {\bf 3.1. Benchmark data sets}
 
@@ -221,12 +243,38 @@ Figure \ref{fig:proportion-missing-votes} shows that 46\% of the CVRs data conta
 \end{figure}
 
 \par
-\noindent {\bf 3.3. Preprocessing}
+\noindent {\bf 3.3. Imputation methods}
+
+We compare seven different imputation techniques within the following five categories which are commonly found in the previous work on missing data imputation:
+
+\begin{labeling}{MDI}
+
+\item[$k$-nearest-neighbors ($k$-NN)]
+Compute the $k$-NN of the observation with missing data and assign the mode of the $k$-neighbors to the missing data.
+
+\item[Classification algorithm]
+Train a classification algorithm --- such as logistic regression, random forests or support vector machines (SVMs) --- to classify missing data given existing data. 
+
+%\item[Principal component analysis (PCA)]
+%Perform factor analysis (e.g., PCA) on the design matrix, project the design matrix onto the first $N$ eigenvectors and replace the missing values by the values that might be given by the projected design matrix.
+
+\item[Random replacement] 
+    The observation with missing data is randomly replaced with another complete observation randomly sampled.
+
+\item[Mode replacement]
+Replace the missing data with the mode of the corresponding feature vector of the training set.
+
+\item[One-hot] Create a binary feature vector to indicate which variable is present.
+
+\end{labeling}
+
+\par
+\noindent {\bf 3.4. Preprocessing}
 
 The first step in preprocessing the training data is artificially increasing the number of missing values in order to study the effect of larger amounts of missing data. We accomplish this by perturbing the categorical training features by substituting nonmissing values with missing values so that each feature has a minimum missing data ratio, from 0-40\%. For example if there 10 categorical features and 10 observations, a missing data ratio of 0.1 will perturb 10 values. Second, we implement one-hot encoding (-1,1) for the categorical variables. Third, we implement the imputation technique. Lastly, we standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature. We preprocess the test data in the same manner, with the exception that there is no perturbation of test features.\footnote{When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.}
 
 \par
-\noindent {\bf 3.4. Model training and hyperparameter selection}
+\noindent {\bf 3.5. Model training and hyperparameter selection}
 
 We train a four-layer neural network, with each of the two hidden layers having 1024 nodes. We use the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}:
 
@@ -246,7 +294,7 @@ The goal of Bayesian optimization is to choose a point in the hyperparameter spa
 \end{figure}
 
 \par
-\noindent {\bf 3.5. Model assessment}
+\noindent {\bf 3.6. Results}
 
 We assess the performance of the neural network classifier in terms of test set error rate in comparison with decision tree and random forests classifiers on differently imputed data and for various degrees of perturbation.  We use one-hot encoding to represent missing data when no imputation method is used. The results on the Adult dataset and CVRs dataset are plotted in Figures \ref{fig:test-error-adult} and \ref{fig:test-error-votes}, respectively. For the Adult dataset, the random forests classifier trained on data imputed with logistic regression yields the lowest generalization error (13.85\% error), beating the state-of-the-art by 0.2\%. In comparison, random forests trained on data with no missing data imputation matches the state-of-the-art (14.05\%) and neural network trained on data imputed by random replacement performs considerably worse (14.37\%). For the CVRs dataset, random forests trained on one-hot encoded data with up to 20\% of the data perturbed beats the state-of-the-art by over 2\% (2.77\%). Neural networks trained on PCA-imputed data or no imputation also beat the state-of-the-art, with error rates of 3.47\% and 4.16\%, respectively. 
 
