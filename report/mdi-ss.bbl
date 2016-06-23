@@ -1,31 +1,30 @@
 \begin{thebibliography}{}
 
-\bibitem[Brouwer, 2002]{brouwer2002feed}
-Brouwer, R.~K. (2002).
-\newblock A feed-forward network for input that is both categorical and
-  quantitative.
-\newblock {\em Neural Networks}, 15(7):881--890.
+\bibitem[Batista and Monard, 2003]{batista2003analysis}
+Batista, G.~E. and Monard, M.~C. (2003).
+\newblock An analysis of four missing data treatment methods for supervised
+  learning.
+\newblock {\em Applied Artificial Intelligence}, 17(5-6):519--533.
 
-\bibitem[De~Leeuw et~al., 2003]{de2003prevention}
-De~Leeuw, E.~D., Hox, J., Huisman, M., et~al. (2003).
-\newblock Prevention and treatment of item nonresponse.
-\newblock {\em Journal of Official Statistics-Stockholm}, 19(2):153--176.
-
-\bibitem[Fayyad et~al., 1996]{fayyad1996data}
-Fayyad, U., Piatetsky-Shapiro, G., and Smyth, P. (1996).
-\newblock From data mining to knowledge discovery in databases.
-\newblock {\em AI magazine}, 17(3):37.
-
-\bibitem[Hsu, 2006]{hsu2006generalizing}
-Hsu, C.-C. (2006).
-\newblock Generalizing self-organizing map for categorical data.
-\newblock {\em Neural Networks, IEEE Transactions on}, 17(2):294--304.
+\bibitem[Jones, 1996]{jones1996}
+Jones, M.~P. (1996).
+\newblock Indicator and stratification methods for missing explanatory
+  variables in multiple linear regression.
+\newblock {\em Journal of the American Statistical Association},
+  91(433):222--230.
 
 \bibitem[Kohavi, 1996]{kohavi1996}
 Kohavi, R. (1996).
 \newblock Scaling up the accuracy of naive-bayes classifiers: A decision-tree
   hybrid.
 \newblock In {\em KDD}, pages 202--207. Citeseer.
+
+\bibitem[Li et~al., 2004]{li2004}
+Li, D., Deogun, J., Spaulding, W., and Shuart, B. (2004).
+\newblock Towards missing data imputation: a study of fuzzy k-means clustering
+  method.
+\newblock In {\em International Conference on Rough Sets and Current Trends in
+  Computing}, pages 573--579. Springer.
 
 \bibitem[Lichman, 2013]{Lichman2013}
 Lichman, M. (2013).
@@ -45,6 +44,13 @@ Schlimmer, J.~C. and Granger~Jr, R.~H. (1986).
 \newblock Incremental learning from noisy data.
 \newblock {\em Machine learning}, 1(3):317--354.
 
+\bibitem[Silva-Ram{\'\i}rez et~al., 2011]{silva2011}
+Silva-Ram{\'\i}rez, E.-L., Pino-Mej{\'\i}as, R., L{\'o}pez-Coello, M., and
+  Cubiles-de-la Vega, M.-D. (2011).
+\newblock Missing value imputation on missing completely at random data using
+  multilayer perceptrons.
+\newblock {\em Neural Networks}, 24(1):121--129.
+
 \bibitem[Snoek et~al., 2012]{snoek2012}
 Snoek, J., Larochelle, H., and Adams, R.~P. (2012).
 \newblock Practical bayesian optimization of machine learning algorithms.
@@ -55,11 +61,6 @@ Snoek, J., Larochelle, H., and Adams, R.~P. (2012).
 Tsiatis, A. (2007).
 \newblock {\em Semiparametric theory and missing data}.
 \newblock Springer Science \& Business Media.
-
-\bibitem[Wang et~al., 2008]{wang2008categorical}
-Wang, H., Xing, G., and Chen, K. (2008).
-\newblock Categorical data transformation methods for neural networks.
-\newblock In {\em IKE}, pages 262--266.
 
 \bibitem[Zeiler, 2012]{zeiler2012}
 Zeiler, M.~D. (2012).

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  20 JUN 2016 13:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  23 JUN 2016 18:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -492,107 +492,121 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
-<figure/proportion-missing-adult.pdf, id=80, 844.15375pt x 597.23125pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+<figure/proportion-missing-adult.pdf, id=78, 844.15375pt x 597.23125pt>
 File: figure/proportion-missing-adult.pdf Graphic file (type pdf)
 
 <use figure/proportion-missing-adult.pdf>
 Package pdftex.def Info: figure/proportion-missing-adult.pdf used on input line
- 232.
+ 174.
 (pdftex.def)             Requested size: 379.86568pt x 268.75157pt.
 
-Underfull \vbox (badness 1231) has occurred while \output is active []
 
- [7 <./figure/proportion-missing-adult.pdf>]
-<figure/proportion-missing-votes.pdf, id=94, 844.15375pt x 597.23125pt>
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8]
+<figure/proportion-missing-votes.pdf, id=89, 844.15375pt x 597.23125pt>
 File: figure/proportion-missing-votes.pdf Graphic file (type pdf)
 
 <use figure/proportion-missing-votes.pdf>
 Package pdftex.def Info: figure/proportion-missing-votes.pdf used on input line
- 240.
+ 182.
 (pdftex.def)             Requested size: 379.86568pt x 268.75157pt.
 
-Overfull \hbox (0.33507pt too wide) in paragraph at lines 253--254
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9 <./figure/proportion-missing-adult.pdf>]
+Overfull \hbox (0.33507pt too wide) in paragraph at lines 195--196
 []\OT1/cmr/m/n/12 Compute the $\OML/cmm/m/it/12 k$\OT1/cmr/m/n/12 -NN of the ob
 -ser-va-tion with miss-
  []
 
 
-Underfull \vbox (badness 1231) has occurred while \output is active []
+Underfull \vbox (badness 1721) has occurred while \output is active []
 
- [8 <./figure/proportion-missing-votes.pdf>] [9]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 282.
+ [10 <./figure/proportion-missing-votes.pdf>] [11]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 224.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 282.
- [10]
-<../images/params3d_adult.png, id=124, 1445.4pt x 722.7pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 224.
+
+<../images/params3d_adult.png, id=122, 1445.4pt x 722.7pt>
 File: ../images/params3d_adult.png Graphic file (type png)
 
 <use ../images/params3d_adult.png>
-Package pdftex.def Info: ../images/params3d_adult.png used on input line 290.
+Package pdftex.def Info: ../images/params3d_adult.png used on input line 232.
 (pdftex.def)             Requested size: 650.424pt x 325.21199pt.
 
-<../images/params3d_votes.png, id=126, 1445.4pt x 722.7pt>
+<../images/params3d_votes.png, id=124, 1445.4pt x 722.7pt>
 File: ../images/params3d_votes.png Graphic file (type png)
 
 <use ../images/params3d_votes.png>
-Package pdftex.def Info: ../images/params3d_votes.png used on input line 291.
+Package pdftex.def Info: ../images/params3d_votes.png used on input line 233.
 (pdftex.def)             Requested size: 650.424pt x 325.21199pt.
 
 
-LaTeX Warning: Float too large for page by 129.36842pt on input line 294.
+LaTeX Warning: Float too large for page by 129.36842pt on input line 236.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
+[12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11]
-<figure/test-errors-adult-no-imp.pdf, id=135, 844.15375pt x 597.23125pt>
+ [13]
+<figure/test-errors-adult-no-imp.pdf, id=141, 844.15375pt x 597.23125pt>
 File: figure/test-errors-adult-no-imp.pdf Graphic file (type pdf)
 
 <use figure/test-errors-adult-no-imp.pdf>
 Package pdftex.def Info: figure/test-errors-adult-no-imp.pdf used on input line
- 306.
+ 248.
 (pdftex.def)             Requested size: 379.86568pt x 268.75157pt.
 
-<figure/test-errors-adult-imp.pdf, id=136, 844.15375pt x 597.23125pt>
+<figure/test-errors-adult-imp.pdf, id=142, 844.15375pt x 597.23125pt>
 File: figure/test-errors-adult-imp.pdf Graphic file (type pdf)
 
 <use figure/test-errors-adult-imp.pdf>
-Package pdftex.def Info: figure/test-errors-adult-imp.pdf used on input line 30
-7.
+Package pdftex.def Info: figure/test-errors-adult-imp.pdf used on input line 24
+9.
 (pdftex.def)             Requested size: 379.86568pt x 268.75157pt.
 
 
-LaTeX Warning: Float too large for page by 68.0587pt on input line 310.
+LaTeX Warning: Float too large for page by 68.0587pt on input line 252.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figure/test-errors-votes-no-imp.pdf, id=137, 844.15375pt x 597.23125pt>
+<figure/test-errors-votes-no-imp.pdf, id=143, 844.15375pt x 597.23125pt>
 File: figure/test-errors-votes-no-imp.pdf Graphic file (type pdf)
 
 <use figure/test-errors-votes-no-imp.pdf>
 Package pdftex.def Info: figure/test-errors-votes-no-imp.pdf used on input line
- 313.
+ 255.
 (pdftex.def)             Requested size: 379.86568pt x 268.75157pt.
 
-<figure/test-errors-votes-imp.pdf, id=138, 844.15375pt x 597.23125pt>
+<figure/test-errors-votes-imp.pdf, id=144, 844.15375pt x 597.23125pt>
 File: figure/test-errors-votes-imp.pdf Graphic file (type pdf)
 
 <use figure/test-errors-votes-imp.pdf>
-Package pdftex.def Info: figure/test-errors-votes-imp.pdf used on input line 31
-4.
+Package pdftex.def Info: figure/test-errors-votes-imp.pdf used on input line 25
+6.
 (pdftex.def)             Requested size: 379.86568pt x 268.75157pt.
 
 
-LaTeX Warning: Float too large for page by 30.0587pt on input line 317.
+LaTeX Warning: Float too large for page by 30.0587pt on input line 259.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -600,41 +614,41 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [13]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [14]
-[15] [16 <../images/params3d_adult.png> <../images/params3d_votes.png>]
-[17 <./figure/test-errors-adult-no-imp.pdf> <./figure/test-errors-adult-imp.pdf
->] [18 <./figure/test-errors-votes-no-imp.pdf> <./figure/test-errors-votes-imp.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16]
+[17] [18 <../images/params3d_adult.png> <../images/params3d_votes.png>]
+[19 <./figure/test-errors-adult-no-imp.pdf> <./figure/test-errors-adult-imp.pdf
+>] [20 <./figure/test-errors-votes-no-imp.pdf> <./figure/test-errors-votes-imp.
 pdf>] (./mdi-ss.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19
+ [21
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 392.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 334.
 
-[20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 392.
+[22]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 334.
  (./mdi-ss.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 392.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 392.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 334.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 334.
 Package rerunfilecheck Info: File `mdi-ss.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 392.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 334.
  ) 
 Here is how much of TeX's memory you used:
- 8342 strings out of 493089
- 122269 string characters out of 6134842
+ 8343 strings out of 493089
+ 122112 string characters out of 6134842
  231862 words of memory out of 5000000
- 11630 multiletter control sequences out of 15000+600000
+ 11629 multiletter control sequences out of 15000+600000
  14089 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,13n,43p,1308b,436s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,13n,43p,1706b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></
@@ -648,10 +662,10 @@ xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texliv
 e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on mdi-ss.pdf (20 pages, 676282 bytes).
+Output written on mdi-ss.pdf (22 pages, 683945 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
- 41 named destinations out of 1000 (max. 500000)
+ 286 PDF objects out of 1000 (max. 8388607)
+ 229 compressed objects within 3 object streams
+ 43 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
