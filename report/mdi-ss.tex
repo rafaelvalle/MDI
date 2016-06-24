@@ -38,6 +38,10 @@
 \usepackage{scrextend}
 \addtokomafont{labelinglabel}{\sffamily}
 
+% Reference labels in the online appendix
+\usepackage{xr}
+\externaldocument{mdi-ss-supp}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagestyle{fancy}
 \def\n{\noindent}
@@ -73,7 +77,7 @@ $\ $\par
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont \vspace{0.8pc}
-\centerline{\large\bf COMPARING MISSING DATA IMPUTATION METHODS}
+\centerline{\large\bf MISSING DATA IMPUTATION }
 \vspace{2pt} \centerline{\large\bf  FOR SUPERVISED CLASSIFICATION}
 \vspace{.4cm} \centerline{Jason Poulos and Rafael Valle} \vspace{.4cm} \centerline{\it
 University of California, Berkeley} \vspace{.55cm} \fontsize{9}{11.5pt plus.8pt minus
@@ -89,9 +93,7 @@ Researchers analyzing survey data typically choose decision trees or random
 forests for classification tasks, largely because these models, unlike neural
 networks and others, do not require imputing missing data nor encoding categorical
 variables. We start by investigating techniques for missing categorical data imputation
-and categorical data encoding. We experiment on two benchmark datasets with missing categorical data,
-comparing a neural network with decision trees and random forests classifiers
-trained on data imputed with different techniques and various levels of perturbation. We beat the state-of-the-art test error on both datasets and conclude from the results that the performance of the classifiers and imputation strategies generally depend on the nature and proportion of missing data. \par
+and categorical data encoding. We experiment on two benchmark datasets with missing categorical data, comparing the three classifiers trained on either non-imputed or differently imputed data with different degrees of nonmissing at random (NMAR) perturbation. We beat the state-of-the-art test error on both datasets and conclude from the results that the performance of the classifiers and imputation strategies generally depend on the nature and proportion of missing data. \par
 
 \vspace{9pt}
 \noindent {\it Key words and phrases:}
@@ -126,11 +128,11 @@ This manuscript is organized as follows: Section 2 describes missing data mechan
 \setcounter{equation}{0} %-1
 \noindent {\bf 2. Missing data and imputation methods}
 
-%Summarize section here. 
+In this section, we describe the missing data mechanisms underlying patterns of missing data common to survey datasets. We then review popular methods of handling missing data.
 
 \noindent {\bf 2.1. Missing data patterns and mechanisms}
 
-It is important to first distinguish between missing data patterns, which describe which values are observed and which are missing, and missing data mechanisms, which describe the the probability of missingness  \citep{little2014}. Common missing data patterns in surveys typically include unit nonresponse, where a subset of participants do not complete the survey, and item nonresponse, where missing values are concentrated on particular questions. In opinion polls, nonresponse may reflect either refusal to reveal a preference or lack of a preference. 
+It is important to first distinguish between missing data patterns, which describe which values are observed and which are missing, and missing data mechanisms, which describe the the probability of missingness  \citep{little2014}. Common missing data patterns in surveys typically include unit nonresponse, where a subset of participants do not complete the survey, and item nonresponse, where missing values are concentrated on particular questions. In opinion polls, nonresponse may reflect either refusal to reveal a preference or lack of a preference \citep{de2003prevention}. 
 
 It may be beneficial to impute missing values in situations where missing data hide values that are useful for classification tasks. Understanding the missing data mechanisms underlying patterns of missing data is crucial since properties of imputation methods depend on the nature of these mechanisms. Following the notation of \cite{little2014}, let $Y = y_{ij}$ be a $(n \times K)$ dataset with each example $y_i = (y_{i1}, \ldots, y_{ik})$ the set of $y_{ij}$ values of feature $Y_j$ for example $i$. Let $Y_{\mathrm{obs}}$ define observed values of $Y$ and $Y_{\mathrm{mis}}$ define missing values. Define the missing data identity matrix $M = m_{ij}$, where $m_{ij} = 1$ if $y_{ij}$ is missing and $m_{ij} = 0$ if $y_{ij}$ is nonmissing. The missing data mechanism is called missing completely at random (MCAR) if the probability of missingness is independent of the data, or $f(M | Y, \phi) = f(M | \phi)$, where $\phi$ denotes unknown parameters. The MAR assumption is less restrictive than MCAR in that that the probability of missingness depends only on the observed data, $f(M | Y, \phi) = f(M | Y_{\mathrm{obs}}, \phi)$. We are primarily interested in the NMAR assumption that the probability of missingness may also depend on the unobserved data, 
 
@@ -140,7 +142,7 @@ f(M | Y, \phi) = f(M | Y_{\mathrm{mis}}, \phi) \hspace{5mm} \forall \,Y_{\mathrm
 				
 \noindent {\bf 2.2. Imputation methods} \label{section:techniques} 
 
-Complete-case analysis (i.e., simply discarding examples with missing values) is wasteful of information and will bias estimates unless the data are MCAR. Since there is no way to distinguish whether the missing data are MCAR or NMAR from the observed data, a natural strategy is to impute missing values and then proceed as if the imputed values are true values. Imputation methods that rely on explicit model assumptions include \emph{mean or mode} imputation, which replaces missing values with the mean (for quantitative features) or mode (for qualitative features) of the feature vector, and \emph{regression model} imputation, which replaces missing values with the predicted values from a regression of $Y_{\mathrm{mis}}$ on $Y_{\mathrm{obs}}$. Explicit modeling methods assume the data are MAR while implicit modeling methods, which are algorithmic in nature and rely only on implicit assumptions, generally do not assume the underlying missing data mechanism. Implicit methods include \emph{random replacement}, where an example with missing data is randomly replaced with another complete example randomly sampled, and \emph{hot deck} imputation, where missing values are replaced by ``similar'' nonmissing values. Hot deck imputation can be implemented by computing the $k$-nearest-neighbors ($k$-NN) of an example with missing data and assigning the mode of the $k$-neighbors to the missing data. \citep{batista2003analysis} use this procedure and find $k$-NN imputation can outperform internal methods used by decision trees to treat missing data and summary statistic imputation. \citep{li2004} propose a hot deck imputation method based on fuzzy $k$-means. 
+Complete-case analysis (i.e., simply discarding examples with missing values) is wasteful of information and will bias estimates unless the data are MCAR. Since there is no way to distinguish whether the missing data are MCAR or NMAR from the observed data, a natural strategy is to impute missing values and then proceed as if the imputed values are true values. Imputation methods that rely on explicit model assumptions include \emph{mean or mode replacement}, which substitutes missing values with the mean (for quantitative features) or mode (for qualitative features) of the feature vector, and \emph{prediction model} imputation, which replaces missing values with the predicted values from a regression of $Y_{\mathrm{mis}}$ on $Y_{\mathrm{obs}}$. Explicit modeling methods assume the data are MAR while implicit modeling methods, which are algorithmic in nature and rely only on implicit assumptions, generally do not assume the underlying missing data mechanism. Implicit methods include \emph{random replacement}, where an example with missing data is randomly replaced with another complete example randomly sampled, and \emph{hot deck} imputation, where missing values are replaced by ``similar'' nonmissing values. Hot deck imputation can be implemented by computing the $k$-nearest-neighbors ($k$-NN) of an example with missing data and assigning the mode of the $k$-neighbors to the missing data. \citep{batista2003analysis} use this procedure and find $k$-NN imputation can outperform internal methods used by decision trees to treat missing data and summary statistic imputation. \citep{li2004} propose a hot deck imputation method based on fuzzy $k$-means. 
 
 \citep{silva2011} empirically compare imputation based on using artificial neural networks (ANNs) with mean/mode  imputation, regression models (logistic regression and multiple linear regression), and hot deck, and find the ANNs model performs the best on datasets with categorical variables. 
 
@@ -157,66 +159,31 @@ A natural strategy in dealing with missing data for supervised learning problems
 \setcounter{equation}{0} %-1
 \noindent {\bf 3. Experiments} 
 
-% Section summary here
+In this section, we describe our experiment on two benchmark datasets with missing categorical data, comparing three popular classifiers (neural networks, decision trees, and random forests) trained on either non-imputed or differently imputed data with different degrees of NMAR perturbation.
 
-\noindent {\bf 3.1. Benchmark data sets}
+\noindent {\bf 3.1. Benchmark datasets}
 
-We experiment on two benchmark datasets from the UCI Machine Learning Repository: the Adult dataset and Congressional Voting Records (CVRs) dataset \citep{Lichman2013}. The Adult dataset contains $N=48,842$ observations and 14 features (6 continuous and 8 categorical). Missing values in this dataset are unknown survey responses. The prediction task is to determine whether a person makes over \$50,000 a year. The CVRs dataset contains $N=435$ observations, each the voting record of a member of the $98^{th}$ U.S. House of Representatives for 16 key roll call votes identified by the Congressional Quarterly Almanac. Thus, the dataset contains 16 categorical features with three possible values: ``yea'', ``nay'', and missing. Missing values in this dataset are not simply unknown, but represents values other up-or-down votes, such as voted present, voted present to avoid conflict of interest, and did not vote or otherwise make a position known. The prediction task is to classify party affiliation (Republican or Democrat). 
+We experiment on two benchmark datasets from the UCI Machine Learning Repository: the Adult dataset and Congressional Voting Records (CVRs) dataset \citep{Lichman2013}. The Adult dataset contains $N=48,842$ examples and 14 features (6 continuous and 8 categorical). Missing values in this dataset are survey nonresponses. The prediction task is to determine whether a person makes over \$50,000 a year. The CVRs dataset contains $N=435$ examples, each the voting record of a member of the $98^{th}$ U.S. House of Representatives for 16 key roll call votes. The dataset contains 16 categorical features with three possible values: ``yea'', ``nay'', and missing. Missing values in this dataset are not simply unknown, but represent values other up-or-down votes, such as voted present, voted present to avoid conflict of interest, and did not vote or otherwise make a position known. The prediction task is to classify party affiliation (Republican or Democrat). 
 
-We randomly split each dataset $2/3$ for training and $1/3$ for testing. The state--of--the--art for the Adult dataset is a Naive Bayes classifier that achieves a 14.05\% generalization error after removing samples with missing values \citep{kohavi1996}. The CVRs dataset donor claims to achieve a 90-95\% accuracy using an incremental decision tree algorithm called STAGGER, although it is not known what train-test split is used or how missing values are handled \citep{schlimmer1987,schlimmer1986}.
-
-\par
-\noindent {\bf 3.2. Patterns of missing values}
-
-Uncovering patterns of missing values in the dataset will help select strategies for imputing missing values. Figure \ref{fig:proportion-missing-adult} analyzes patterns of missing data in the Adult dataset, in which 7.4\% of the observations contain missing values. Missing values occur in three of the categorical features: \textit{Work class}, \textit{Occupation}, and \textit{Native country}. Since these the former two features are related, it is unlikely that these values are missing completely at random (MCAR); it is more likely, and much less desirable that the values are not missing at random (MNAR). The histogram (left) in Figure \ref{fig:proportion-missing-votes} shows \textit{Work class} and \textit{Occupation} each have about 5.6\% of missing values, and \textit{Native country} has about 1.7\% missing values. The aggregation plot (right) shows 5.5\% of samples are missing values for both \textit{Work class} and \textit{Occupation}. Less than 2\% of samples are missing just \textit{Native country} and less than 1\% are missing all three features.
-
-\begin{figure}[h!]
-\includegraphics [scale=0.45]{figure/proportion-missing-adult.pdf}\par
-\caption{\footnotesize Histogram of proportion of missing values in each feature (Left) of Adult training set and aggregation plot of all existing combinations of missing and non-missing values in the samples (Right).}
- \label{fig:proportion-missing-adult}
-\end{figure}
-
-Figure \ref{fig:proportion-missing-votes} shows that 46\% of the CVRs data contains missing values and all features contain missing data. About a quarter of missing data is in \texttt{South Africa}, which was a controversial amendment to amend the Export Administration Act to bar U.S. exports to South Africa's apartheid regime. Twelve percent of missing data is in the feature \texttt{Water}, which is a water projects authorizations bill, and 7\% of missing data rests in the feature \texttt{Exports}, which is a tariff bill. 
-
-\begin{figure}[h!]
-\includegraphics [scale=0.45]{figure/proportion-missing-votes.pdf}\par
-\caption{\footnotesize Histogram of proportion of missing values in each feature (Left) of CVRs training set and aggregation plot of all existing combinations of missing and non-missing values in the samples (Right).}
- \label{fig:proportion-missing-votes}
-\end{figure}
+We randomly split each dataset $2/3$ for training and $1/3$ for testing. The state--of--the--art for the Adult dataset is a Naive Bayes classifier that achieves a 14.05\% generalization error after removing examples with missing values \citep{kohavi1996}. The CVRs dataset donor claims to achieve a 90-95\% accuracy using an incremental decision tree algorithm called STAGGER, although it is not known what train-test split is used or how missing values are handled \citep{schlimmer1987,schlimmer1986}.
 
 \par
-\noindent {\bf 3.3. Imputation methods}
+\noindent {\bf 3.2. Patterns of missing data}
 
-We compare seven different imputation techniques within the following five categories which are commonly found in the previous work on missing data imputation:
+Uncovering missing data patterns in the datasets is will help to identify possible missing data mechanisms and select appropriate imputation methods. In the supplementary material (SM), Figure SM-\ref{fig:proportion-missing-adult} analyzes patterns of missing data in the Adult dataset, in which 7\% of the examples contain missing values. Missing data in the Adult dataset is due to item nonresponse, as missing values are concentrated in three of the categorical features --- \emph{Work class}, \emph{Occupation}, and \emph{Native country}--- and no examples contain entirely missing data. It is unlikely that the data are MCAR because observations that are missing in \emph{Work class} are also missing in \emph{Occupation} (about 6\% of examples have missing values in both). About 1\% of examples are missing just \emph{Native country} and less than 1\% are missing all three features. There is no way to determine from the observed data whether the missing data are MAR or NMAR; the data are NMAR if the probability of missingness cannot be explained only by the observed data in the other predictors.
 
-\begin{labeling}{MDI}
-
-\item[$k$-nearest-neighbors ($k$-NN)]
-Compute the $k$-NN of the observation with missing data and assign the mode of the $k$-neighbors to the missing data.
-
-\item[Classification algorithm]
-Train a classification algorithm --- such as logistic regression, random forests or support vector machines (SVMs) --- to classify missing data given existing data. 
-
-%\item[Principal component analysis (PCA)]
-%Perform factor analysis (e.g., PCA) on the design matrix, project the design matrix onto the first $N$ eigenvectors and replace the missing values by the values that might be given by the projected design matrix.
-
-\item[Random replacement] 
-    The observation with missing data is randomly replaced with another complete observation randomly sampled.
-
-\item[Mode replacement]
-Replace the missing data with the mode of the corresponding feature vector of the training set.
-
-\item[One-hot] Create a binary feature vector to indicate which variable is present.
-
-\end{labeling}
+Close to half of the CVRs data contains missing values, which are present in every feature (Figure SM-\ref{fig:proportion-missing-votes}). About a quarter of missing data is in \texttt{South Africa}, which was a controversial amendment to amend the Export Administration Act to bar U.S. exports to South Africa's apartheid regime. Twelve percent of missing data is in the feature \texttt{Water}, which is a water projects authorizations bill, and 7\% of missing data rests in the feature \texttt{Exports}, which is a tariff bill. The data are unlikely to be MCAR because 12\% of the data are missing in just \texttt{South Africa} and less than 1\% of examples are missing across all features. It is most likely in this case that the CVRs data are NMAR because the probability of missing a vote or voting present on one important bill should not theoretically be influenced by observed votes on other important bills. 
 
 \par
-\noindent {\bf 3.4. Preprocessing}
+\noindent {\bf 3.3. Preprocessing}
 
-The first step in preprocessing the training data is artificially increasing the number of missing values in order to study the effect of larger amounts of missing data. We accomplish this by perturbing the categorical training features by substituting nonmissing values with missing values so that each feature has a minimum missing data ratio, from 0-40\%. For example if there 10 categorical features and 10 observations, a missing data ratio of 0.1 will perturb 10 values. Second, we implement one-hot encoding (-1,1) for the categorical variables. Third, we implement the imputation technique. Lastly, we standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature. We preprocess the test data in the same manner, with the exception that there is no perturbation of test features.\footnote{When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.}
+The first step in preprocessing the training data is artificially increasing the number of missing values in order to study the effect of larger amounts of missing data. We accomplish this by perturbing the categorical training features by substituting nonmissing values with missing values so that each feature has a minimum missing data ratio, from 0-40\%. For example if there 10 categorical features and 10 examples, a missing data ratio of 0.1 will perturb 10 values. Second, we implement one-hot encoding (-1,1) for the categorical variables. Third, we implement one of the following imputation techniques, discussed in Section 2.2: $k$-NN, prediction model (logistic regression, random forests, or SVMs), mode replacement, and random replacement. Lastly, we standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature.  We preprocess the test data in the same manner, with the exception that there is no perturbation of test features.\footnote{When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.}
 
 \par
-\noindent {\bf 3.5. Model training and hyperparameter selection}
+\noindent {\bf 3.4. Model training and hyperparameter selection}
+
+% Decision trees/RF description 
+% Wrapper method
 
 We train a four-layer neural network, with each of the two hidden layers having 1024 nodes. We use the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}:
 
@@ -226,17 +193,10 @@ We train a four-layer neural network, with each of the two hidden layers having 
 \item Learning rate: [0.000001 to 0.01].
 \end{itemize}
 
-The goal of Bayesian optimization is to choose a point in the hyperparameter space that appropriately balances information gain and exploitation. Figure \ref{fig:params} shows the exploration of hyperparameter space during Bayesian optimization for both Adult and CVRs datasets. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset. More circles appear in the plot for CVRs simply due to the fact that the training set is smaller. We see that most of the candidate models use dropout and have an initial learning rate close to the maximum of 0.01. The plurality of candidate models appear to either have momentum (1) or not (0). The candidate model with the lowest training error is selected for predicting on the test set. 
-
-\begin{figure}[h!]
-\includegraphics [scale=0.45, center]{../images/params3d_adult.png}\par
-\includegraphics [scale=0.45, center]{../images/params3d_votes.png}\par
-\caption{\footnotesize Exploration of hyperparameter space during Bayesian optimization.}
-   \label{fig:params}
-\end{figure}
+The goal of Bayesian optimization is to choose a point in the hyperparameter space that appropriately balances information gain and exploitation. Figure SM-\ref{fig:params} shows the exploration of hyperparameter space during Bayesian optimization for both Adult and CVRs datasets. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset. More circles appear in the plot for CVRs simply due to the fact that the training set is smaller. We see that most of the candidate models use dropout and have an initial learning rate close to the maximum of 0.01. The plurality of candidate models appear to either have momentum (1) or not (0). The candidate model with the lowest training error is selected for predicting on the test set. 
 
 \par
-\noindent {\bf 3.6. Results}
+\noindent {\bf 3.5. Results}
 
 We assess the performance of the neural network classifier in terms of test set error rate in comparison with decision tree and random forests classifiers on differently imputed data and for various degrees of perturbation.  We use one-hot encoding to represent missing data when no imputation method is used. The results on the Adult dataset and CVRs dataset are plotted in Figures \ref{fig:test-error-adult} and \ref{fig:test-error-votes}, respectively. For the Adult dataset, the random forests classifier trained on data imputed with logistic regression yields the lowest generalization error (13.85\% error), beating the state-of-the-art by 0.2\%. In comparison, random forests trained on data with no missing data imputation matches the state-of-the-art (14.05\%) and neural network trained on data imputed by random replacement performs considerably worse (14.37\%). For the CVRs dataset, random forests trained on one-hot encoded data with up to 20\% of the data perturbed beats the state-of-the-art by over 2\% (2.77\%). Neural networks trained on PCA-imputed data or no imputation also beat the state-of-the-art, with error rates of 3.47\% and 4.16\%, respectively. 
 
@@ -277,6 +237,7 @@ For future work, we will further explore the idea that missing data may have mor
 \noindent {\large\bf Supplementary Materials}
 
 %Contain the brief description of the online supplementary materials.
+The online supplementary material contains descriptive plots of missing data patterns in the benchmark datasets and of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets. 
 The code used for this project is available on Github (\url{https://github.com/rafaelvalle/MDI}).
 
 \par

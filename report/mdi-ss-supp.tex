@@ -1,7 +1,7 @@
 \documentclass[10pt]{book}
 \usepackage[sectionbib]{natbib}
-\usepackage{array,epsfig,fancyheadings,rotating}
-\usepackage[dvipdfm]{hyperref}
+\usepackage{array,epsfig,fancyhdr,rotating}
+\usepackage[driverfallback=dvipdfm]{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textwidth=31.9pc
@@ -19,6 +19,8 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+\usepackage[export]{adjustbox}
+
 \setcounter{page}{1}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -31,6 +33,10 @@
 \newtheorem{remark}{Remark}
 \pagestyle{fancy}
 
+% Reference labels in the online appendix
+\usepackage{xr}
+\externaldocument{mdi-ss}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagestyle{fancy}
 \def\n{\noindent}
@@ -38,7 +44,7 @@
 \chead[]{}
 \rhead[]{\fancyplain{}\rightmark}
 \cfoot{}
-\headrulewidth=0pt
+\renewcommand{\headrulewidth}{0pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,31 +62,30 @@
 %\href{http://dx.doi.org/10.5705/ss.20??.???}{doi:http://dx.doi.org/10.5705/ss.20??.???}
 }\hfill }
 
-\markboth{\hfill{\footnotesize\rm FIRSTNAME1 LASTNAME1 AND FIRSTNAME2 LASTNAME2} \hfill}
-{\hfill {\footnotesize\rm FILL IN A SHORT RUNNING TITLE} \hfill}
+\markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
 
 \renewcommand{\thefootnote}{}
 $\ $\par \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- \centerline{\large\bf THE TITLE OF THE MANUSCRIPT}
+ \centerline{\large\bf MISSING DATA IMPUTATION }
 \vspace{2pt}
- \centerline{\large\bf IF SECOND LINE IS NEEDED}
-\vspace{2pt}
- \centerline{\large\bf IF THIRD LINE IS NEEDED}
+ \centerline{\large\bf FOR SUPERVISED CLASSIFICATION}
+%\vspace{2pt}
+% \centerline{\large\bf IF THIRD LINE IS NEEDED}
 \vspace{.25cm}
- \author{Author(s)}
+% \author{Author(s)}
+ \centerline{Jason Poulos and Rafael Valle} \vspace{.4cm} 
 \vspace{.4cm}
- \centerline{\it The affiliation(s) of authors}
+ \centerline{\it University of California, Berkeley}
 \vspace{.55cm}
  \centerline{\bf Supplementary Material}
 \vspace{.55cm}
 \fontsize{9}{11.5pt plus.8pt minus .6pt}\selectfont
 \noindent
-CONTENT OF A BRIEF NOTE.........\\
-CONTENT OF THE BRIEF NOTE.\\
-CONTENT OF THE BRIEF NOTE.\\
+This file contains descriptive plots of missing data patterns in the benchmark datasets and of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets. 
 \par
 
 \setcounter{section}{0}
@@ -90,45 +95,43 @@ CONTENT OF THE BRIEF NOTE.\\
 
 \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont
 
-\section{Title of section 1}
-
-CONTENT OF THIS SECTION........\\
-CONTENT OF THIS SECTION.\\
-CONTENT OF THIS SECTION.\\
-\par
-\begin{equation}
-\mbox {The 1st display equation of section 1.}
-\end{equation}
-
-\begin{equation}
-\mbox {The 2nd display equation of section 1.}
-\end{equation}
-
-\section{Title of section 2}
-\setcounter{equation}{0}
-
-CONTENT OF THIS SECTION........\\
-CONTENT OF THIS SECTION.\\
-CONTENT OF THIS SECTION.\\
-\par
-
-\begin{equation}
-\mbox {The 1st display equation of S.2.}
-\end{equation}
-
-\begin{equation}
-\mbox {The 2nd display equation of S.2.}
-\end{equation}
+\section{Descriptive plots}
 
 \newpage
 \lhead[\footnotesize\thepage\fancyplain{}\leftmark]{}\rhead[]{\fancyplain{}\rightmark\footnotesize\thepage}%Put this line in Page 2
 
+\begin{figure}[h!]
+\includegraphics [scale=0.45]{figure/proportion-missing-adult.pdf}\par
+\caption{\footnotesize Histogram of proportion of missing values in each feature (Left) of Adult training set and aggregation plot of all existing combinations of missing and non-missing values in the samples (Right).}
+ \label{fig:proportion-missing-adult}
+\end{figure}
 
-\section{Title of section 3}
-\setcounter{equation}{0}
+\clearpage
+\markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+
+\begin{figure}[h!]
+\includegraphics [scale=0.45]{figure/proportion-missing-votes.pdf}\par
+\caption{\footnotesize Histogram of proportion of missing values in each feature (Left) of CVRs training set and aggregation plot of all existing combinations of missing and non-missing values in the samples (Right).}
+ \label{fig:proportion-missing-votes}
+\end{figure}
+
+%\section{Bayesian hyperparameter optimization plots}
+%\setcounter{equation}{0}
+
+\begin{figure}[h!]
+\includegraphics [scale=0.45, center]{../images/params3d_adult.png}\par
+\includegraphics [scale=0.45, center]{../images/params3d_votes.png}\par
+\caption{\footnotesize Exploration of hyperparameter space during Bayesian optimization. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset.}
+   \label{fig:params}
+\end{figure}
 
 
-\section{Title of section 4}
-\setcounter{equation}{0}
+%\section{Title of section 3}
+%\setcounter{equation}{0}
+%
+%
+%\section{Title of section 4}
+%\setcounter{equation}{0}
 
 \end{document}
