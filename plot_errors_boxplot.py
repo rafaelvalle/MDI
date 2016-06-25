@@ -35,7 +35,7 @@ def plot(params_dir):
     g = sns.boxplot(df)
     g.set_xticklabels(df.columns, rotation=45)
     plt.tight_layout()
-    plt.savefig('{}_residuals_box_plot.png'.format(
+    plt.savefig('{}_errors_box_plot.png'.format(
         os.path.join(IMAGES_DIRECTORY,
                      os.path.basename(os.path.normpath(params_dir)))))
 
