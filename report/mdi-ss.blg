@@ -3,46 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: mdi-ss.aux
 The style file: apalike.bst
 Database file #1: refs.bib
+Warning--empty journal in heskes1997
 Warning--empty journal in schlimmer1987
-You've used 12 entries,
+You've used 14 entries,
             1935 wiz_defined-function locations,
-            546 strings with 5584 characters,
-and the built_in function-call counts, 4677 in all, are:
-= -- 474
-> -- 145
+            558 strings with 5939 characters,
+and the built_in function-call counts, 5464 in all, are:
+= -- 548
+> -- 186
 < -- 12
-+ -- 48
-- -- 46
-* -- 355
-:= -- 786
-add.period$ -- 36
-call.type$ -- 12
-change.case$ -- 81
-chr.to.int$ -- 12
-cite$ -- 13
-duplicate$ -- 203
-empty$ -- 351
-format.name$ -- 64
-if$ -- 946
++ -- 62
+- -- 60
+* -- 427
+:= -- 928
+add.period$ -- 41
+call.type$ -- 14
+change.case$ -- 97
+chr.to.int$ -- 14
+cite$ -- 16
+duplicate$ -- 230
+empty$ -- 401
+format.name$ -- 80
+if$ -- 1093
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 13
-newline$ -- 61
-num.names$ -- 36
-pop$ -- 83
+missing$ -- 15
+newline$ -- 70
+num.names$ -- 42
+pop$ -- 99
 preamble$ -- 1
-purify$ -- 83
+purify$ -- 99
 quote$ -- 0
-skip$ -- 162
+skip$ -- 183
 stack$ -- 0
-substring$ -- 350
-swap$ -- 39
+substring$ -- 399
+swap$ -- 40
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 68
-warning$ -- 1
-while$ -- 41
+type$ -- 80
+warning$ -- 2
+while$ -- 47
 width$ -- 0
-write$ -- 151
-(There was 1 warning)
+write$ -- 174
+(There were 2 warnings)
