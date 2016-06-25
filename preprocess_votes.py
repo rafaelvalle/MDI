@@ -62,7 +62,7 @@ for ratio in ratios:
     if ratio > 0:
         pert_data, _ = perturbate_data(
             votes_train, votes_params['cat_cols'], ratio, monotone,
-            votes_params['miss_data_symbol'])
+            votes_params['miss_data_symbol'], votes_params['mnar_values'])
     else:
         pert_data = votes_train
     path = os.path.join(perturb_folder,

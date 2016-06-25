@@ -16,6 +16,14 @@ adult_params = {
     'miss_data_cond': lambda x: x == '?',
     'cat_cols': (1, 3, 4, 5, 6, 7, 8, 12),
     'non_cat_cols': (0, 2, 9, 10, 11),
+    'mnar_values': ('Without-pay', 'Never-worked',
+      '1st-4th', '10th','5th-6th',"9th, 7th-8th", "11th","12th",'Preschool',
+      'Divorced', 'Never-married', 'Separated', 'Widowed',
+      'Handlers-cleaners', 'Machine-op-inspct', 'Farming-fishing', 'Priv-house-ser',
+      'Not-in-family', 'Other-relative', 'Unmarried',
+      'Amer-Indian-Eskimo', 'Other', 'Black',
+      'Male',
+      'Cambodia', 'Puerto-Rico', 'Outlying-US(Guam-USVI-etc)', 'India', 'China', 'Cuba', 'Iran', 'Honduras', 'Philippines', 'Jamaica', 'Vietnam', 'Mexico', 'Dominican-Republic', 'Laos', 'Ecuador', 'Taiwan', 'Haiti', 'Columbia',"Guatemala", "Nicaragua", "Scotland", "Thailand", "El-Salvador", "Trinadad&Tobago", "Peru", "Hong"),
     'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
                'SVM', 'KNN','PCA', 'Identity'),
     'n_neighbors': 5,
@@ -28,6 +36,7 @@ votes_params = {
     'miss_data_cond': lambda x: x == '?',
     'cat_cols': np.arange(0, 16), # labels are not included in imputation
     'non_cat_cols': (),
+    'mnar_values': ('n'),
     'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression', #no KNN
                'SVM', 'PCA', 'Identity'), 
     'summary_func': lambda x: mode(x)[0]
