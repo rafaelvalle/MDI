@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  25 JUN 2016 11:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  25 JUN 2016 18:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -484,11 +484,6 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-
-Package natbib Warning: Citation `de2003prevention' on page 3 undefined on inpu
-t line 136.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
@@ -508,14 +503,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-Underfull \vbox (badness 1127) has occurred while \output is active []
+Underfull \vbox (badness 2065) has occurred while \output is active []
 
  [10]
-
-Package natbib Warning: Citation `heskes1997' on page 11 undefined on input lin
-e 200.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [11]
@@ -579,64 +569,60 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [16] [17 <./figure/test-errors-adult-no-imp.pdf> <./figure/test-errors-adult-im
 p.pdf>] [18 <./figure/test-errors-votes-no-imp.pdf> <./figure/test-errors-votes
 -imp.pdf>] (./mdi-ss.bbl
+Missing character: There is no ‚ in font cmr9!
+Missing character: There is no Ä in font cmr9!
+Missing character: There is no ú in font cmr9!
+Missing character: There is no ‚ in font cmr9!
+Missing character: There is no Ä in font cmr9!
+Missing character: There is no ù in font cmr9!
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [19
 
 ])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 298.
 
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 299.
 [20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
- (./mdi-ss.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 299.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 298.
+ (./mdi-ss.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 298.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 298.
 Package rerunfilecheck Info: File `mdi-ss.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 299.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 298.
  ) 
 Here is how much of TeX's memory you used:
- 8334 strings out of 493089
- 121580 string characters out of 6134842
- 232152 words of memory out of 5000000
- 11622 multiletter control sequences out of 15000+600000
- 14091 words of font info for 55 fonts, out of 8000000 for 9000
+ 8332 strings out of 493089
+ 121583 string characters out of 6134842
+ 231252 words of memory out of 5000000
+ 11624 multiletter control sequences out of 15000+600000
+ 13782 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,17n,43p,1710b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{figure.0.3} has been referenced but does not exis
+ 34i,17n,43p,1710b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.0.2} has been referenced but does not exis
 t, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.0.2} has been referenced but does not exist,
- replaced by a fixed one
 
 pdfTeX warning (dest): name{figure.0.1} has been referenced but does not exist,
  replaced by a fixed one
 
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on mdi-ss.pdf (20 pages, 240841 bytes).
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/tex
+live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on mdi-ss.pdf (20 pages, 229038 bytes).
 PDF statistics:
- 273 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
- 46 named destinations out of 1000 (max. 500000)
+ 267 PDF objects out of 1000 (max. 8388607)
+ 220 compressed objects within 3 object streams
+ 43 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
