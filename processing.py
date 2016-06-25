@@ -60,7 +60,7 @@ def impute(data, imputer, imp_method, params_dict):
     return imp_data
 
 
-def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
+def perturbate_data(x, cols, ratio, monotone, missing_data_symbol, mnar=None,
                     in_place=False):
     """Perturbs data by substituting existing values with missing data symbol
     such that each feature has a minimum missing data ratio
@@ -77,12 +77,15 @@ def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
         Ratio of observations in data to have missing data
     missing_data_symbol : str
         String that represents missing data in data
-    method: float [0, 1]
+    monotone: boolean
         Non-monotone: Any observation and feature can present a missing
             value. Restrict the number of missing values in a observations
             to not more than half of the features.
         Monotone: set to missing all the values of 30% of randomly selected
             features with categorical variables
+    mnar: tuple
+    	Will perturb only items in the x matrix that matches items in the tuple
+    	MNAR will suppress monotone
     """
 
     def zero():
@@ -94,7 +97,19 @@ def perturbate_data(x, cols, ratio, monotone, missing_data_symbol,
         data = np.copy(x)
 
     n_perturbations = int(len(x) * ratio)
-    if monotone:
+    if mnar is not None:
+    	mask = []
+    	[mask.extend(np.argwhere(data == item).tolist()) for item in mnar]
+    	mask = np.array(mask)
+    	n_perturbations = int(len(mask) * ratio)
+    	if n_perturbations < 1:
+    		raise Exception('Number of perturbations is smaller than 1.')
+    	else:
+	    	mask_rows = np.random.choice(mask.shape[0], 
+	    		max(int(len(mask) * ratio), 1), replace=False)
+	    	coords = mask[mask_rows]
+	    	data[coords[:, 0], coords[:, 1]] = missing_data_symbol
+    elif monotone:
         missing_mask = np.random.choice((0, 1), data[:, cols].shape, True,
                                         (1-ratio, ratio)).astype(bool)
 
