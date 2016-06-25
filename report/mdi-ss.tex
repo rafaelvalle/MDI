@@ -88,7 +88,7 @@ University of California, Berkeley} \vspace{.55cm} \fontsize{9}{11.5pt plus.8pt 
 \begin{quotation}
 \noindent {\it Abstract:}
 This paper compares methods for imputing missing categorical data for classification
-tasks using random forests, decision trees and neural networks.
+tasks using random forests, decision trees and deep neural networks.
 Researchers analyzing survey data typically choose decision trees or random
 forests for classification tasks, largely because these models, unlike neural
 networks and others, do not require imputing missing data nor encoding categorical
@@ -97,7 +97,7 @@ and categorical data encoding. We experiment on two benchmark datasets with miss
 
 \vspace{9pt}
 \noindent {\it Key words and phrases:}
-missing data, survey data, imputation methods,  neural networks, random forests, decision trees
+missing data, survey data, imputation methods,  neural networks,  deep learning, random forests, decision trees
 \par
 \end{quotation}\par
 
@@ -188,26 +188,16 @@ Close to half of the CVRs data contains missing values, which are present in eve
 1, &\text{if $y_i \in A$ \hspace{5mm} $\forall \,$ categorical $Y_j$} \\
 0, &\text{if $y_i \notin A$ \hspace{5mm} $\forall \,$ categorical $Y_j$},
 \end{cases}
-\end{equation} where $A$ is a length-$K$ vector containing categorical values.\footnote{\textbf{Note here how the values are selected.}}  We perturb the training data so that each categorical feature has 10\%, 20\%, 30\%, and 40\% of values MNAR. 
+\end{equation} where $A$ is a length-$K$ vector containing categorical values.\footnote{\textbf{Note here how the values are selected.}}  We perturb the training data so that each categorical feature has 10\%, 20\%, 30\%, and 40\% entries MNAR. 
 
-After one-hot encoding the categorical variables in the training data, we implement one of the following imputation techniques, discussed in Section 2.2: $k$-NN, prediction model (logistic regression, random forests, or SVMs), mode replacement, and random replacement. Lastly, we standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature.  
-
-We preprocess the test data in the same manner, with the exception that we do not perturb categorical features in the test data. When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.
+After one-hot encoding the categorical variables in the training data, we implement eachof the following imputation techniques, discussed in Section 2.2: $k$-NN, prediction model (logistic regression, random forests, or SVMs), mode replacement, and random replacement. We then standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature. The test data is preprocessed in the same manner, with the exception that we do not perturb categorical features in the test data.\footnote{When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.}
 
 \par
 \noindent {\bf 3.4. Model training and hyperparameter selection}
 
-%We train three different classifiers:
+We train three different classifiers on the preprocessed data: decision trees, random forests, and deep neural networks. We construct prediction confidence intervals using the standard deviation of test set errors obtained by training each classifier with different hyperparameters. We vary maximum depth of the tree for decision trees  (4 to no maximum, i.e., nodes are expanded until all leaves are pure) and vary the number of trees for random forests (10 to 2,500). 
 
-We train a four-layer neural network, with each of the two hidden layers having 1024 nodes. We use the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}:
-
-\begin{itemize}
-\item Momentum schedule [0 to 1]
-\item Dropout regularization [No, Yes]
-\item Learning rate: [0.000001 to 0.01].
-\end{itemize}
-
-The goal of Bayesian optimization is to choose a point in the hyperparameter space that appropriately balances information gain and exploitation. Figure SM-\ref{fig:params} shows the exploration of hyperparameter space during Bayesian optimization for both Adult and CVRs datasets. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset. More circles appear in the plot for CVRs simply due to the fact that the training set is smaller. We see that most of the candidate models use dropout and have an initial learning rate close to the maximum of 0.01. The plurality of candidate models appear to either have momentum (1) or not (0). The candidate model with the lowest training error is selected for predicting on the test set. 
+We train a four-layer neural network, with each of the two hidden layers having 1024 nodes, and use the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}: Momentum schedule (0 to 1), dropout regularization (No, Yes) and learning rate: (0.000001 to 0.01). The goal of Bayesian optimization is to choose a point in the hyperparameter space that appropriately balances information gain and exploitation.\footnote{Figure SM-\ref{fig:params} shows the exploration of hyperparameter space during Bayesian optimization for both Adult and CVRs datasets. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset. More circles appear in the plot for CVRs simply due to the fact that the training set is smaller. We see that most of the candidate models use dropout and have an initial learning rate close to the maximum of 0.01. The plurality of candidate models appear to either have momentum (1) or not (0).} We run Bayesian optimization several times in order to select different models to predict on the test set. 
 
 \par
 \noindent {\bf 3.5. Results}
@@ -221,7 +211,7 @@ Each of the three classifiers trained on one-hot encoded data perform well on th
 \begin{figure}[h!]
 \includegraphics [scale=0.45]{figure/test-errors-adult-no-imp.pdf}\par
 \includegraphics [scale=0.45]{figure/test-errors-adult-imp.pdf}\par
-   \caption{\footnotesize Error rates on the Adult test set with (bottom) and without (top) missing data imputation, for various levels of perturbed training features (x-axis). One-hot encoding is used to represent missing data in the absence of imputation. The decision tree and random forests classifiers are trained with maximum depths of 8 and 16, respectively.}
+   \caption{\footnotesize Error rates on the Adult test set with (bottom) and without (top) missing data imputation, for various levels of perturbed training features (x-axis). One-hot encoding is used to represent missing data in the absence of imputation.}
    \label{fig:test-error-adult}
 \end{figure}
 
