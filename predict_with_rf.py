@@ -71,7 +71,9 @@ if __name__ == '__main__':
                 os.path.join(feats_test_folder, test_path)).astype(np.float32)
 
             # Fit Tree Classifiers
-            clfs = {'DTC(max_depth=4)':
+            clfs = {'DTC(max_depth=None)':
+                        DecisionTreeClassifier(max_depth=None),
+                    'DTC(max_depth=4)':
                         DecisionTreeClassifier(max_depth=4),
                     'DTC(max_depth=8)':
                         DecisionTreeClassifier(max_depth=8),
@@ -83,18 +85,20 @@ if __name__ == '__main__':
                         DecisionTreeClassifier(max_depth=256),
                     'DTC(max_depth=1024)':
                         DecisionTreeClassifier(max_depth=1024),
-                    'RFC(max_depth=4)':
-                        RandomForestClassifier(max_depth=4),
-                    'RFC(max_depth=8)':
-                        RandomForestClassifier(max_depth=8),
-                    'RFC(max_depth=16)':
-                        RandomForestClassifier(max_depth=16),
-                    'RFC(max_depth=32)':
-                        RandomForestClassifier(max_depth=32),
-                    'RFC(max_depth=256)':
-                        RandomForestClassifier(max_depth=256),
-                    'RFC(max_depth=1024)':
-                        RandomForestClassifier(max_depth=1024)}
+                    'RFC(n_estimators=10)':
+                        RandomForestClassifier(n_estimators=10),
+                    'RFC(n_estimators=100)':
+                        RandomForestClassifier(n_estimators=100),
+                    'RFC(n_estimators=500)':
+                        RandomForestClassifier(n_estimators=500),
+                    'RFC(n_estimators=1000)':
+                        RandomForestClassifier(n_estimators=1000),
+                    'RFC(n_estimators=1500)':
+                        RandomForestClassifier(n_estimators=1500),
+                    'RFC(n_estimators=2000)':
+                        RandomForestClassifier(n_estimators=2000),
+                    'RFC(n_estimators=2500)':
+                        RandomForestClassifier(n_estimators=2500)}
 
             for _ in xrange(args.n_iterations):
                 for model_name, clf in clfs.items():
