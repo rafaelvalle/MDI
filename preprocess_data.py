@@ -43,8 +43,11 @@ ratios = np.arange(0, .5, .1)
 
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
-    pert_data, _ = perturbate_data(x, adult_params['cat_cols'], ratio, monotone,
-                                   adult_params['miss_data_symbol'])
+    if ratio > 0:
+        pert_data, _ = perturbate_data(x, adult_params['cat_cols'], ratio, monotone,
+                                       adult_params['miss_data_symbol'])
+    else:
+        pert_data = x
     print "\tRatio is {} of {}".format(
             np.sum(pert_data == adult_params['miss_data_symbol']), 
             len(pert_data) * len(adult_params['cat_cols']))

@@ -59,9 +59,12 @@ ratios = np.arange(0, .5, .1)
 
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
-    pert_data, _ = perturbate_data(
-        votes_train, votes_params['cat_cols'], ratio, monotone,
-        votes_params['miss_data_symbol'])
+    if ratio > 0:
+        pert_data, _ = perturbate_data(
+            votes_train, votes_params['cat_cols'], ratio, monotone,
+            votes_params['miss_data_symbol'])
+    else:
+        pert_data = votes_train
     path = os.path.join(perturb_folder,
                         '{}_train_pert_mono_{}_ratio_{}.csv'.format(dataname,
                                                                     monotone,
