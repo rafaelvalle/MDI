@@ -31,6 +31,7 @@ def plot(params_dir):
                 params_dir, model_dir) + '/*.h5')]
 
     df = pd.DataFrame(dict([(k, pd.Series(v)) for k, v in df.iteritems()]))
+    df.to_csv(os.path.basename(os.path.normpath(params_dir)))
     plt.figure(figsize=(16, 4), dpi=300)
     g = sns.boxplot(df)
     g.set_xticklabels(df.columns, rotation=45)
