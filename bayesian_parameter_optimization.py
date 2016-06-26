@@ -114,7 +114,7 @@ def run_trial(data, nnet_params, hyperparameter_space, train_function):
 
 def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
                      model_directory, train_function, model_name='best_model',
-                     n_models=12):
+                     n_models=10):
     """Run parameter optimization given some train function, writing out results
     Parameters
     ----------
