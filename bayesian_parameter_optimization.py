@@ -113,7 +113,8 @@ def run_trial(data, nnet_params, hyperparameter_space, train_function):
 
 
 def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
-                     model_directory, train_function, model_name='best_model'):
+                     model_directory, train_function, model_name='best_model',
+                     n_models=12):
     """Run parameter optimization given some train function, writing out results
     Parameters
     ----------
@@ -134,6 +135,10 @@ def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
     train_function : callable
         This function will be called with the constructed network, training
         data, and hyperparameters to create a model.
+    model_name : str
+        String to be used when saving models to file
+    n_models_to_save : int
+        Number of best models to save
     """
     # Create parameter trials directory if it doesn't exist
     if not os.path.exists(trial_directory):
@@ -148,6 +153,8 @@ def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
         trial = deepdish.io.load(trial_file)
         ss.update(trial['hyperparameters'], trial['best_objective'])
     # Run parameter optimization forever
+    best_scores = np.empty((n_models,))
+    best_scores[:] = np.inf
     while True:
         # Get a new suggestion
         suggestion = ss.suggest()
@@ -163,9 +170,19 @@ def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
                          {'hyperparameters': suggestion,
                           'best_objective': best_objective,
                           'best_epoch': best_epoch})
+        # We will write the N best models
+        idx_max = np.argmax(best_scores)
+        if (not np.isnan(best_objective) and (best_objective <
+                                              best_scores[idx_max])):
+                deepdish.io.save(os.path.join(model_directory,
+                                              "{}_{}.h5".format(model_name,
+                                                                idx_max)),
+                                 best_model)
+        """
         # Also write out the entire model when the objective is the smallest
         # We don't want to write all models; they are > 100MB each
         if (not np.isnan(best_objective) and
                 best_objective == np.nanmin(ss.objective_values)):
             deepdish.io.save(
                 os.path.join(model_directory, model_name+'.h5'), best_model)
+        """
