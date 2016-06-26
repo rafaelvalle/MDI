@@ -84,8 +84,8 @@ def perturbate_data(x, cols, ratio, monotone, missing_data_symbol, mnar=None,
         Monotone: set to missing all the values of 30% of randomly selected
             features with categorical variables
     mnar: tuple
-    	Will perturb only items in the x matrix that matches items in the tuple
-    	MNAR will suppress monotone
+        Will perturb only items in the x matrix that matches items in the tuple
+        MNAR will suppress monotone
     """
 
     def zero():
@@ -98,20 +98,20 @@ def perturbate_data(x, cols, ratio, monotone, missing_data_symbol, mnar=None,
 
     n_perturbations = int(len(x) * ratio)
     if mnar is not None:
-    	mask = []
-    	[mask.extend(np.argwhere(data == item).tolist()) for item in mnar]
-    	mask = np.array(mask)
-    	n_perturbations = int(len(mask) * ratio)
-    	if n_perturbations < 1:
-    		raise Exception('Number of perturbations is smaller than 1.')
-    	else:
-	    	mask_rows = np.random.choice(mask.shape[0], 
-	    		max(int(len(mask) * ratio), 1), replace=False)
-	    	coords = mask[mask_rows]
-	    	data[coords[:, 0], coords[:, 1]] = missing_data_symbol
-	    miss_dict = defaultdict(list)
-	    for i in coords:
-	    	miss_dict[i[1]].extend(i[0])
+        mask = []
+        [mask.extend(np.argwhere(data == item).tolist()) for item in mnar]
+        mask = np.array(mask)
+        n_perturbations = int(len(mask) * ratio)
+        if n_perturbations < 1:
+            raise Exception('Number of perturbations is smaller than 1.')
+        else:
+            mask_rows = np.random.choice(mask.shape[0], 
+                max(int(len(mask) * ratio), 1), replace=False)
+            coords = np.array(mask[mask_rows], ndmin=2)
+            data[coords[:, 0], coords[:, 1]] = missing_data_symbol
+        miss_dict = defaultdict(list)
+        for i in coords:
+            miss_dict[i[1]].extend(i[0])
     elif monotone:
         missing_mask = np.random.choice((0, 1), data[:, cols].shape, True,
                                         (1-ratio, ratio)).astype(bool)
