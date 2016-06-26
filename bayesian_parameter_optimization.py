@@ -174,10 +174,11 @@ def parameter_search(data, nnet_params, hyperparameter_space, trial_directory,
         idx_max = np.argmax(best_scores)
         if (not np.isnan(best_objective) and (best_objective <
                                               best_scores[idx_max])):
-                deepdish.io.save(os.path.join(model_directory,
-                                              "{}_{}.h5".format(model_name,
-                                                                idx_max)),
-                                 best_model)
+            best_scores[idx_max] = best_objective
+            deepdish.io.save(os.path.join(model_directory,
+                                          "{}_{}.h5".format(model_name,
+                                                            idx_max)),
+                             best_model)
         """
         # Also write out the entire model when the objective is the smallest
         # We don't want to write all models; they are > 100MB each
