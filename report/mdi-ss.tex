@@ -181,23 +181,23 @@ Close to half of the CVRs data contains missing values, which are present in eve
 \par
 \noindent {\bf 3.3. Preprocessing}
 
- in order to study the effect of larger amounts of missing data, we replace nonmissing values with missing values in the each categorical feature in the training data according to the following MNAR mechanism:
+In order to study the effect of larger amounts of missing data, we perturb the training data so that each categorical feature has 10\%, 20\%, 30\%, and 40\% values missing according to the MNAR mechanism
  
  \begin{equation}\label{3.1}
 \Pr (M_i = 1 | y_i, \phi) = \begin{cases}
 1, &\text{if $y_i \in A$ \hspace{5mm} $\forall \,$ categorical $Y_j$} \\
 0, &\text{if $y_i \notin A$ \hspace{5mm} $\forall \,$ categorical $Y_j$},
 \end{cases}
-\end{equation} where $A$ is a length-$K$ vector containing categorical values.\footnote{\textbf{Note here how the values are selected.}}  We perturb the training data so that each categorical feature has 10\%, 20\%, 30\%, and 40\% entries MNAR. 
+\end{equation} where $A$ is a vector containing at least one value from each categorical feature that we determine likely to be missing. We select categorical values in the Adult dataset that are theoretically correlated with low socioeconomic status, such as the values ``Without pay'' and ``Never worked" for the feature \emph{Work class}. The existing literature suggests item nonresponse in surveys is correlated with low income and low education \citep{rubin1995}. We include in $A$ only ``nay'' votes, under the assumption that refusing to take position on an issue or missing a vote is akin to voting against the issue. 
 
-After one-hot encoding the categorical variables in the training data, we implement each of the following imputation techniques, discussed in Section 2.2: $k$-NN, prediction model (logistic regression, random forests, or SVMs), mode replacement, and random replacement. We then standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature. The test data is preprocessed in the same manner, with the exception that we do not perturb categorical features in the test data.\footnote{When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.}
+After one-hot encoding the categorical variables in the training data, we implement each of the following imputation techniques, discussed in Section 2.2: $k$-NN, prediction model (logistic regression, random forests, or SVMs), mode replacement, and random replacement. We then standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature. The test data is preprocessed in the same manner, with the exception that we do not perturb categorical features in the test data.%\footnote{When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.}
 
 \par
 \noindent {\bf 3.4. Model training and assessment}
 
-We train three different classifiers on the preprocessed data: decision trees, random forests, and deep neural networks. The deep neural network consists of four layers, each of the two hidden layers having 1024 nodes, and employs the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}: Momentum schedule (0 to 1), dropout regularization (No, Yes) and learning rate: (0.000001 to 0.01).\footnote{The goal of Bayesian optimization is to choose a point in the hyperparameter space that appropriately balances information gain and exploitation. Figure SM-\ref{fig:params} shows the exploration of hyperparameter space during Bayesian optimization for both Adult and CVRs datasets. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset. More circles appear in the plot for CVRs simply due to the fact that the training set is smaller. We see that most of the candidate models use dropout and have an initial learning rate close to the maximum of 0.01. The plurality of candidate models appear to either have momentum (1) or not (0).} We obtain an ensemble of different candidate models that minimize training error during Bayesian optimization. 
+We train three different classifiers on the preprocessed data: decision trees, random forests, and deep neural networks. The deep neural network consists of four layers, each of the two hidden layers having 1024 nodes, and employs the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}: Momentum schedule (0 to 1), dropout regularization (No, Yes) and learning rate: (0.000001 to 0.01). We obtain an ensemble of different candidate models that minimize training error during Bayesian optimization. 
 
-We construct prediction confidence intervals using the variation in an ensemble of neural networks, each model fit on the training data and applied to the test data \citep{heskes1997}. We use the same procedure for decision trees and random forests, creating an ensemble of decision trees by varying the maximum depth of the tree (5 to no maximum, i.e., nodes are expanded until all leaves are pure), and an ensemble of random forests by varying the number of trees for random forests (10 to 3,500) and the number of features to consider when looking for the best split (the square root, logarithm, or total number of features). 
+We construct prediction confidence intervals using the variation in an ensemble of neural networks, each model fit on the training data and applied to the test data \citep{heskes1997}. We use the same procedure for decision trees and random forests, creating an ensemble of decision trees by varying the maximum depth of the tree (5 to no maximum, i.e., nodes are expanded until all leaves are pure), and an ensemble of random forests by varying the number of trees for random forests (10 to 2,000) and the number of features to consider when looking for the best split (the square root, logarithm, or total number of features). 
 
 \par
 \noindent {\bf 3.5. Results}
@@ -241,8 +241,7 @@ For future work, we will further explore the idea that missing data may have mor
 \noindent {\large\bf Supplementary Materials}
 
 %Contain the brief description of the online supplementary materials.
-The online supplementary material contains descriptive plots of missing data patterns in the benchmark datasets and of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets. 
-The code used for this project is available on Github (\url{https://github.com/rafaelvalle/MDI}).
+The online supplementary material contains descriptive plots of missing data patterns in the benchmark datasets, as well as a description and plots of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets. The code used for this project is available on Github (\url{https://github.com/rafaelvalle/MDI}).
 
 \par
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

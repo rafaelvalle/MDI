@@ -44,6 +44,13 @@ Little, R.~J. and Rubin, D.~B. (2014).
 \newblock {\em Statistical analysis with missing data}.
 \newblock John Wiley \& Sons.
 
+\bibitem[Rubin et~al., 1995]{rubin1995}
+Rubin, D.~B., Stern, H.~S., and Vehovar, V. (1995).
+\newblock Handling “don't know” survey responses: the case of the
+  {S}lovenian plebiscite.
+\newblock {\em Journal of the American Statistical Association},
+  90(431):822--828.
+
 \bibitem[Schlimmer, 1987]{schlimmer1987}
 Schlimmer, J.~C. (1987).
 \newblock Concept acquisition through representational adjustment.

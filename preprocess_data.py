@@ -45,7 +45,8 @@ for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
     if ratio > 0:
         pert_data, _ = perturbate_data(x, adult_params['cat_cols'], ratio, monotone,
-                                       adult_params['miss_data_symbol'])
+                                       adult_params['miss_data_symbol'],
+                                       adult_params['mnar_values'])
     else:
         pert_data = x
     print "\tRatio is {} of {}".format(
