@@ -57,7 +57,6 @@ if __name__ == '__main__':
             print("\nExecuting prediction on test set \n{}").format(model_name)
             for filename in os.listdir(MODEL_DIRECTORY):
                 if model_name in filename:
-                    set_trace()
                     # Load test set, separate target labels from dataset
                     data = np.load(
                         os.path.join(feats_test_folder, test_path)).astype(np.float32)
