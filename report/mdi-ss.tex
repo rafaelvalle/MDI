@@ -3,6 +3,7 @@
 \usepackage{array,epsfig,fancyhdr,rotating}
 \usepackage[driverfallback=dvipdfm]{hyperref}
 \usepackage{soul} %for strikeout
+\usepackage{csquotes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textwidth=31.9pc
@@ -92,12 +93,11 @@ tasks using random forests, decision trees and deep neural networks.
 Researchers analyzing survey data typically choose decision trees or random
 forests for classification tasks, largely because these models, unlike neural
 networks and others, do not require imputing missing data nor encoding categorical
-variables. We start by investigating techniques for missing categorical data imputation
-and categorical data encoding. We experiment on two benchmark datasets with missing categorical data, comparing the three classifiers trained on either non-imputed or differently imputed data with different degrees of nonmissing at random (MNAR) perturbation. We beat the state-of-the-art test error on both datasets and conclude from the results that the performance of the classifiers and imputation strategies generally depend on the nature and proportion of missing data. \par
+variables. We experiment on two benchmark datasets with missing categorical data, comparing the three classifiers trained on either non-imputed or differently imputed data with different degrees of nonmissing at random (MNAR) perturbation. We beat the state-of-the-art test error on both datasets and conclude from the results that the performance of the classifiers and imputation strategies generally depend on the nature and proportion of missing data. \par
 
 \vspace{9pt}
-\noindent {\it Key words and phrases:}
-missing data, survey data, imputation methods,  neural networks,  deep learning, random forests, decision trees, prediction intervals
+\noindent {\it Key words and phrases:} % alphabetical order
+decision trees, deep learning, imputation methods, missing data, neural networks, random forests, survey data
 \par
 \end{quotation}\par
 
@@ -114,7 +114,7 @@ missing data, survey data, imputation methods,  neural networks,  deep learning,
 \setcounter{equation}{0} %-1
 \noindent {\bf 1. Introduction} 
 
-Missing data is a common problem in survey data in various domains, such as social science and marketing. Sources of missing data in surveys include nonresponse and attrition in longitudinal surveys. For supervised classification tasks, the objective is to fit a model on categorically labeled training data in order to categorize new examples. The ability of researchers to accurately fit a model model may be compromised by missing data, depending on the underlying missing data mechanism. In this paper, we focus on data that are missing not at random (MNAR), which occurs when the probability of an example having a missing value may depend on the missing data itself. There is an inherent nonidentifiability problem when the missing data mechanism is MNAR because we cannot observe the true value of missing data \citep{tsiatis2007}. Item nonresponse in surveys is typically handled by imputation methods, which are used to estimate a value for missing data. However, imputation methods assume data missing at random (MAR), which occurs when the probability of missingness depends only on the observed data. 
+Missing data is a common problem in survey data in various domains, such as social science and marketing. Sources of missing data in surveys include nonresponse and attrition in longitudinal surveys. For supervised classification tasks, the objective is to fit a model on categorically labeled training data in order to categorize new examples. The ability of researchers to accurately fit a model model may be compromised by missing data, depending on the underlying missing data mechanism. In this paper, we focus on data that are missing not at random (MNAR), which occurs when the probability of an example having a missing value may depend on the missing data itself. There is an inherent nonidentifiability problem when the missing data mechanism is MNAR because we cannot observe the true value of missing data \citep[Chap.~6]{tsiatis2007}. Item nonresponse in surveys is typically handled by imputation methods, which are used to estimate a value for missing data. However, imputation methods assume data missing at random (MAR), which occurs when the probability of missingness depends only on the observed data. 
 
 The objective of the present study is to compare the out-of-sample performance of three popular machine learning classifiers --- decision trees, random forests, and neural networks --- trained on either differently-imputed or non-imputed survey datasets that contain various degrees of MNAR missing data. Decision trees and random forests are typically used for survey data because missing data must be pre-processed to be suited for models that require numerical input, such as neural networks. Imputation methods that assume data at MAR when the data is in fact MNAR can bias model estimates. The results of the study will provide guidance to applied researchers on how to handle missing data in survey datasets and which classifier to use. 
 
@@ -133,13 +133,9 @@ In this section, we describe the missing data mechanisms underlying patterns of 
 \par
 \noindent {\bf 2.1. Missing data patterns and mechanisms}
 
-It is important to first distinguish between missing data patterns, which describe which values are observed and which are missing, and missing data mechanisms, which describe the the probability of missingness  \citep{little2014}. Common missing data patterns in surveys typically include unit nonresponse, where a subset of participants do not complete the survey, and item nonresponse, where missing values are concentrated on particular questions. In opinion polls, nonresponse may reflect either refusal to reveal a preference or lack of a preference \citep{de2003prevention}. 
+It is important to first distinguish between missing data patterns, which describe which values are observed and which are missing, and missing data mechanisms, which describe the the probability of missingness  \citep[Chap.~1]{little2014}. Common missing data patterns in surveys typically include unit nonresponse, where a subset of participants do not complete the survey, and item nonresponse, where missing values are concentrated on particular questions. In opinion polls, nonresponse may reflect either refusal to reveal a preference or lack of a preference \citep{de2003prevention}. 
 
-It may be beneficial to impute missing values in situations where missing data hide values that are useful for classification tasks. Understanding the missing data mechanisms underlying patterns of missing data is crucial since properties of imputation methods depend on the nature of these mechanisms. Following the notation of \cite{little2014}, let $Y = y_{ij}$ be a $(n \times K)$ dataset with each example $y_i = (y_{i1}, \ldots, y_{iK})$ the set of $y_{ij}$ values of feature $Y_j$ for example $i$. Let $Y_{\mathrm{obs}}$ define observed values of $Y$ and $Y_{\mathrm{mis}}$ define missing values. Define the missing data identity matrix $M = m_{ij}$, where $m_{ij} = 1$ if $y_{ij}$ is missing and $m_{ij} = 0$ if $y_{ij}$ is nonmissing. The missing data mechanism is called missing completely at random (MCAR) if the probability of missingness is independent of the data, or $f(M | Y, \phi) = f(M | \phi)$, where $\phi$ denotes unknown parameters. The MAR assumption is less restrictive than MCAR in that that the probability of missingness depends only on the observed data, $f(M | Y, \phi) = f(M | Y_{\mathrm{obs}}, \phi)$. We are primarily interested in the MNAR assumption that the probability of missingness may also depend on the unobserved data, 
-
-\begin{equation}\label{2.1}
-f(M | Y, \phi) = f(M | Y_{\mathrm{mis}}, \phi) \hspace{5mm} \forall \,Y_{\mathrm{mis}}, \phi.
-\end{equation} Researchers typically assume data is MAR, which mitigates the identifiability problems of MNAR because the probability of missingness depends on the features that are observed on all individuals \citep{tsiatis2007}. 
+It may be beneficial to impute missing values in situations where missing data hide values that are useful for classification tasks. Understanding the missing data mechanisms underlying patterns of missing data is crucial since properties of imputation methods depend on the nature of these mechanisms. Following the notation of \cite[Chap.~1]{little2014}, let $Y = y_{ij}$ be a $(n \times K)$ dataset with each example $y_i = (y_{i1}, \ldots, y_{iK})$ the set of $y_{ij}$ values of feature $Y_j$ for example $i$. Let $Y_{\mathrm{obs}}$ define observed values of $Y$ and $Y_{\mathrm{mis}}$ define missing values. Define the missing data identity matrix $M = m_{ij}$, where $m_{ij} = 1$ if $y_{ij}$ is missing and $m_{ij} = 0$ if $y_{ij}$ is nonmissing. The missing data mechanism is called missing completely at random (MCAR) if the probability of missingness is independent of the data, or $f(M | Y, \phi) = f(M | \phi)$ for all $Y, \phi$, where $\phi$ denotes unknown parameters. The MAR assumption is less restrictive than MCAR in that that the probability of missingness depends only on the observed data, $f(M | Y, \phi) = f(M | Y_{\mathrm{obs}}, \phi)$ for all $Y_{\mathrm{mis}}, \phi$. We are primarily interested in the MNAR assumption that the probability of missingness may also depend on the unobserved data, $f(M | Y, \phi) = f(M | Y_{\mathrm{mis}}, \phi)$ for all $Y_{\mathrm{mis}}, \phi$. Researchers typically assume data is MAR, which mitigates the identifiability problems of MNAR because the probability of missingness depends on the features that are observed on all individuals \citep[Chap.~6]{tsiatis2007}. 
 
 \par			
 \noindent {\bf 2.2. Imputation methods} \label{section:techniques} 
@@ -195,9 +191,9 @@ After one-hot encoding the categorical variables in the training data, we implem
 \par
 \noindent {\bf 3.4. Model training and assessment}
 
-We train three different classifiers on the preprocessed data: decision trees, random forests, and deep neural networks. The deep neural network consists of four layers, each of the two hidden layers having 1024 nodes, and employs the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}: Momentum schedule (0 to 1), dropout regularization (No, Yes) and learning rate: (0.000001 to 0.01). We obtain an ensemble of different candidate models that minimize training error during Bayesian optimization. 
+We train three different classifiers on the preprocessed data: decision trees, random forests, and deep neural networks. The deep neural network consists of four layers, each of the two hidden layers having 1024 nodes, and employs the adaptive learning rate method Adadelta \citep{zeiler2012} for the update rule. We explore the following hyperparameter space via Bayesian optimization \citep{snoek2012}: Momentum schedule (0 to 1), dropout regularization (No, Yes) and learning rate: (0.000001 to 0.01). We obtain an ensemble of the ten candidate models that achieve the lowest training error during Bayesian optimization. We construct prediction confidence intervals using the variation in an ensemble of neural networks, each model fit on the training data and applied to the test data \citep{heskes1997}. 
 
-We construct prediction confidence intervals using the variation in an ensemble of neural networks, each model fit on the training data and applied to the test data \citep{heskes1997}. We use the same procedure for decision trees and random forests, creating an ensemble of decision trees by varying the maximum depth of the tree (5 to 2,500), and an ensemble of random forests by varying the number of trees for random forests (10 to 2,500) and decision rule for the number of features to consider when looking for the best split (the square root or logarithm of total number of features). 
+We also use an ensemble method to construct prediction intervals for decision trees and random forests. An ensemble of decision trees is formed by varying the maximum depth of the tree (5 to 2,500), and  for random forests, we vary the number of trees for random forests (10 to 2,500) and decision rule for the number of features to consider when looking for the best split (the square root or logarithm of total number of features). 
 
 \par
 \noindent {\bf 3.5. Results}
@@ -241,7 +237,7 @@ For future work, we will further explore the idea that missing data may have mor
 \noindent {\large\bf Supplementary Materials}
 
 %Contain the brief description of the online supplementary materials.
-The online supplementary material contains descriptive plots of missing data patterns in the benchmark datasets, a description and plots of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets, and test error plots for classifiers trained on MCAR-perturbed categorical training features. . The code used for this project is available on Github (\url{https://github.com/rafaelvalle/MDI}).
+The online supplementary material contains descriptive plots of missing data patterns in the benchmark datasets, a description and plots of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets, and test error plots for classifiers trained on MCAR-perturbed categorical training features. The code used for this project is available on Github (\url{https://github.com/rafaelvalle/MDI}).
 
 \par
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -279,6 +275,9 @@ We thank Isabelle Guyon for advice and the idea for the paper. We also thank Joa
 %\end{thebibliography}
 \bibliographystyle{apalike}
 \bibliography{refs}
+\clearpage
+\markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
 
 \vskip .65cm
 \noindent
