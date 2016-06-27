@@ -56,13 +56,13 @@ if __name__ == '__main__':
             model_name = os.path.basename(train_path)[:-3]
             print("\nExecuting prediction on test set \n{}").format(model_name)
             for filename in os.listdir(MODEL_DIRECTORY):
-                if model_name in filename:
+                if filename.startswith(model_name):
                     # Load test set, separate target labels from dataset
-                    data = np.load(
-                        os.path.join(feats_test_folder, test_path)).astype(np.float32)
+                    data = np.load(os.path.join(feats_test_folder,
+                                                test_path)).astype(np.float32)
 
                     network = neural_networks.build_general_network(
-                        (nnet_params['batch_size'], data.shape[1]-1),  # last is target
+                        (nnet_params['batch_size'], data.shape[1]-1),  # target
                         nnet_params['n_layers'],
                         nnet_params['widths'],
                         nnet_params['non_linearities'],
@@ -74,7 +74,6 @@ if __name__ == '__main__':
 
                     for i in xrange(len(parameters)):
                         parameters[i] = parameters[i].astype('float32')
-
                     lasagne.layers.set_all_param_values(network, parameters)
 
                     # set up neural network functions for predictions
@@ -82,7 +81,8 @@ if __name__ == '__main__':
                     target_var = T.ivector()
                     prediction = lasagne.layers.get_output(
                         network, input_var, deterministic=True)
-                    obj_fn = T.mean(T.neq(T.argmax(prediction, axis=1), target_var))
+                    obj_fn = T.mean(T.neq(T.argmax(prediction, axis=1),
+                                          target_var))
                     validate_fn = theano.function(
                         inputs=[input_var, target_var], outputs=[obj_fn])
 
@@ -90,7 +90,8 @@ if __name__ == '__main__':
                     obj_val = validate_fn(data[:, :-1].astype(input_var.dtype),
                                           data[:, -1].astype(target_var.dtype))
                     model_preds[filename] = obj_val
-                    print("{} error rate on test set: {}").format(filename, obj_val)
+                    print("{} error rate on test set: {}").format(filename,
+                                                                  obj_val)
 
     # dump dictionary
     pkl.dump(model_preds, open(
