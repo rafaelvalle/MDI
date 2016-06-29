@@ -85,7 +85,7 @@ $\ $\par \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont
 \vspace{.55cm}
 \fontsize{9}{11.5pt plus.8pt minus .6pt}\selectfont
 \noindent
-This file contains descriptive plots of missing data patterns in the benchmark datasets, a description and plots of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets, and test error plots for classifiers trained on MCAR-perturbed categorical training features. 
+This file contains descriptive plots of missing data patterns in the benchmark datasets, and plots of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets.
 \par
 
 \setcounter{section}{0}
@@ -139,27 +139,27 @@ The goal of Bayesian optimization is to choose a point in the hyperparameter spa
 \clearpage
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
 {\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
-
-\section{Results with MCAR perturbation}
-\setcounter{equation}{0}
-
-\clearpage
-\markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
-
-\begin{figure}[h!]
-\includegraphics [scale=0.45]{figure/test-errors-adult-no-imp-mcar.pdf}\par
-\includegraphics [scale=0.45]{figure/test-errors-adult-imp-mcar.pdf}\par
-   \caption{\footnotesize Error rates on the Adult test set with (bottom) and without (top) missing data imputation, for various levels of MCAR-perturbed categorical training features (x-axis). One-hot encoding is used to represent missing data in the absence of imputation.} %The decision tree and random forests classifiers are trained with maximum depths of 8 and 16, respectively. 
-   \label{fig:test-error-adult-mcar}
-\end{figure}
-
-\begin{figure}[h!]
-\includegraphics [scale=0.45]{figure/test-errors-votes-no-imp-mcar.pdf}\par
-\includegraphics [scale=0.45]{figure/test-errors-votes-imp-mcar.pdf}\par
-   \caption{\footnotesize Error rates on the CVRs test set with (bottom) and without (top) missing data imputation. See footnotes for Figure \ref{fig:test-error-adult-mcar}.}
-   \label{fig:test-error-votes-mcar}
-\end{figure}
+%
+%\section{Results with MCAR perturbation}
+%\setcounter{equation}{0}
+%
+%\clearpage
+%\markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
+%{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+%
+%\begin{figure}[h!]
+%\includegraphics [scale=0.45]{figure/test-errors-adult-no-imp-mcar.pdf}\par
+%\includegraphics [scale=0.45]{figure/test-errors-adult-imp-mcar.pdf}\par
+%   \caption{\footnotesize Error rates on the Adult test set with (bottom) and without (top) missing data imputation, for various levels of MCAR-perturbed categorical training features (x-axis). One-hot encoding is used to represent missing data in the absence of imputation.} %The decision tree and random forests classifiers are trained with maximum depths of 8 and 16, respectively. 
+%   \label{fig:test-error-adult-mcar}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\includegraphics [scale=0.45]{figure/test-errors-votes-no-imp-mcar.pdf}\par
+%\includegraphics [scale=0.45]{figure/test-errors-votes-imp-mcar.pdf}\par
+%   \caption{\footnotesize Error rates on the CVRs test set with (bottom) and without (top) missing data imputation. See footnotes for Figure \ref{fig:test-error-adult-mcar}.}
+%   \label{fig:test-error-votes-mcar}
+%\end{figure}
 
 %\section{Title of section 3}
 %\setcounter{equation}{0}
