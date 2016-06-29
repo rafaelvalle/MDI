@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  26 JUN 2016 12:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  28 JUN 2016 22:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -358,11 +358,7 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 Package: xr 1994/05/28 v5.02 eXternal References (DPC)
 )
 Package xr Info: IMPORTING LABELS FROM mdi-ss.aux on input line 38.
- (./mdi-ss-supp.aux
-
-LaTeX Warning: Label `fig:test-error-votes' multiply defined.
-
-)
+ (./mdi-ss-supp.aux)
 \openout1 = `mdi-ss-supp.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
@@ -379,7 +375,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
- (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count123
 \scratchdimen=\dimen132
@@ -505,7 +501,7 @@ ne 152.
 (pdftex.def)             Requested size: 379.86568pt x 268.75157pt.
 
 
-LaTeX Warning: Float too large for page by 68.0587pt on input line 155.
+LaTeX Warning: Float too large for page by 49.0587pt on input line 155.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -542,27 +538,23 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 171.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 171.
 Package rerunfilecheck Info: File `mdi-ss-supp.out' has not changed.
 (rerunfilecheck)             Checksum: 2BCA13A9684E0984106306E02FB6988C;201.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 171.
  ) 
 Here is how much of TeX's memory you used:
  7465 strings out of 493089
- 107866 string characters out of 6134842
- 196796 words of memory out of 5000000
+ 107888 string characters out of 6134842
+ 196778 words of memory out of 5000000
  10815 multiletter control sequences out of 15000+600000
  7494 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,12n,43p,912b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,12n,43p,808b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
 sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
 local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/loc
 al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on mdi-ss-supp.pdf (8 pages, 569926 bytes).
+Output written on mdi-ss-supp.pdf (8 pages, 569338 bytes).
 PDF statistics:
  151 PDF objects out of 1000 (max. 8388607)
  116 compressed objects within 2 object streams

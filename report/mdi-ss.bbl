@@ -11,11 +11,12 @@ De~Leeuw, E.~D., Hox, J., Huisman, M., et~al. (2003).
 \newblock Prevention and treatment of item nonresponse.
 \newblock {\em Journal of Official Statistics}, 19(2):153--176.
 
-\bibitem[Heskes et~al., 1997]{heskes1997}
-Heskes, T., Wiegerinck, W., and Kappen, H. (1997).
-\newblock Practical confidence and prediction intervals for prediction tasks.
-\newblock In {\em Advances in Neural Information Processing Systems 9:
-  Proceedingss of the 1996 Conference}. MIT Press.
+\bibitem[Hinton et~al., 2012]{hinton2012}
+Hinton, G.~E., Srivastava, N., Krizhevsky, A., Sutskever, I., and
+  Salakhutdinov, R.~R. (2012).
+\newblock Improving neural networks by preventing co-adaptation of feature
+  detectors.
+\newblock {\em arXiv preprint arXiv:1207.0580}.
 
 \bibitem[Jones, 1996]{jones1996}
 Jones, M.~P. (1996).
@@ -46,6 +47,12 @@ Lichman, M. (2013).
 Little, R.~J. and Rubin, D.~B. (2014).
 \newblock {\em Statistical Analysis with Missing Data}.
 \newblock John Wiley \& Sons.
+
+\bibitem[Maaten et~al., 2013]{maaten2013}
+Maaten, L., Chen, M., Tyree, S., and Weinberger, K.~Q. (2013).
+\newblock Learning with marginalized corrupted features.
+\newblock In {\em Proceedings of the 30th International Conference on Machine
+  Learning (ICML-13)}, pages 410--418.
 
 \bibitem[Rubin et~al., 1995]{rubin1995}
 Rubin, D.~B., Stern, H.~S., and Vehovar, V. (1995).
@@ -82,6 +89,12 @@ Snoek, J., Larochelle, H., and Adams, R.~P. (2012).
 Tsiatis, A. (2007).
 \newblock {\em Semiparametric Theory and Missing Data}.
 \newblock Springer Science \& Business Media.
+
+\bibitem[Wang and Manning, 2013]{wang2013}
+Wang, S. and Manning, C. (2013).
+\newblock Fast dropout training.
+\newblock In {\em Proceedings of the 30th International Conference on Machine
+  Learning (ICML-13)}, pages 118--126.
 
 \bibitem[Zeiler, 2012]{zeiler2012}
 Zeiler, M.~D. (2012).

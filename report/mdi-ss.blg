@@ -5,45 +5,45 @@ The style file: apalike.bst
 Database file #1: refs.bib
 Warning--entry type for "Lichman2013" isn't style-file defined
 --line 75 of file refs.bib
-You've used 15 entries,
+You've used 17 entries,
             1935 wiz_defined-function locations,
-            566 strings with 6247 characters,
-and the built_in function-call counts, 5940 in all, are:
-= -- 601
-> -- 204
-< -- 12
-+ -- 68
-- -- 66
-* -- 469
-:= -- 1010
-add.period$ -- 47
-call.type$ -- 15
-change.case$ -- 104
-chr.to.int$ -- 15
-cite$ -- 15
-duplicate$ -- 248
-empty$ -- 437
-format.name$ -- 87
-if$ -- 1190
+            573 strings with 6538 characters,
+and the built_in function-call counts, 7060 in all, are:
+= -- 715
+> -- 250
+< -- 15
++ -- 84
+- -- 82
+* -- 553
+:= -- 1181
+add.period$ -- 52
+call.type$ -- 17
+change.case$ -- 122
+chr.to.int$ -- 17
+cite$ -- 17
+duplicate$ -- 297
+empty$ -- 512
+format.name$ -- 107
+if$ -- 1428
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 15
-newline$ -- 77
-num.names$ -- 45
-pop$ -- 104
+missing$ -- 17
+newline$ -- 87
+num.names$ -- 51
+pop$ -- 125
 preamble$ -- 1
-purify$ -- 107
+purify$ -- 125
 quote$ -- 0
-skip$ -- 190
+skip$ -- 235
 stack$ -- 0
-substring$ -- 436
-swap$ -- 43
-text.length$ -- 3
+substring$ -- 524
+swap$ -- 63
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 86
+type$ -- 98
 warning$ -- 0
-while$ -- 51
+while$ -- 61
 width$ -- 0
-write$ -- 193
+write$ -- 218
 (There was 1 warning)
