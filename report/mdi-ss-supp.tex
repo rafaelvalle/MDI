@@ -63,16 +63,16 @@
 }\hfill }
 
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION} \hfill}
 
 \renewcommand{\thefootnote}{}
 $\ $\par \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- \centerline{\large\bf MISSING DATA IMPUTATION }
-\vspace{2pt}
- \centerline{\large\bf FOR SUPERVISED CLASSIFICATION}
+ \centerline{\large\bf MISSING DATA IMPUTATION FOR SUPERVISED LEARNING}
+%\vspace{2pt}
+% \centerline{\large\bf FOR SUPERVISED CLASSIFICATION}
 %\vspace{2pt}
 % \centerline{\large\bf IF THIRD LINE IS NEEDED}
 \vspace{.25cm}
@@ -85,7 +85,7 @@ $\ $\par \fontsize{12}{14pt plus.8pt minus .6pt}\selectfont
 \vspace{.55cm}
 \fontsize{9}{11.5pt plus.8pt minus .6pt}\selectfont
 \noindent
-This file contains descriptive plots of missing data patterns in the benchmark datasets, and plots of Bayesian hyperparameter optimization for training neural networks on the benchmark datasets.
+This file contains descriptive plots of missing data patterns in the benchmark datasets, and plots of Bayesian hyperparameter optimization for training ANNs on the benchmark datasets.
 \par
 
 \setcounter{section}{0}
@@ -108,7 +108,7 @@ This file contains descriptive plots of missing data patterns in the benchmark d
 
 \clearpage
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION} \hfill}
 
 \begin{figure}[h!]
 \includegraphics [scale=0.45]{figure/proportion-missing-votes.pdf}\par
@@ -118,34 +118,34 @@ This file contains descriptive plots of missing data patterns in the benchmark d
 
 \clearpage
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION} \hfill}
 
 \section{Bayesian hyperparameter optimization}
 \setcounter{equation}{0}
 
-The goal of Bayesian optimization is to choose a point in the hyperparameter space that appropriately balances information gain and exploitation. Figure \ref{fig:params} shows the exploration of hyperparameter space during Bayesian optimization for both Adult and CVRs datasets. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset. More circles appear in the plot for CVRs simply due to the fact that the training set is smaller. We see that most of the candidate models use dropout and have an initial learning rate close to the maximum of 0.01. The plurality of candidate models appear to either have momentum (1) or not (0).
+The goal of Bayesian optimization is to choose a point in the hyperparameter space that appropriately balances information gain and exploitation. Figure \ref{fig:params} shows the exploration of hyperparameter space during Bayesian optimization for both Adult and CVRs datasets. Each circle represents a candidate ANNs classifier trained on a differently imputed and perturbed dataset. More circles appear in the plot for CVRs simply due to the fact that the training set is smaller. We see that most of the candidate models use dropout and have an initial learning rate close to the maximum of 0.01. The plurality of candidate models appear to either have momentum (1) or not (0).
 
 \clearpage
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION} \hfill}
 
 \begin{figure}[h!]
 \includegraphics [scale=0.45, center]{../images/params3d_adult.png}\par
 \includegraphics [scale=0.45, center]{../images/params3d_votes.png}\par
-\caption{\footnotesize Exploration of hyperparameter space during Bayesian optimization. Each circle represents a candidate neural network classifier trained on a differently imputed and perturbed dataset.}
+\caption{\footnotesize Exploration of hyperparameter space during Bayesian optimization. Each circle represents a candidate ANNs classifier trained on a differently imputed and perturbed dataset.}
    \label{fig:params}
 \end{figure}
 
 \clearpage
 \markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+{\hfill {\footnotesize\rm MISSING DATA IMPUTATION} \hfill}
 %
 %\section{Results with MCAR perturbation}
 %\setcounter{equation}{0}
 %
 %\clearpage
 %\markboth{\hfill{\footnotesize\rm JASON POULOS AND RAFAEL VALLE} \hfill}
-%{\hfill {\footnotesize\rm MISSING DATA IMPUTATION FOR SUPERVISED CLASSIFICATION} \hfill}
+%{\hfill {\footnotesize\rm MISSING DATA IMPUTATION} \hfill}
 %
 %\begin{figure}[h!]
 %\includegraphics [scale=0.45]{figure/test-errors-adult-no-imp-mcar.pdf}\par
