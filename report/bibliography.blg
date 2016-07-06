@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: bibliography.aux
+The style file: chicago.bst
+Database file #1: bibliography.bib
+Warning--entry type for "Lichman2013" isn't style-file defined
+--line 75 of file bibliography.bib
+Warning--no number and no volume in hinton2012
+Warning--page numbers missing in hinton2012
+Warning--page numbers missing in lo2009
+Warning--no number and no volume in napp2008
+Warning--page numbers missing in napp2008
+Warning--no number and no volume in ruggles2010
+Warning--page numbers missing in ruggles2010
+Warning--no number and no volume in zeiler2012
+Warning--page numbers missing in zeiler2012
+You've used 29 entries,
+            2861 wiz_defined-function locations,
+            785 strings with 10044 characters,
+and the built_in function-call counts, 21557 in all, are:
+= -- 1772
+> -- 1688
+< -- 6
++ -- 510
+- -- 568
+* -- 1941
+:= -- 3910
+add.period$ -- 89
+call.type$ -- 29
+change.case$ -- 219
+chr.to.int$ -- 29
+cite$ -- 38
+duplicate$ -- 598
+empty$ -- 1261
+format.name$ -- 644
+if$ -- 4046
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 29
+newline$ -- 147
+num.names$ -- 290
+pop$ -- 186
+preamble$ -- 1
+purify$ -- 396
+quote$ -- 0
+skip$ -- 611
+stack$ -- 0
+substring$ -- 1092
+swap$ -- 213
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 560
+warning$ -- 9
+while$ -- 281
+width$ -- 0
+write$ -- 387
+(There were 10 warnings)

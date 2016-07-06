@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: mdi.aux
+The style file: chicago.bst
+Database file #1: bibliography.bib
+Warning--entry type for "Lichman2013" isn't style-file defined
+--line 75 of file bibliography.bib
+Warning--no number and no volume in hinton2012
+Warning--page numbers missing in hinton2012
+Warning--no number and no volume in zeiler2012
+Warning--page numbers missing in zeiler2012
+You've used 18 entries,
+            2861 wiz_defined-function locations,
+            720 strings with 7949 characters,
+and the built_in function-call counts, 13066 in all, are:
+= -- 1101
+> -- 954
+< -- 5
++ -- 282
+- -- 320
+* -- 1126
+:= -- 2342
+add.period$ -- 56
+call.type$ -- 18
+change.case$ -- 130
+chr.to.int$ -- 18
+cite$ -- 22
+duplicate$ -- 393
+empty$ -- 800
+format.name$ -- 368
+if$ -- 2485
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 18
+newline$ -- 92
+num.names$ -- 180
+pop$ -- 124
+preamble$ -- 1
+purify$ -- 241
+quote$ -- 0
+skip$ -- 399
+stack$ -- 0
+substring$ -- 680
+swap$ -- 143
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 340
+warning$ -- 4
+while$ -- 175
+width$ -- 0
+write$ -- 243
+(There were 5 warnings)
