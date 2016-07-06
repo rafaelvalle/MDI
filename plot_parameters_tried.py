@@ -87,7 +87,7 @@ def plot_3d(params_dir):
     #plt.legend()
     plt.title('Adult dataset',weight='bold')
     plt.show()
-    plt.savefig('{}.png'.format(os.path.join(IMAGES_DIRECTORY, 'params3d_adult')))
+    plt.savefig('{}.eps'.format(os.path.join(IMAGES_DIRECTORY, 'params3d_adult')), format='eps', dpi=1000)
     plt.close()
 
 def plot_2d(params_dir):
@@ -140,7 +140,7 @@ def plot_2d(params_dir):
     plt.colorbar(im, label='Momentum')
     plt.legend()
     plt.show()
-    plt.savefig('{}.png'.format(os.path.join(IMAGES_DIRECTORY, 'params2d')))
+    plt.savefig('{}.eps'.format(os.path.join(IMAGES_DIRECTORY, 'params2d')), format='eps', dpi=1000)
     plt.close()
 
 if __name__ == '__main__':
