@@ -92,7 +92,7 @@
 
 \begin{quotation}
 \noindent {\it Abstract:} % abstract: 200-300 words
-This paper compares methods for imputing missing categorical data for classification tasks using random forests, decision trees, and artificial neural networks (ANNs). Researchers analyzing survey data typically choose decision trees or random forests for classification tasks, largely because these models do not require imputing missing data nor encoding categorical variables, unlike ANNs or other classifiers. We experiment on two social science benchmark datasets with missing categorical data, comparing the three classifiers trained on non-imputed (i.e., one-hot encoded) or differently-imputed data with different degrees of missing-data perturbation. The results of the experiments show that for non-imputed models, perturbation produces a considerable decrease in prediction accuracy relative to models trained on imputed data. Additionally, we find that for imputed models, missing-data perturbation can improve prediction accuracy by regularizing the training data. \par
+This paper compares methods for imputing missing categorical data for classification tasks using random forests, decision trees, and artificial neural networks (ANNs). Researchers analyzing survey data typically choose decision trees or random forests for classification tasks, largely because these models do not require imputing missing data nor encoding categorical variables, unlike ANNs or other classifiers. We experiment on two benchmark datasets with missing categorical data, comparing classifiers trained on non-imputed (i.e., one-hot encoded) or differently-imputed data with different degrees of missing-data perturbation. The results show imputation methods can increase predictive accuracy in the presence of missing-data perturbation. Additionally, we find that for imputed models, missing-data perturbation can improve prediction accuracy by regularizing the training data. \par
 
 \vspace{9pt}
 \noindent {\it Key words and phrases:} % alphabetical order
@@ -114,9 +114,9 @@ artificial neural networks (ANNs), decision trees,  imputation methods, missing 
 \setcounter{page}{1} %-1
 \noindent {\bf 1. Introduction} 
 
-Missing data is a common problem in survey-based political science research. Sources of missing data in surveys include nonresponse and attrition in longitudinal surveys. For supervised classification tasks, the objective is to fit a model on categorically labeled training data in order to categorize new examples.\footnote{Applications of supervised learning in political science include studies of international and civil conflict\citep{beck2000,de2004,hill2014,muchlinski2016} and election fraud \citep{cantu2011,montgomery2015}. Recently, political scientists have employed supervised learning for estimating heterogeneous treatment effects, \citep{imai2011,green2012, imai2013, grimmer2014}, text analysis \citep{quinn2010,hopkins2010,grimmer2013,lauderdale2014,wilkerson2015}, and record linkage \citep{giraud2010}.} The ability of researchers to accurately fit a model model may be compromised by missing data, depending on the underlying missing data mechanism. Nonresponse in surveys is typically handled by imputation methods, which are used to estimate a value for missing data. However, many popular imputation methods assume data missing at random (MAR), which occurs when the probability of missingness depends only on the observed data. 
+Missing data is a common problem in survey-based political science research. Sources of missing data in surveys include nonresponse and attrition in longitudinal surveys. For supervised classification tasks, the objective is to fit a model on labeled training data in order to categorize new examples.\footnote{Applications of supervised learning in political science include studies of international and civil conflict\citep{beck2000,de2004,hill2014,muchlinski2016} and election fraud \citep{cantu2011,montgomery2015}. Recently, political scientists have employed supervised learning for estimating heterogeneous treatment effects, \citep{imai2011,green2012, imai2013, grimmer2014}, text analysis \citep{quinn2010,hopkins2010,grimmer2013,lauderdale2014,wilkerson2015}, and record linkage \citep{giraud2010}.} The ability of researchers to accurately fit a model model and yield unbiased estimates may be compromised by missing data. Nonresponse in surveys is typically handled by imputation methods, which are used to estimate a value for missing data. However, many popular imputation methods assume data missing at random (MAR), which occurs when the probability of missingness depends only on the observed data. Imputation methods that assume data are MAR when the data is in fact missing not at random (MNAR), when the probability of an example having a missing value depends on the missing data itself, can bias model estimates. 
 
-The objective of the present study is to compare the out-of-sample performance of three popular machine learning classifiers --- decision trees, random forests, and artificial neural networks (ANNs) --- trained on differently-imputed or non-imputed (i.e., one-hot encoded) survey datasets that contain various degrees of missing-data perturbation. Decision trees and random forests are typically used for survey data because missing data must be preprocessed to be suited for models that require numerical input, such as ANNs. Imputation methods that assume data at MAR when the data is in fact missing not at random (MNAR), when the probability of an example having a missing value depends on the missing data itself, can bias model estimates. The results of the study will provide guidance to applied researchers on how to handle missing data in survey datasets and which classifier to use. 
+The objective of the present study is to compare the out-of-sample performance of three popular machine learning classifiers --- decision trees, random forests, and artificial neural networks (ANNs) --- trained on differently-imputed or non-imputed (i.e., one-hot encoded) survey datasets that contain various degrees of missing-data perturbation. Researchers analyzing survey data typically choose decision trees or random forests for classification tasks, largely because these models do not require imputing missing data nor encoding categorical variables, unlike ANNs or other classifiers. The results of the present study will provide guidance to applied researchers on how to handle missing data for supervised learning tasks. 
 
 This manuscript is organized as follows: Section 2 describes missing data mechanisms and imputation methods; Section 3 describes our experiments on two benchmark datasets and discusses the results; Section 4 concludes and offers areas for future research. 
 
@@ -135,14 +135,12 @@ In this section, we describe the missing data mechanisms underlying patterns of 
 
 It is important to first distinguish between missing data patterns, which describe which values are observed and which are missing, and missing data mechanisms, which describe the the probability of missingness  \citep[Chap.~1]{little2014}. Common missing data patterns in surveys typically include unit nonresponse, where a subset of participants do not complete the survey, and item nonresponse, where missing values are concentrated on particular questions. In opinion polls, nonresponse may reflect either refusal to reveal a preference or lack of a preference \citep{de2003prevention}. 
 
-Imputing missing values in situations where missing data hide values that are useful for classification tasks can help improve prediction accuracy. Understanding the missing data mechanisms underlying patterns of missing data is crucial since properties of imputation methods depend on the nature of these mechanisms. Following the notation of \cite[Chap.~1]{little2014}, let $Y = y_{ij}$ be a $(n \times K)$ dataset with each row $y_i = (y_{i1}, \ldots, y_{iK})$ the set of $y_{ij}$ values of feature $Y_j$ for example $i$. Let $Y_{\mathrm{obs}}$ define observed values of $Y$ and $Y_{\mathrm{mis}}$ define missing values. Define the missing data identity matrix $M = m_{ij}$, where $m_{ij} = 1$ if $y_{ij}$ is missing and $m_{ij} = 0$ if $y_{ij}$ is nonmissing. The missing data mechanism is missing completely at random (MCAR) if the probability of missingness is independent of the data, or $f(M | Y, \phi) = f(M | \phi)$ for all $Y, \phi$, where $\phi$ denotes unknown parameters. The MAR assumption is less restrictive than MCAR in that the probability of missingness depends only on the observed data, $f(M | Y, \phi) = f(M | Y_{\mathrm{obs}}, \phi)$ for all $Y_{\mathrm{mis}}, \phi$. The MNAR assumption is that the probability of missingness may also depend on the unobserved data, $f(M | Y, \phi) = f(M | Y_{\mathrm{mis}}, \phi)$ for all $Y_{\mathrm{mis}}, \phi$. Researchers typically assume data is MAR, which mitigates the identifiability problems of MNAR because the probability of missingness depends on data that are observed on all individuals \citep[Chap.~6]{tsiatis2007}. 
+Imputing missing values in situations where missing data hide values that are useful for classification tasks can help improve prediction accuracy. Understanding the missing data mechanisms underlying patterns of missing data is crucial since properties of imputation methods depend on the nature of these mechanisms. Following the notation of \citet[Chap.~1]{little2014}, let $Y = y_{ij}$ be a $(n \times K)$ dataset with each row $y_i = (y_{i1}, \ldots, y_{iK})$ the set of $y_{ij}$ values of feature $Y_j$ for example $i$. Let $Y_{\mathrm{obs}}$ define observed values of $Y$ and $Y_{\mathrm{mis}}$ define missing values. Define the missing data identity matrix $M = m_{ij}$, where $m_{ij} = 1$ if $y_{ij}$ is missing and $m_{ij} = 0$ if $y_{ij}$ is nonmissing. The missing data mechanism is missing completely at random (MCAR) if the probability of missingness is independent of the data, or $f(M | Y, \phi) = f(M | \phi)$ for all $Y, \phi$, where $\phi$ denotes unknown parameters. The MAR assumption is less restrictive than MCAR in that the probability of missingness depends only on the observed data, $f(M | Y, \phi) = f(M | Y_{\mathrm{obs}}, \phi)$ for all $Y_{\mathrm{mis}}, \phi$. The MNAR assumption is that the probability of missingness may also depend on the unobserved data, $f(M | Y, \phi) = f(M | Y_{\mathrm{mis}}, \phi)$ for all $Y_{\mathrm{mis}}, \phi$. Researchers typically assume data is MAR, which mitigates the identifiability problems of MNAR because the probability of missingness depends on data that are observed on all individuals \citep[Chap.~6]{tsiatis2007}. 
 
 \par			
 \noindent {\bf 2.2. Imputation methods} \label{section:techniques} 
 
-Complete-case analysis (i.e., simply discarding examples with missing values) wastes information and biases estimates unless the data are MCAR. Since there is no way to distinguish whether the missing data are MCAR or MNAR from the observed data, a natural strategy is to impute missing values and then proceed as if the imputed values are true values. Imputation methods that rely on explicit model assumptions include \emph{mean or mode replacement}, which substitutes missing values with the mean (for quantitative features) or mode (for qualitative features) of the feature vector, and \emph{prediction model} imputation, which replaces missing values with the predicted values from a regression of $Y_{\mathrm{mis}}$ on $Y_{\mathrm{obs}}$. Explicit modeling methods assume the data are MAR while implicit modeling methods, which are algorithmic in nature and rely only on implicit assumptions, generally do not assume the underlying missing data mechanism. Implicit methods include \emph{random replacement}, where an example with missing data is randomly replaced with another complete example randomly sampled, and \emph{hot deck} imputation, where missing values are replaced by ``similar'' nonmissing values. Hot deck imputation can be implemented by computing the $k$-nearest-neighbors ($k$-NN) of an example with missing data and assigning the mode of the $k$-neighbors to the missing data. \cite{batista2003analysis} use this procedure and find $k$-NN imputation can outperform internal methods used by decision trees to treat missing data and summary statistic imputation. \cite{li2004} propose a hot deck imputation method based on fuzzy $k$-means. 
-
-\cite{silva2011} empirically compare imputation using ANNs with mean/mode imputation, regression models (logistic regression and multiple linear regression), or hot deck, and find the ANNs model performs the best on datasets with categorical variables. 
+Complete-case analysis (i.e., discarding examples with missing values) wastes information and biases estimates unless the missing data are MCAR. Since there is no way to distinguish whether the missing data are MCAR or MNAR from the observed data, a natural strategy is to impute missing values and then proceed as if the imputed values are true values. Imputation methods that rely on explicit model assumptions include \emph{mean or mode replacement}, which substitutes missing values with the mean (for quantitative features) or mode (for qualitative features) of the feature vector, and \emph{prediction model} imputation, which replaces missing values with the predicted values from a regression of $Y_{\mathrm{mis}}$ on $Y_{\mathrm{obs}}$. Explicit modeling methods assume the data are MAR while implicit modeling methods, which are algorithmic in nature and rely only on implicit assumptions, generally do not assume the underlying missing data mechanism. Implicit methods include \emph{random replacement}, where an example with missing data is randomly replaced with another complete example randomly sampled, and \emph{hot deck} imputation, where missing values are replaced by ``similar'' nonmissing values. Hot deck imputation can be implemented by computing the $k$-nearest-neighbors ($k$-NN) of an example with missing data and assigning the mode of the $k$-neighbors to the missing data. \cite{batista2003analysis} use this procedure and find $k$-NN imputation can outperform internal methods used by decision trees to treat missing data and summary statistic imputation. \cite{li2004} propose a hot deck imputation method based on fuzzy $k$-means. \cite{silva2011} empirically compare imputation using ANNs with mean/mode imputation, regression models (logistic regression and multiple linear regression), andhot deck, finding the ANNs model performs the best on datasets with categorical variables. 
 
 \par
 \noindent {\bf 2.3. One-hot encoding for missing data} 
@@ -158,21 +156,21 @@ A natural strategy in dealing with missing data for supervised learning problems
 \setcounter{equation}{0} %-1
 \noindent {\bf 3. Experiments} 
 
-In this section, we describe our experiment on two benchmark datasets with missing categorical data, comparing three popular classifiers --- ANNs, decision trees, and random forests--- trained on either non-imputed or differently-imputed data with different degrees of MCAR perturbation.
+In this section, we describe our experiment on two benchmark datasets with missing categorical data, comparing three popular classifiers --- ANNs, decision trees, and random forests--- trained on either one-hot encoded or differently-imputed data with different degrees of MCAR perturbation.
 
 \par
 \noindent {\bf 3.1. Benchmark datasets}
 
-We experiment on two benchmark datasets from the UCI Machine Learning Repository: the Adult dataset and Congressional Voting Records (CVRs) dataset \citep{Lichman2013}. The Adult dataset contains $N=48,842$ examples and 14 features (6 continuous and 8 categorical). Missing values in this dataset are survey nonresponses. The prediction task is to determine whether a person makes over \$50,000 a year. The CVRs dataset contains $N=435$ examples, each the voting record of a member of the $98^{th}$ U.S. House of Representatives for 16 key roll call votes. The dataset contains 16 categorical features with three possible values: ``yea'', ``nay'', and missing. Missing values in this dataset are not simply unknown, but represent values other up-or-down votes, such as voted present, voted present to avoid conflict of interest, and did not vote or otherwise make a position known. The prediction task is to classify party affiliation (Republican or Democrat). In contrast to the Adult dataset, in which only a few features are highly correlated, many of the roll call votes in the CVRs dataset exhibit strong correlations (Figures SM-\ref{fig:correlation-adult} and SM-\ref{fig:correlation-votes}).
+We experiment on two benchmark datasets from the UCI Machine Learning Repository: the Adult dataset and Congressional Voting Records (CVRs) dataset \citep{Lichman2013}. The Adult dataset contains $N=48,842$ examples and 14 features (6 continuous and 8 categorical). The prediction task is to determine whether a person makes over \$50,000 a year. The CVRs dataset contains $N=435$ examples, each the voting record of a member of the $98^{th}$ U.S. House of Representatives for 16 key roll call votes. The dataset contains 16 categorical features with three possible values: ``yea'', ``nay'', and missing. The prediction task is to classify party affiliation (Republican or Democrat). In contrast to the Adult dataset, in which only a few features are highly correlated, many of the roll call votes in the CVRs dataset exhibit strong correlations (Figures SM-\ref{fig:correlation-adult} and SM-\ref{fig:correlation-votes}).
 
-We randomly split each dataset $2/3$ for training and $1/3$ for testing. The state--of--the--art for the Adult dataset is a Naive Bayes classifier that achieves a 14.05\% generalization error after removing examples with missing values \citep{kohavi1996}. The CVRs dataset donor claims to achieve a 90-95\% accuracy using an incremental decision tree algorithm called STAGGER, although it is unknown to the authors what train-test split is used or how missing values are handled \citep{schlimmer1987,schlimmer1986}.
+We randomly split each dataset $2/3$ for training and $1/3$ for testing. The state--of--the--art for the Adult dataset is a Naive Bayes classifier that achieves a 14.05\% generalization error after removing examples with missing values \citep{kohavi1996}. The CVRs dataset donor claims to achieve a 5-10\% error rate using an incremental decision tree algorithm called STAGGER, although it is unknown to the authors what train-test split is used or how missing values are handled \citep{schlimmer1987,schlimmer1986}.
 
 \par
 \noindent {\bf 3.2. Patterns of missing data}
 
-Uncovering missing data patterns in the datasets is will help to identify possible missing data mechanisms and select appropriate imputation methods. Figure SM-\ref{fig:proportion-missing-adult} analyzes patterns of missing data in the Adult dataset, in which 7\% of the examples contain missing values. Missing data in the Adult dataset is due to item nonresponse, as missing values are concentrated in three of the categorical features --- \emph{Work class}, \emph{Occupation}, and \emph{Native country}--- and no examples contain entirely missing data. It is unlikely that the data are MCAR because observations that are missing in \emph{Work class} are also missing in \emph{Occupation} (about 6\% of examples have missing values in both). About 1\% of examples are missing just \emph{Native country} and less than 1\% are missing all three features. There is no way to determine from the observed data whether the missing data are MAR or MNAR; the data are MNAR if the probability of missingness cannot be explained only by the observed data in the other predictors.
+Uncovering missing data patterns in the datasets will help to identify possible missing data mechanisms and select appropriate imputation methods. Figure SM-\ref{fig:proportion-missing-adult} analyzes patterns of missing data in the Adult dataset, in which 7\% of the examples contain missing values. Missing data in the Adult dataset is due to item nonresponse, as missing values are concentrated in three of the categorical features --- \emph{Work class}, \emph{Occupation}, and \emph{Native country}--- and no examples contain entirely missing data. It is unlikely that the data are MCAR because observations that are missing in \emph{Work class} are also missing in \emph{Occupation} (about 6\% of examples have missing values in both). There is no way to determine from the observed data whether the missing data are MAR or MNAR; the data are MNAR if the probability of missingness cannot be explained only by the observed data in the other predictors.
 
-Close to half of the CVRs data contains missing values, which are present in every feature (Figure SM-\ref{fig:proportion-missing-votes}). About a quarter of missing data is in \texttt{South Africa}, which was a controversial amendment to amend the Export Administration Act to bar U.S. exports to South Africa's apartheid regime. Twelve percent of missing data is in the feature \texttt{Water}, which is a water projects authorizations bill, and 7\% of missing data rests in the feature \texttt{Exports}, which is a tariff bill. The data are unlikely to be MCAR because 12\% of the data are missing in just \texttt{South Africa} and less than 1\% of examples are missing across all features. It is most likely in this case that the CVRs data are MNAR because the probability of missing a vote or voting present on one important bill should not theoretically be influenced by observed votes on other important bills. 
+Missing values in the CVRs dataset are not simply unknown, but represent values other up-or-down votes, such as voted present, voted present to avoid conflict of interest, and did not vote or otherwise make a position known. Close to half of the CVRs data contains missing values, which are present in every feature (Figure SM-\ref{fig:proportion-missing-votes}). About a quarter of missing data is in \texttt{South Africa}, which was a controversial amendment to amend the Export Administration Act to bar U.S. exports to South Africa's apartheid regime. Twelve percent of missing data is in the feature \texttt{Water}, which is a water projects authorizations bill, and 7\% of missing data rests in the feature \texttt{Exports}, which is a tariff bill. The data are unlikely to be MCAR because 12\% of the data are missing in just \texttt{South Africa} and less than 1\% of examples are missing across all features. It is most likely in this case that the CVRs data are MNAR because the probability of missing a vote or voting present on one important bill should not theoretically be influenced by observed votes on other important bills. 
 
 \par
 \noindent {\bf 3.3. Preprocessing}
@@ -181,7 +179,7 @@ We perturb the training data so that the proportion of missing values in the set
  
  \begin{equation}\label{3.1}
 \Pr (M = 1 | Y_{\mathrm{cat}}, \phi) = \delta \text{ for all } Y_{\mathrm{cat}}.
-\end{equation} While perturbation is used primarily to study the effect of larger amounts of missing data, we note that missing-data perturbation is a form of dropout noise that is used to control overfitting during the training process \citep{wager2013}.
+\end{equation} While perturbation is used primarily to study the effect of larger amounts of missing data, we note that missing-data perturbation is a form of dropout noise that can be used to control overfitting during the training process \citep{wager2013}.
 
 After one-hot encoding the categorical variables in the training data, we implement each of the following imputation techniques, discussed in Section 2.2: $k$-NN, prediction model (logistic regression, random forests, or SVMs), mode replacement, and random replacement. We then standardize continuous features by subtracting the mean and dividing by the standard deviation of the feature. The test data is preprocessed in the same manner, with the exception that we do not perturb categorical features in the test data.\footnote{When imputing the missing data with mode replacement, we use the training set mode. We also use the training set mean and standard deviation to standardize test set features.\nocite{rubin1995}}
 
@@ -190,14 +188,14 @@ After one-hot encoding the categorical variables in the training data, we implem
 
 We train three different classifiers on the preprocessed data: decision trees, random forests, and ANNs. The ANNs consists of four layers, each of the two hidden layers having 1024 nodes, and updates with the adaptive learning rate method \emph{Adadelta} \citep{zeiler2012}. We explore the hyperparameter space ---  momentum schedule, dropout regularization, and learning rate --- via Bayesian optimization \citep{snoek2012}, which selects optimal models based on training error. Prediction intervals are obtained from the standard deviation of test set errors of ANNs trained with different convergences \citep{heskes1997}. 
 
-Random forests and decision trees are are trained with preselected hyperparameters. Prediction intervals follow from the variation created by varying the maximum depth of the decision trees, and for random forests, the number of trees for random forests and decision rule for the number of features to consider when looking for the best split. 
+Random forests and decision trees are trained with preselected hyperparameters. Prediction intervals follow from the variation created by varying the maximum depth of the decision trees, and for random forests, the number of trees and decision rule for the number of features to consider when looking for the best split. 
 
 \par
 \noindent {\bf 3.5. Results}
 
-We assess the performance of the classifiers in terms of test set error rate on non-imputed and differently-imputed data and for various degrees of MCAR perturbation. The results on the Adult dataset and CVRs dataset are plotted in Figures \ref{fig:test-error-adult} and \ref{fig:test-error-votes}, respectively. Error bars represent $\pm 1$ standard deviation from the test error rate. The ANNs classifier trained on data imputed with $k$-NN yields the lowest generalization error ($0.144 \pm 0.06$) on the Adult dataset, which is slightly above the state-of-the-art for the dataset even with 10\% of the categorical feature values perturbed. In comparison, a random forests classifier with trained on non-perturbed and non-imputed data yields a test error rate of $0.152 \pm 0.02$. One-hot-encoded decision trees beats the state-of-the-art on the CVRs dataset by over 2\% ($0.027 \pm 0.006$). More importantly, these results show that the classifiers can overfit the data and, in the case of imputed models, perturbation improves prediction accuracy by regularizing the training data.
+We assess the performance of the classifiers in terms of test set error rate on one-hot encoded or differently-imputed data and for various degrees of MCAR perturbation. The results on the Adult dataset and CVRs dataset are plotted in Figures \ref{fig:test-error-adult} and \ref{fig:test-error-votes}, respectively. Error bars represent $\pm 1$ standard deviation from the test error rate. One-hot-encoded decision trees beats the state-of-the-art on the CVRs dataset by over 2\% ($0.027 \pm 0.006$). The ANNs classifier trained on data imputed with $k$-NN yields the lowest generalization error ($0.144 \pm 0.06$) on the Adult dataset, which is slightly above the state-of-the-art for the dataset even with 10\% of the categorical feature values perturbed. In comparison, a random forests classifier trained on non-perturbed and one-hot encoded data yields a test error rate of $0.152 \pm 0.02$. This comparison shows that the classifiers can overfit the data and, in the case of imputed models, perturbation improves prediction accuracy by regularizing the training data. 
 
-Overall, the results show imputation methods can increase predictive accuracy when there are considerable levels of MCAR data. For both datasets, non-imputed models trained in the absence of perturbation do just as well as imputed models trained on non-perturbed data. In the case of the Adult dataset, imputation clearly improves accuracy in the presence of MCAR-perturbed data. In contrast, each of the three classifiers trained on the one-hot encoded CVRs dataset perform relatively well across different levels of perturbation. The results are similar to when the classifiers are trained on MNAR-perturbed data (Figures SM-\ref{fig:test-error-adult-mnar} and SM-\ref{fig:test-error-votes-mnar}).
+Overall, the results show imputation methods can increase predictive accuracy in the presence of missing-data perturbation. For both datasets, one-hot encoded models trained in the absence of perturbation do just as well as imputed models trained on non-perturbed data. In the case of the Adult dataset, imputation clearly improves accuracy in the presence of MCAR-perturbed data. In contrast, each of the three classifiers trained on the one-hot encoded CVRs dataset perform relatively well across different levels of perturbation. The general pattern of results hold when the classifiers are trained on MNAR-perturbed data (Figures SM-\ref{fig:test-error-adult-mnar} and SM-\ref{fig:test-error-votes-mnar}).
 
 \begin{figure}[h!]
 \includegraphics[scale=0.58, center]{figure/test-errors-adult-no-imp-mcar}\par
@@ -219,11 +217,11 @@ Overall, the results show imputation methods can increase predictive accuracy wh
 \setcounter{equation}{0} %-1
 \noindent {\bf 4. Conclusion}  
 
-This paper investigates the effects of missing data imputation and perturbation on classification tasks using supervised learning algorithms. We compare the predictive performance of ANNs against decision tree and random forest classifiers trained on datasets with differently-imputed data. We assess performance in terms of test set error for different levels of MCAR-perturbed training data. We come close to beating the state-of-the-art test error on the Adult dataset using an ANNs classifier trained on data imputed with $k$-NN and outperform the state-of-the-art on the CVRs dataset by over 2\% using one-hot-encoded random forests. 
+This paper investigates the effects of missing data imputation and perturbation on classification tasks using supervised learning algorithms. We compare the predictive performance of ANNs against decision tree and random forest classifiers trained on datasets with one-hot encoded or differently-imputed data. We assess performance in terms of test set error for different levels of MCAR-perturbed training data. We come close to beating the state-of-the-art test error on the Adult dataset using an ANNs classifier trained on data imputed with $k$-NN and outperform the state-of-the-art on the CVRs dataset by over 2\% using one-hot encoded random forests. 
 
 We conclude from the results that the performance of the classifiers and imputation strategies generally depend on the nature and proportion of missing data. For the Adult dataset, ANNs trained on imputed data generally outperform other classifiers and imputation methods across different ratios of perturbed data, while classifiers trained on one-hot encoded data perform very poorly on perturbed training data. 
 
-Future work could help identify the conditions under which missing-data perturbation might improve prediction accuracy by acting as a regularization technique. The results of the present study show that perturbation can help increase predictive accuracy for imputed models, but not non-imputed models. Future work might compare missing-data perturbation with dropout training, which changes to zero all the values of a random subset of features \citep{hinton2012, maaten2013, wang2013}. 
+Future work could help identify the conditions under which missing-data perturbation might improve prediction accuracy by acting as a regularization technique. The results of the present study show that perturbation can help increase predictive accuracy for imputed models, but not one-hot encoded models. Future work might compare missing-data perturbation with dropout training, which changes to zero all the values of a random subset of features \citep{hinton2012, maaten2013, wang2013}. 
 
 \par
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -272,17 +270,52 @@ Batista, G.~E. and M.~C. Monard (2003).
   learning.
 \newblock {\em Applied Artificial Intelligence\/}~{\em 17\/}(5-6), 519--533.
 
+\bibitem[\protect\citeauthoryear{Beck, King, and Zeng}{Beck
+  et~al.}{2000}]{beck2000}
+Beck, N., G.~King, and L.~Zeng (2000).
+\newblock Improving quantitative studies of international conflict: A
+  conjecture.
+\newblock {\em American Political Science Review\/}~{\em 94\/}(01), 21--35.
+
+\bibitem[\protect\citeauthoryear{Bowers, Fredrickson, Hansen, and
+  Panagopoulos}{Bowers et~al.}{2015}]{bowers2015}
+Bowers, J., M.~M. Fredrickson, B.~B. Hansen, and C.~Panagopoulos (2015).
+\newblock Machine learning and causal inference: A modular approach to
+  assessing the effects of the london bombings of 2005.
+\newblock {\em \url{http://www.jakebowers.org/PAPERS/BFHPAPSA2015.pdf}\/}.
+
 \bibitem[\protect\citeauthoryear{Brouwer}{Brouwer}{2002}]{brouwer2002feed}
 Brouwer, R.~K. (2002).
 \newblock A feed-forward network for input that is both categorical and
   quantitative.
 \newblock {\em Neural Networks\/}~{\em 15\/}(7), 881--890.
 
+\bibitem[\protect\citeauthoryear{Cant{\'u} and Saiegh}{Cant{\'u} and
+  Saiegh}{2011}]{cantu2011}
+Cant{\'u}, F. and S.~M. Saiegh (2011).
+\newblock Fraudulent democracy? {A}n analysis of {A}rgentina's infamous decade
+  using supervised machine learning.
+\newblock {\em Political Analysis\/}~{\em 19\/}(4), 409--433.
+
+\bibitem[\protect\citeauthoryear{Caughey and Wang}{Caughey and
+  Wang}{2014}]{caughey2014}
+Caughey, D. and M.~Wang (2014).
+\newblock {B}ayesian population interpolation and lasso-based target selection
+  in survey weighting.
+\newblock In {\em Summer Meeting of the Society for Political Methodology,
+  University of Georgia, Athens, GA}.
+
 \bibitem[\protect\citeauthoryear{De~Leeuw, Hox, Huisman, et~al.}{De~Leeuw
   et~al.}{2003}]{de2003prevention}
 De~Leeuw, E.~D., J.~Hox, M.~Huisman, et~al. (2003).
 \newblock Prevention and treatment of item nonresponse.
 \newblock {\em Journal of Official Statistics\/}~{\em 19\/}(2), 153--176.
+
+\bibitem[\protect\citeauthoryear{De~Marchi, Gelpi, and Grynaviski}{De~Marchi
+  et~al.}{2004}]{de2004}
+De~Marchi, S., C.~Gelpi, and J.~D. Grynaviski (2004).
+\newblock Untangling neural nets.
+\newblock {\em American Political Science Review\/}~{\em 98\/}(02), 371--378.
 
 \bibitem[\protect\citeauthoryear{Efron}{Efron}{1994}]{efron1994}
 Efron, B. (1994).
@@ -296,12 +329,45 @@ Fayyad, U., G.~Piatetsky-Shapiro, and P.~Smyth (1996).
 \newblock From data mining to knowledge discovery in databases.
 \newblock {\em AI magazine\/}~{\em 17\/}(3), 37.
 
+\bibitem[\protect\citeauthoryear{Giraud-Carrier, Goodliffe, and
+  Jones}{Giraud-Carrier et~al.}{2010}]{giraud2010}
+Giraud-Carrier, C., J.~Goodliffe, and B.~Jones (2010).
+\newblock Improving the study of campaign contributors with record linkage.
+\newblock {\em \url{http://goodliffe.byu.edu/papers/linkage.pdf}\/}.
+
+\bibitem[\protect\citeauthoryear{Green and Kern}{Green and
+  Kern}{2012}]{green2012}
+Green, D.~P. and H.~L. Kern (2012).
+\newblock Modeling heterogeneous treatment effects in survey experiments with
+  {B}ayesian additive regression trees.
+\newblock {\em Public Opinion Quarterly\/}~{\em 76\/}(3), 491--511.
+
+\bibitem[\protect\citeauthoryear{Grimmer, Messing, and Westwood}{Grimmer
+  et~al.}{2014}]{grimmer2014}
+Grimmer, J., S.~Messing, and S.~J. Westwood (2014).
+\newblock Estimating heterogeneous treatment effects and the effects of
+  heterogeneous treatments with ensemble methods.
+\newblock {\em \url{http://stanford.edu/~jgrimmer/het.pdf}\/}.
+
+\bibitem[\protect\citeauthoryear{Grimmer and Stewart}{Grimmer and
+  Stewart}{2013}]{grimmer2013}
+Grimmer, J. and B.~M. Stewart (2013).
+\newblock Text as data: The promise and pitfalls of automatic content analysis
+  methods for political texts.
+\newblock {\em Political Analysis\/}, mps028.
+
 \bibitem[\protect\citeauthoryear{Heskes, Wiegerinck, and Kappen}{Heskes
   et~al.}{1997}]{heskes1997}
 Heskes, T., W.~Wiegerinck, and H.~Kappen (1997).
 \newblock Practical confidence and prediction intervals for prediction tasks.
 \newblock In {\em Advances in Neural Information Processing Systems 9:
   Proceedingss of the 1996 Conference}. MIT Press.
+
+\bibitem[\protect\citeauthoryear{Hill and Jones}{Hill and
+  Jones}{2014}]{hill2014}
+Hill, D.~W. and Z.~M. Jones (2014).
+\newblock An empirical evaluation of explanations for state repression.
+\newblock {\em American Political Science Review\/}~{\em 108\/}(03), 661--687.
 
 \bibitem[\protect\citeauthoryear{Hinton, Srivastava, Krizhevsky, Sutskever, and
   Salakhutdinov}{Hinton et~al.}{2012}]{hinton2012}
@@ -311,15 +377,34 @@ Hinton, G.~E., N.~Srivastava, A.~Krizhevsky, I.~Sutskever, and R.~R.
   detectors.
 \newblock {\em arXiv preprint arXiv:1207.0580\/}.
 
+\bibitem[\protect\citeauthoryear{Hopkins and King}{Hopkins and
+  King}{2010}]{hopkins2010}
+Hopkins, D.~J. and G.~King (2010).
+\newblock A method of automated nonparametric content analysis for social
+  science.
+\newblock {\em American Journal of Political Science\/}~{\em 54\/}(1),
+  229--247.
+
 \bibitem[\protect\citeauthoryear{Hsu}{Hsu}{2006}]{hsu2006generalizing}
 Hsu, C.-C. (2006).
 \newblock Generalizing self-organizing map for categorical data.
 \newblock {\em Neural Networks, IEEE Transactions on\/}~{\em 17\/}(2),
   294--304.
-  
-\clearpage
-\markboth{\hfill{\footnotesize\rm } \hfill}
-{\hfill {\footnotesize\rm } \hfill}
+
+\bibitem[\protect\citeauthoryear{Imai, Ratkovic, et~al.}{Imai
+  et~al.}{2013}]{imai2013}
+Imai, K., M.~Ratkovic, et~al. (2013).
+\newblock Estimating treatment effect heterogeneity in randomized program
+  evaluation.
+\newblock {\em The Annals of Applied Statistics\/}~{\em 7\/}(1), 443--470.
+
+\bibitem[\protect\citeauthoryear{Imai and Strauss}{Imai and
+  Strauss}{2011}]{imai2011}
+Imai, K. and A.~Strauss (2011).
+\newblock Estimation of heterogeneous treatment effects from randomized
+  experiments, with application to the optimal planning of the get-out-the-vote
+  campaign.
+\newblock {\em Political Analysis\/}~{\em 19\/}(1), 1--19.
 
 \bibitem[\protect\citeauthoryear{Jones}{Jones}{1996}]{jones1996}
 Jones, M.~P. (1996).
@@ -330,10 +415,17 @@ Jones, M.~P. (1996).
 
 \bibitem[\protect\citeauthoryear{Kohavi}{Kohavi}{1996}]{kohavi1996}
 Kohavi, R. (1996).
-\newblock Scaling up the accuracy of naive-bayes classifiers: A decision-tree
+\newblock Scaling up the accuracy of naive-{B}ayes classifiers: A decision-tree
   hybrid.
 \newblock In {\em Proceedings of the Second International Conference on
   Knowledge Discovery and Data Mining}, pp.\  202--207. Citeseer.
+
+\bibitem[\protect\citeauthoryear{Lauderdale and Clark}{Lauderdale and
+  Clark}{2014}]{lauderdale2014}
+Lauderdale, B.~E. and T.~S. Clark (2014).
+\newblock Scaling politically meaningful dimensions using texts and votes.
+\newblock {\em American Journal of Political Science\/}~{\em 58\/}(3),
+  754--771.
 
 \bibitem[\protect\citeauthoryear{Li, Deogun, Spaulding, and Shuart}{Li
   et~al.}{2004}]{li2004}
@@ -358,14 +450,14 @@ Little, R.~J. and D.~B. Rubin (2014).
 Liu, Y., Y.~Wang, Y.~Feng, M.~M. Wall, et~al. (2016).
 \newblock Variable selection and prediction with incomplete high-dimensional
   data.
-\newblock {\em The annals of applied statistics\/}~{\em 10\/}(1), 418--450.
+\newblock {\em The Annals of Applied Statistics\/}~{\em 10\/}(1), 418--450.
 
 \bibitem[\protect\citeauthoryear{Lo, Chang, Chen, Chiang, Ferng, Hsieh, Ko,
   Kuo, Lai, Lin, et~al.}{Lo et~al.}{2009}]{lo2009}
 Lo, H.-Y., K.-W. Chang, S.-T. Chen, T.-H. Chiang, C.-S. Ferng, C.-J. Hsieh,
   Y.-K. Ko, T.-T. Kuo, H.-C. Lai, K.-Y. Lin, et~al. (2009).
-\newblock An ensemble of three classifiers for kdd cup 2009: Expanded linear
-  model, heterogeneous boosting, and selective na{\i}ve bayes.
+\newblock An ensemble of three classifiers for {KDD} {C}up 2009: Expanded
+  linear model, heterogeneous boosting, and selective na{\i}ve {B}ayes.
 \newblock {\em JMLR W\&CP\/}~{\em 7}.
 
 \bibitem[\protect\citeauthoryear{Maaten, Chen, Tyree, and Weinberger}{Maaten
@@ -383,12 +475,33 @@ Malarvizhi, M. and A.~Thanamani (2012).
 \newblock {\em IOSR Journal of Computer Engineering (IOSRJCE)\/}~{\em 6},
   12--15.
 
+\bibitem[\protect\citeauthoryear{Montgomery, Olivella, Potter, and
+  Crisp}{Montgomery et~al.}{2015}]{montgomery2015}
+Montgomery, J.~M., S.~Olivella, J.~D. Potter, and B.~F. Crisp (2015).
+\newblock An informed forensics approach to detecting vote irregularities.
+\newblock {\em Political Analysis\/}~{\em 23\/}(4), 488--505.
+
+\bibitem[\protect\citeauthoryear{Muchlinski, Siroky, He, and Kocher}{Muchlinski
+  et~al.}{2016}]{muchlinski2016}
+Muchlinski, D., D.~Siroky, J.~He, and M.~Kocher (2016).
+\newblock Comparing random forest with logistic regression for predicting
+  class-imbalanced civil war onset data.
+\newblock {\em Political Analysis\/}~{\em 24\/}(1), 87--103.
+
 \bibitem[\protect\citeauthoryear{NAPP}{NAPP}{2008}]{napp2008}
 NAPP (2008).
 \newblock Minnesota population center. north atlantic population project:
   Complete count microdata. version 2.0 [machine-readable database].
 \newblock {\em Minneapolis, MN: Minnesota Population Center, available at
   \url{https://www.nappdata.org}\/}.
+
+\bibitem[\protect\citeauthoryear{Quinn, Monroe, Colaresi, Crespin, and
+  Radev}{Quinn et~al.}{2010}]{quinn2010}
+Quinn, K.~M., B.~L. Monroe, M.~Colaresi, M.~H. Crespin, and D.~R. Radev (2010).
+\newblock How to analyze political attention with minimal assumptions and
+  costs.
+\newblock {\em American Journal of Political Science\/}~{\em 54\/}(1),
+  209--228.
 
 \bibitem[\protect\citeauthoryear{Rey-del Castillo and Carde{\~n}osa}{Rey-del
   Castillo and Carde{\~n}osa}{2012}]{rey2012fuzzy}
@@ -409,8 +522,8 @@ Rubin, D.~B., H.~S. Stern, and V.~Vehovar (1995).
   Schroeder, and Sobek}{Ruggles et~al.}{2010}]{ruggles2010}
 Ruggles, S., T.~Alexander, K.~Genadek, R.~Goeken, M.~Schroeder, and M.~Sobek
   (2010).
-\newblock Integrated public use microdata series (ipums): Version 5.0
-  [machine-readable database].
+\newblock {I}ntegrated {P}ublic {U}se {M}icrodata {S}eries ({IPUMS}): Version
+  5.0 [machine-readable database].
 \newblock {\em University of Minnesota, Minneapolis, available at
   \url{http://usa.ipums.org}\/}.
 
@@ -447,6 +560,13 @@ Tsiatis, A. (2007).
 \newblock {\em Semiparametric Theory and Missing Data}.
 \newblock Springer Science \& Business Media.
 
+\bibitem[\protect\citeauthoryear{Wager, Wang, and Liang}{Wager
+  et~al.}{2013}]{wager2013}
+Wager, S., S.~Wang, and P.~S. Liang (2013).
+\newblock Dropout training as adaptive regularization.
+\newblock In {\em Advances in neural information processing systems}, pp.\
+  351--359.
+
 \bibitem[\protect\citeauthoryear{Wang, Xing, and Chen}{Wang
   et~al.}{2008}]{wang2008categorical}
 Wang, H., G.~Xing, and K.~Chen (2008).
@@ -459,6 +579,14 @@ Wang, S. and C.~Manning (2013).
 \newblock Fast dropout training.
 \newblock In {\em Proceedings of the 30th International Conference on Machine
   Learning (ICML-13)}, pp.\  118--126.
+
+\bibitem[\protect\citeauthoryear{Wilkerson, Smith, and Stramp}{Wilkerson
+  et~al.}{2015}]{wilkerson2015}
+Wilkerson, J., D.~Smith, and N.~Stramp (2015).
+\newblock Tracing the flow of policy ideas in legislatures: A text reuse
+  approach.
+\newblock {\em American Journal of Political Science\/}~{\em 59\/}(4),
+  943--956.
 
 \bibitem[\protect\citeauthoryear{Zeiler}{Zeiler}{2012}]{zeiler2012}
 Zeiler, M.~D. (2012).

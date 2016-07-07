@@ -5,6 +5,13 @@ The style file: chicago.bst
 Database file #1: bibliography.bib
 Warning--entry type for "Lichman2013" isn't style-file defined
 --line 75 of file bibliography.bib
+Warning--no number and no volume in bowers2015
+Warning--page numbers missing in bowers2015
+Warning--no number and no volume in giraud2010
+Warning--page numbers missing in giraud2010
+Warning--no number and no volume in grimmer2014
+Warning--page numbers missing in grimmer2014
+Warning--no number and no volume in grimmer2013
 Warning--no number and no volume in hinton2012
 Warning--page numbers missing in hinton2012
 Warning--page numbers missing in lo2009
@@ -14,45 +21,45 @@ Warning--no number and no volume in ruggles2010
 Warning--page numbers missing in ruggles2010
 Warning--no number and no volume in zeiler2012
 Warning--page numbers missing in zeiler2012
-You've used 29 entries,
+You've used 48 entries,
             2861 wiz_defined-function locations,
-            785 strings with 10044 characters,
-and the built_in function-call counts, 21557 in all, are:
-= -- 1772
-> -- 1688
-< -- 6
-+ -- 510
-- -- 568
-* -- 1941
-:= -- 3910
-add.period$ -- 89
-call.type$ -- 29
-change.case$ -- 219
-chr.to.int$ -- 29
-cite$ -- 38
-duplicate$ -- 598
-empty$ -- 1261
-format.name$ -- 644
-if$ -- 4046
+            882 strings with 13332 characters,
+and the built_in function-call counts, 35994 in all, are:
+= -- 2986
+> -- 2860
+< -- 7
++ -- 872
+- -- 956
+* -- 3339
+:= -- 6497
+add.period$ -- 146
+call.type$ -- 48
+change.case$ -- 367
+chr.to.int$ -- 48
+cite$ -- 64
+duplicate$ -- 952
+empty$ -- 2072
+format.name$ -- 1108
+if$ -- 6744
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 29
-newline$ -- 147
-num.names$ -- 290
-pop$ -- 186
+missing$ -- 48
+newline$ -- 242
+num.names$ -- 480
+pop$ -- 290
 preamble$ -- 1
-purify$ -- 396
+purify$ -- 658
 quote$ -- 0
-skip$ -- 611
+skip$ -- 988
 stack$ -- 0
-substring$ -- 1092
-swap$ -- 213
-text.length$ -- 6
+substring$ -- 1835
+swap$ -- 330
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 560
-warning$ -- 9
-while$ -- 281
+type$ -- 940
+warning$ -- 16
+while$ -- 457
 width$ -- 0
-write$ -- 387
-(There were 10 warnings)
+write$ -- 635
+(There were 17 warnings)
