@@ -14,6 +14,13 @@ Beck, N., G.~King, and L.~Zeng (2000).
   conjecture.
 \newblock {\em American Political Science Review\/}~{\em 94\/}(01), 21--35.
 
+\bibitem[\protect\citeauthoryear{Cant{\'u} and Saiegh}{Cant{\'u} and
+  Saiegh}{2011}]{cantu2011}
+Cant{\'u}, F. and S.~M. Saiegh (2011).
+\newblock Fraudulent democracy? an analysis of argentina's infamous decade
+  using supervised machine learning.
+\newblock {\em Political Analysis\/}~{\em 19\/}(4), 409--433.
+
 \bibitem[\protect\citeauthoryear{De~Leeuw, Hox, Huisman, et~al.}{De~Leeuw
   et~al.}{2003}]{de2003prevention}
 De~Leeuw, E.~D., J.~Hox, M.~Huisman, et~al. (2003).
@@ -25,6 +32,33 @@ De~Leeuw, E.~D., J.~Hox, M.~Huisman, et~al. (2003).
 De~Marchi, S., C.~Gelpi, and J.~D. Grynaviski (2004).
 \newblock Untangling neural nets.
 \newblock {\em American Political Science Review\/}~{\em 98\/}(02), 371--378.
+
+\bibitem[\protect\citeauthoryear{Giraud-Carrier, Goodliffe, and
+  Jones}{Giraud-Carrier et~al.}{2010}]{giraud2010}
+Giraud-Carrier, C., J.~Goodliffe, and B.~Jones (2010).
+\newblock Improving the study of campaign contributors with record linkage.
+\newblock {\em \url{http://goodliffe.byu.edu/papers/linkage.pdf}\/}.
+
+\bibitem[\protect\citeauthoryear{Green and Kern}{Green and
+  Kern}{2012}]{green2012}
+Green, D.~P. and H.~L. Kern (2012).
+\newblock Modeling heterogeneous treatment effects in survey experiments with
+  bayesian additive regression trees.
+\newblock {\em Public Opinion Quarterly\/}~{\em 76\/}(3), 491--511.
+
+\bibitem[\protect\citeauthoryear{Grimmer, Messing, and Westwood}{Grimmer
+  et~al.}{2014}]{grimmer2014}
+Grimmer, J., S.~Messing, and S.~J. Westwood (2014).
+\newblock Estimating heterogeneous treatment effects and the effects of
+  heterogeneous treatments with ensemble methods.
+\newblock {\em \url{http://stanford.edu/~jgrimmer/het.pdf}\/}.
+
+\bibitem[\protect\citeauthoryear{Grimmer and Stewart}{Grimmer and
+  Stewart}{2013}]{grimmer2013}
+Grimmer, J. and B.~M. Stewart (2013).
+\newblock Text as data: The promise and pitfalls of automatic content analysis
+  methods for political texts.
+\newblock {\em Political Analysis\/}, mps028.
 
 \bibitem[\protect\citeauthoryear{Heskes, Wiegerinck, and Kappen}{Heskes
   et~al.}{1997}]{heskes1997}
@@ -47,6 +81,29 @@ Hinton, G.~E., N.~Srivastava, A.~Krizhevsky, I.~Sutskever, and R.~R.
   detectors.
 \newblock {\em arXiv preprint arXiv:1207.0580\/}.
 
+\bibitem[\protect\citeauthoryear{Hopkins and King}{Hopkins and
+  King}{2010}]{hopkins2010}
+Hopkins, D.~J. and G.~King (2010).
+\newblock A method of automated nonparametric content analysis for social
+  science.
+\newblock {\em American Journal of Political Science\/}~{\em 54\/}(1),
+  229--247.
+
+\bibitem[\protect\citeauthoryear{Imai, Ratkovic, et~al.}{Imai
+  et~al.}{2013}]{imai2013}
+Imai, K., M.~Ratkovic, et~al. (2013).
+\newblock Estimating treatment effect heterogeneity in randomized program
+  evaluation.
+\newblock {\em The Annals of Applied Statistics\/}~{\em 7\/}(1), 443--470.
+
+\bibitem[\protect\citeauthoryear{Imai and Strauss}{Imai and
+  Strauss}{2011}]{imai2011}
+Imai, K. and A.~Strauss (2011).
+\newblock Estimation of heterogeneous treatment effects from randomized
+  experiments, with application to the optimal planning of the get-out-the-vote
+  campaign.
+\newblock {\em Political Analysis\/}~{\em 19\/}(1), 1--19.
+
 \bibitem[\protect\citeauthoryear{Jones}{Jones}{1996}]{jones1996}
 Jones, M.~P. (1996).
 \newblock Indicator and stratification methods for missing explanatory
@@ -60,6 +117,13 @@ Kohavi, R. (1996).
   hybrid.
 \newblock In {\em Proceedings of the Second International Conference on
   Knowledge Discovery and Data Mining}, pp.\  202--207. Citeseer.
+
+\bibitem[\protect\citeauthoryear{Lauderdale and Clark}{Lauderdale and
+  Clark}{2014}]{lauderdale2014}
+Lauderdale, B.~E. and T.~S. Clark (2014).
+\newblock Scaling politically meaningful dimensions using texts and votes.
+\newblock {\em American Journal of Political Science\/}~{\em 58\/}(3),
+  754--771.
 
 \bibitem[\protect\citeauthoryear{Li, Deogun, Spaulding, and Shuart}{Li
   et~al.}{2004}]{li2004}
@@ -85,6 +149,27 @@ Maaten, L., M.~Chen, S.~Tyree, and K.~Q. Weinberger (2013).
 \newblock Learning with marginalized corrupted features.
 \newblock In {\em Proceedings of the 30th International Conference on Machine
   Learning (ICML-13)}, pp.\  410--418.
+
+\bibitem[\protect\citeauthoryear{Montgomery, Olivella, Potter, and
+  Crisp}{Montgomery et~al.}{2015}]{montgomery2015}
+Montgomery, J.~M., S.~Olivella, J.~D. Potter, and B.~F. Crisp (2015).
+\newblock An informed forensics approach to detecting vote irregularities.
+\newblock {\em Political Analysis\/}~{\em 23\/}(4), 488--505.
+
+\bibitem[\protect\citeauthoryear{Muchlinski, Siroky, He, and Kocher}{Muchlinski
+  et~al.}{2016}]{muchlinski2016}
+Muchlinski, D., D.~Siroky, J.~He, and M.~Kocher (2016).
+\newblock Comparing random forest with logistic regression for predicting
+  class-imbalanced civil war onset data.
+\newblock {\em Political Analysis\/}~{\em 24\/}(1), 87--103.
+
+\bibitem[\protect\citeauthoryear{Quinn, Monroe, Colaresi, Crespin, and
+  Radev}{Quinn et~al.}{2010}]{quinn2010}
+Quinn, K.~M., B.~L. Monroe, M.~Colaresi, M.~H. Crespin, and D.~R. Radev (2010).
+\newblock How to analyze political attention with minimal assumptions and
+  costs.
+\newblock {\em American Journal of Political Science\/}~{\em 54\/}(1),
+  209--228.
 
 \bibitem[\protect\citeauthoryear{Rubin, Stern, and Vehovar}{Rubin
   et~al.}{1995}]{rubin1995}
@@ -140,6 +225,14 @@ Wang, S. and C.~Manning (2013).
 \newblock Fast dropout training.
 \newblock In {\em Proceedings of the 30th International Conference on Machine
   Learning (ICML-13)}, pp.\  118--126.
+
+\bibitem[\protect\citeauthoryear{Wilkerson, Smith, and Stramp}{Wilkerson
+  et~al.}{2015}]{wilkerson2015}
+Wilkerson, J., D.~Smith, and N.~Stramp (2015).
+\newblock Tracing the flow of policy ideas in legislatures: A text reuse
+  approach.
+\newblock {\em American Journal of Political Science\/}~{\em 59\/}(4),
+  943--956.
 
 \bibitem[\protect\citeauthoryear{Zeiler}{Zeiler}{2012}]{zeiler2012}
 Zeiler, M.~D. (2012).

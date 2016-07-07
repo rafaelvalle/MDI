@@ -5,49 +5,54 @@ The style file: chicago.bst
 Database file #1: bibliography.bib
 Warning--entry type for "Lichman2013" isn't style-file defined
 --line 75 of file bibliography.bib
+Warning--no number and no volume in giraud2010
+Warning--page numbers missing in giraud2010
+Warning--no number and no volume in grimmer2014
+Warning--page numbers missing in grimmer2014
+Warning--no number and no volume in grimmer2013
 Warning--no number and no volume in hinton2012
 Warning--page numbers missing in hinton2012
 Warning--no number and no volume in zeiler2012
 Warning--page numbers missing in zeiler2012
-You've used 22 entries,
+You've used 35 entries,
             2861 wiz_defined-function locations,
-            745 strings with 8470 characters,
-and the built_in function-call counts, 16195 in all, are:
-= -- 1371
-> -- 1189
+            814 strings with 10810 characters,
+and the built_in function-call counts, 26060 in all, are:
+= -- 2201
+> -- 1996
 < -- 6
-+ -- 354
-- -- 394
-* -- 1426
-:= -- 2883
-add.period$ -- 68
-call.type$ -- 22
-change.case$ -- 161
-chr.to.int$ -- 22
-cite$ -- 26
-duplicate$ -- 479
-empty$ -- 987
-format.name$ -- 458
-if$ -- 3087
++ -- 604
+- -- 664
+* -- 2394
+:= -- 4661
+add.period$ -- 107
+call.type$ -- 35
+change.case$ -- 262
+chr.to.int$ -- 35
+cite$ -- 44
+duplicate$ -- 708
+empty$ -- 1533
+format.name$ -- 780
+if$ -- 4915
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 22
-newline$ -- 112
-num.names$ -- 220
-pop$ -- 149
+missing$ -- 35
+newline$ -- 177
+num.names$ -- 350
+pop$ -- 211
 preamble$ -- 1
-purify$ -- 296
+purify$ -- 475
 quote$ -- 0
-skip$ -- 485
+skip$ -- 737
 stack$ -- 0
-substring$ -- 863
-swap$ -- 175
+substring$ -- 1383
+swap$ -- 250
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 420
-warning$ -- 4
-while$ -- 212
+type$ -- 680
+warning$ -- 9
+while$ -- 335
 width$ -- 0
-write$ -- 296
-(There were 5 warnings)
+write$ -- 465
+(There were 10 warnings)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  6 JUL 2016 23:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  7 JUL 2016 11:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -506,8 +506,76 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 117.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
- been already used, duplicate ignored
+)
+
+Package natbib Warning: Citation `beck2000' on page 1 undefined on input line 1
+17.
+
+
+Package natbib Warning: Citation `de2004' on page 1 undefined on input line 117
+.
+
+
+Package natbib Warning: Citation `hill2014' on page 1 undefined on input line 1
+17.
+
+
+Package natbib Warning: Citation `muchlinski2016' on page 1 undefined on input 
+line 117.
+
+
+Package natbib Warning: Citation `cantu2011' on page 1 undefined on input line 
+117.
+
+
+Package natbib Warning: Citation `montgomery2015' on page 1 undefined on input 
+line 117.
+
+
+Package natbib Warning: Citation `imai2011' on page 1 undefined on input line 1
+17.
+
+
+Package natbib Warning: Citation `green2012' on page 1 undefined on input line 
+117.
+
+
+Package natbib Warning: Citation `imai2013' on page 1 undefined on input line 1
+17.
+
+
+Package natbib Warning: Citation `grimmer2014' on page 1 undefined on input lin
+e 117.
+
+
+Package natbib Warning: Citation `quinn2010' on page 1 undefined on input line 
+117.
+
+
+Package natbib Warning: Citation `hopkins2010' on page 1 undefined on input lin
+e 117.
+
+
+Package natbib Warning: Citation `grimmer2013' on page 1 undefined on input lin
+e 117.
+
+
+Package natbib Warning: Citation `lauderdale2014' on page 1 undefined on input 
+line 117.
+
+
+Package natbib Warning: Citation `wilkerson2015' on page 1 undefined on input l
+ine 117.
+
+
+Package natbib Warning: Citation `giraud2010' on page 1 undefined on input line
+ 117.
+
+
+Underfull \vbox (badness 5563) has occurred while \output is active []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.120 
@@ -533,6 +601,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
+
+Package natbib Warning: Citation `wager2013' on page 9 undefined on input line 
+184.
+
 [9]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -549,7 +621,7 @@ o-imp-mcar-eps-converted-to.pdf figure/test-errors-adult-no-imp-mcar.eps>
 (epstopdf)             \includegraphics on input line 203.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf, id=138, 505.89pt x 
+<figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf, id=126, 505.89pt x 
 505.89pt>
 File: figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf Graphic file (t
 ype pdf)
@@ -569,7 +641,7 @@ mp-mcar-eps-converted-to.pdf figure/test-errors-adult-imp-mcar.eps>
 (epstopdf)             \includegraphics on input line 204.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-adult-imp-mcar-eps-converted-to.pdf, id=139, 505.89pt x 505
+<figure/test-errors-adult-imp-mcar-eps-converted-to.pdf, id=127, 505.89pt x 505
 .89pt>
 File: figure/test-errors-adult-imp-mcar-eps-converted-to.pdf Graphic file (type
  pdf)
@@ -596,7 +668,7 @@ o-imp-mcar-eps-converted-to.pdf figure/test-errors-votes-no-imp-mcar.eps>
 (epstopdf)             \includegraphics on input line 210.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf, id=140, 505.89pt x 
+<figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf, id=128, 505.89pt x 
 505.89pt>
 File: figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf Graphic file (t
 ype pdf)
@@ -616,7 +688,7 @@ mp-mcar-eps-converted-to.pdf figure/test-errors-votes-imp-mcar.eps>
 (epstopdf)             \includegraphics on input line 211.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-votes-imp-mcar-eps-converted-to.pdf, id=141, 505.89pt x 505
+<figure/test-errors-votes-imp-mcar-eps-converted-to.pdf, id=129, 505.89pt x 505
 .89pt>
 File: figure/test-errors-votes-imp-mcar-eps-converted-to.pdf Graphic file (type
  pdf)
@@ -641,35 +713,43 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [13] [14 <./figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf> <./figur
 e/test-errors-adult-imp-mcar-eps-converted-to.pdf>] [15 <./figure/test-errors-v
 otes-no-imp-mcar-eps-converted-to.pdf> <./figure/test-errors-votes-imp-mcar-eps
--converted-to.pdf>] (./mdi.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
+-converted-to.pdf>] [16
 
- [16
 
 ]
-[17])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 289.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [18]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 289.
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 489.
+[19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 489.
  (./mdi.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 289.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 289.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 489.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 489.
 Package rerunfilecheck Info: File `mdi.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 289.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 489.
  ) 
 Here is how much of TeX's memory you used:
- 9169 strings out of 493089
- 133991 string characters out of 6134842
- 256240 words of memory out of 5000000
- 12428 multiletter control sequences out of 15000+600000
- 11315 words of font info for 43 fonts, out of 8000000 for 9000
+ 9222 strings out of 493089
+ 134885 string characters out of 6134842
+ 256654 words of memory out of 5000000
+ 12471 multiletter control sequences out of 15000+600000
+ 13038 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,12n,43p,1694b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,12n,43p,1694b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{figure.0.7} has been referenced but does not exis
 t, replaced by a fixed one
 
@@ -689,21 +769,23 @@ pdfTeX warning (dest): name{figure.0.1} has been referenced but does not exist,
  replaced by a fixed one
 
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on mdi.pdf (19 pages, 478091 bytes).
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on mdi.pdf (20 pages, 495372 bytes).
 PDF statistics:
- 349 PDF objects out of 1000 (max. 8388607)
- 230 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
+ 363 PDF objects out of 1000 (max. 8388607)
+ 241 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
