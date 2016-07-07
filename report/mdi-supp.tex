@@ -36,7 +36,7 @@
 
 % Reference labels in the online appendix
 \usepackage{xr}
-\externaldocument{mdi-ss}
+\externaldocument{mdi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagestyle{fancy}
@@ -111,8 +111,8 @@ This file contains descriptive plots of feature correlation and missing data pat
 
 \begin{figure}[h!]
 \includegraphics [scale=0.75, center]{figure/correlation-votes}\par
-\caption{\footnotesize Correlation matrix for Adult training set. See footnotes for Figure \ref{fig:correlation-adult}.}
- \label{fig:correlation-adult}
+\caption{\footnotesize Correlation matrix for CVRs training set. See footnotes for Figure \ref{fig:correlation-adult}.}
+ \label{fig:correlation-votes}
 \end{figure}
 
 \begin{figure}[h!]
@@ -144,11 +144,11 @@ The goal of Bayesian optimization is to choose a point in the hyperparameter spa
 \section{Results with MNAR perturbation}
 \setcounter{equation}{0}
 
-In order to study the effect of larger amounts of missing data, we perturb the training data so that each categorical feature has 10\%, 20\%, 30\%, and 40\% values missing according to the MNAR mechanism
+We perturb the training data according to the MNAR mechanism
  
  \begin{equation}\label{3.1}
-\Pr (M_i = 1 | y_i, \phi) = \begin{cases}
-1, &\text{if $y_i \in A$}  \\
+\Pr (M_{ij} = 1 | y_{ij}, \phi) = \begin{cases}
+\delta, &\text{if $y_{ij} \in A$}  \\
 0, &\text{otherwise},
 \end{cases}
 \end{equation} where $A$ is a vector containing at least one value from each categorical feature that we determine likely to be missing. We select categorical values in the Adult dataset that are theoretically correlated with low socioeconomic status, such as the values ``Without pay'' and ``Never worked" for the feature \emph{Work class}. The existing literature suggests item nonresponse in surveys is correlated with low income and low education (Rubin et al., 1995). We include in $A$ only ``nay'' votes, under the assumption that refusing to take position on an issue or missing a vote is akin to voting against the issue. 

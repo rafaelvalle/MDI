@@ -9,45 +9,45 @@ Warning--no number and no volume in hinton2012
 Warning--page numbers missing in hinton2012
 Warning--no number and no volume in zeiler2012
 Warning--page numbers missing in zeiler2012
-You've used 18 entries,
+You've used 22 entries,
             2861 wiz_defined-function locations,
-            720 strings with 7949 characters,
-and the built_in function-call counts, 13066 in all, are:
-= -- 1101
-> -- 954
-< -- 5
-+ -- 282
-- -- 320
-* -- 1126
-:= -- 2342
-add.period$ -- 56
-call.type$ -- 18
-change.case$ -- 130
-chr.to.int$ -- 18
-cite$ -- 22
-duplicate$ -- 393
-empty$ -- 800
-format.name$ -- 368
-if$ -- 2485
+            745 strings with 8470 characters,
+and the built_in function-call counts, 16195 in all, are:
+= -- 1371
+> -- 1189
+< -- 6
++ -- 354
+- -- 394
+* -- 1426
+:= -- 2883
+add.period$ -- 68
+call.type$ -- 22
+change.case$ -- 161
+chr.to.int$ -- 22
+cite$ -- 26
+duplicate$ -- 479
+empty$ -- 987
+format.name$ -- 458
+if$ -- 3087
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 18
-newline$ -- 92
-num.names$ -- 180
-pop$ -- 124
+missing$ -- 22
+newline$ -- 112
+num.names$ -- 220
+pop$ -- 149
 preamble$ -- 1
-purify$ -- 241
+purify$ -- 296
 quote$ -- 0
-skip$ -- 399
+skip$ -- 485
 stack$ -- 0
-substring$ -- 680
-swap$ -- 143
-text.length$ -- 5
+substring$ -- 863
+swap$ -- 175
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 340
+type$ -- 420
 warning$ -- 4
-while$ -- 175
+while$ -- 212
 width$ -- 0
-write$ -- 243
+write$ -- 296
 (There were 5 warnings)

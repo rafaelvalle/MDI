@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  6 JUL 2016 13:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  6 JUL 2016 23:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -438,15 +438,14 @@ LaTeX Info: Redefining \textsubscript on input line 1265.
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/tools/xr.sty
 Package: xr 1994/05/28 v5.02 eXternal References (DPC)
 )
-
-Package xr Warning: 
-No file mdi-ss-supp.aux
-LABELS NOT IMPORTED.
- on input line 45.
-
+Package xr Info: IMPORTING LABELS FROM mdi-supp.aux on input line 45.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
-(./mdi.aux)
+ (./mdi.aux
+
+LaTeX Warning: Label `3.1' multiply defined.
+
+)
 \openout1 = `mdi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
@@ -495,21 +494,19 @@ LaTeX Info: Redefining \nameref on input line 59.
 \@outlinefile=\write3
 \openout3 = `mdi.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 77.
+ [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for U+msa on input line 116.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 77.
+LaTeX Font Info:    Try loading font information for U+msb on input line 116.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [2]
+) [2]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
@@ -525,121 +522,106 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7]
-
-LaTeX Warning: Reference `fig:proportion-missing-adult' on page 8 undefined on 
-input line 172.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-
-LaTeX Warning: Reference `fig:proportion-missing-votes' on page 9 undefined on 
-input line 174.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-Underfull \vbox (badness 2065) has occurred while \output is active []
-
- [10]
+[10]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [11]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [12]
 Package epstopdf Info: Source file: <figure/test-errors-adult-no-imp-mcar.eps>
-(epstopdf)                    date: 2016-07-06 13:31:56
-(epstopdf)                    size: 87544 bytes
+(epstopdf)                    date: 2016-07-06 16:55:52
+(epstopdf)                    size: 83927 bytes
 (epstopdf)             Output file: <figure/test-errors-adult-no-imp-mcar-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:36:11
-(epstopdf)                    size: 32443 bytes
+(epstopdf)                    date: 2016-07-06 16:56:05
+(epstopdf)                    size: 32755 bytes
 (epstopdf)             Command: <repstopdf --outfile=figure/test-errors-adult-n
 o-imp-mcar-eps-converted-to.pdf figure/test-errors-adult-no-imp-mcar.eps>
-(epstopdf)             \includegraphics on input line 206.
+(epstopdf)             \includegraphics on input line 202.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf, id=122, 505.89pt x 
+<figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf, id=139, 505.89pt x 
 505.89pt>
 File: figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf>
 Package pdftex.def Info: figure/test-errors-adult-no-imp-mcar-eps-converted-to.
-pdf used on input line 206.
-(pdftex.def)             Requested size: 303.53633pt x 303.53633pt.
+pdf used on input line 202.
+(pdftex.def)             Requested size: 293.4164pt x 293.4164pt.
 Package epstopdf Info: Source file: <figure/test-errors-adult-imp-mcar.eps>
-(epstopdf)                    date: 2016-07-06 13:31:56
-(epstopdf)                    size: 242441 bytes
+(epstopdf)                    date: 2016-07-06 16:55:51
+(epstopdf)                    size: 305931 bytes
 (epstopdf)             Output file: <figure/test-errors-adult-imp-mcar-eps-conv
 erted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:38:05
-(epstopdf)                    size: 124247 bytes
+(epstopdf)                    date: 2016-07-06 16:56:06
+(epstopdf)                    size: 133641 bytes
 (epstopdf)             Command: <repstopdf --outfile=figure/test-errors-adult-i
 mp-mcar-eps-converted-to.pdf figure/test-errors-adult-imp-mcar.eps>
-(epstopdf)             \includegraphics on input line 207.
+(epstopdf)             \includegraphics on input line 203.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-adult-imp-mcar-eps-converted-to.pdf, id=123, 505.89pt x 505
+<figure/test-errors-adult-imp-mcar-eps-converted-to.pdf, id=140, 505.89pt x 505
 .89pt>
 File: figure/test-errors-adult-imp-mcar-eps-converted-to.pdf Graphic file (type
  pdf)
  <use figure/test-errors-adult-imp-mcar-eps-converted-to.pdf>
 Package pdftex.def Info: figure/test-errors-adult-imp-mcar-eps-converted-to.pdf
- used on input line 207.
-(pdftex.def)             Requested size: 303.53633pt x 303.53633pt.
+ used on input line 203.
+(pdftex.def)             Requested size: 293.4164pt x 293.4164pt.
 
 
-LaTeX Warning: Float too large for page by 118.62822pt on input line 210.
+LaTeX Warning: Float too large for page by 98.38835pt on input line 206.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <figure/test-errors-votes-no-imp-mcar.eps>
-(epstopdf)                    date: 2016-07-06 13:31:57
-(epstopdf)                    size: 88806 bytes
+(epstopdf)                    date: 2016-07-06 16:55:53
+(epstopdf)                    size: 73930 bytes
 (epstopdf)             Output file: <figure/test-errors-votes-no-imp-mcar-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:38:05
-(epstopdf)                    size: 33057 bytes
+(epstopdf)                    date: 2016-07-06 16:56:07
+(epstopdf)                    size: 33162 bytes
 (epstopdf)             Command: <repstopdf --outfile=figure/test-errors-votes-n
 o-imp-mcar-eps-converted-to.pdf figure/test-errors-votes-no-imp-mcar.eps>
-(epstopdf)             \includegraphics on input line 213.
+(epstopdf)             \includegraphics on input line 209.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf, id=124, 505.89pt x 
+<figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf, id=141, 505.89pt x 
 505.89pt>
 File: figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf>
 Package pdftex.def Info: figure/test-errors-votes-no-imp-mcar-eps-converted-to.
-pdf used on input line 213.
+pdf used on input line 209.
 (pdftex.def)             Requested size: 303.53633pt x 303.53633pt.
 Package epstopdf Info: Source file: <figure/test-errors-votes-imp-mcar.eps>
-(epstopdf)                    date: 2016-07-06 13:31:57
-(epstopdf)                    size: 289144 bytes
+(epstopdf)                    date: 2016-07-06 16:55:52
+(epstopdf)                    size: 226085 bytes
 (epstopdf)             Output file: <figure/test-errors-votes-imp-mcar-eps-conv
 erted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:38:06
-(epstopdf)                    size: 109255 bytes
+(epstopdf)                    date: 2016-07-06 16:56:07
+(epstopdf)                    size: 101078 bytes
 (epstopdf)             Command: <repstopdf --outfile=figure/test-errors-votes-i
 mp-mcar-eps-converted-to.pdf figure/test-errors-votes-imp-mcar.eps>
-(epstopdf)             \includegraphics on input line 214.
+(epstopdf)             \includegraphics on input line 210.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-votes-imp-mcar-eps-converted-to.pdf, id=125, 505.89pt x 505
+<figure/test-errors-votes-imp-mcar-eps-converted-to.pdf, id=142, 505.89pt x 505
 .89pt>
 File: figure/test-errors-votes-imp-mcar-eps-converted-to.pdf Graphic file (type
  pdf)
  <use figure/test-errors-votes-imp-mcar-eps-converted-to.pdf>
 Package pdftex.def Info: figure/test-errors-votes-imp-mcar-eps-converted-to.pdf
- used on input line 214.
+ used on input line 210.
 (pdftex.def)             Requested size: 303.53633pt x 303.53633pt.
 
 
-LaTeX Warning: Float too large for page by 99.62822pt on input line 217.
+LaTeX Warning: Float too large for page by 99.62822pt on input line 213.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -647,52 +629,76 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13]
+ [12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [14]
-(./mdi.bbl [15] [16])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 292.
- [17] [18 <./figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf> <./figu
-re/test-errors-adult-imp-mcar-eps-converted-to.pdf>]
-[19 <./figure/test-errors-votes-no-imp-mcar-eps-converted-to.pdf> <./figure/tes
-t-errors-votes-imp-mcar-eps-converted-to.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 292.
+ [13]
+[14] [15 <./figure/test-errors-adult-no-imp-mcar-eps-converted-to.pdf> <./figur
+e/test-errors-adult-imp-mcar-eps-converted-to.pdf>] [16 <./figure/test-errors-v
+otes-no-imp-mcar-eps-converted-to.pdf> <./figure/test-errors-votes-imp-mcar-eps
+-converted-to.pdf>] (./mdi.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17
+
+]
+[18])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 288.
+ [19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 288.
  (./mdi.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 292.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 292.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 288.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 288.
 Package rerunfilecheck Info: File `mdi.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 292.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 288.
  ) 
 Here is how much of TeX's memory you used:
- 9146 strings out of 493089
- 133627 string characters out of 6134842
- 255612 words of memory out of 5000000
- 12416 multiletter control sequences out of 15000+600000
- 12369 words of font info for 48 fonts, out of 8000000 for 9000
+ 9170 strings out of 493089
+ 133998 string characters out of 6134842
+ 256241 words of memory out of 5000000
+ 12428 multiletter control sequences out of 15000+600000
+ 11315 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,12n,43p,1694b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
-l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on mdi.pdf (19 pages, 471983 bytes).
+ 34i,9n,43p,1694b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.0.7} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.0.6} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.0.4} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.0.3} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.0.2} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.0.1} has been referenced but does not exist,
+ replaced by a fixed one
+
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on mdi.pdf (19 pages, 476604 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
- 205 compressed objects within 3 object streams
- 42 named destinations out of 1000 (max. 500000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 231 compressed objects within 3 object streams
+ 54 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

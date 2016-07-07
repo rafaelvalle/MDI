@@ -7,11 +7,24 @@ Batista, G.~E. and M.~C. Monard (2003).
   learning.
 \newblock {\em Applied Artificial Intelligence\/}~{\em 17\/}(5-6), 519--533.
 
+\bibitem[\protect\citeauthoryear{Beck, King, and Zeng}{Beck
+  et~al.}{2000}]{beck2000}
+Beck, N., G.~King, and L.~Zeng (2000).
+\newblock Improving quantitative studies of international conflict: A
+  conjecture.
+\newblock {\em American Political Science Review\/}~{\em 94\/}(01), 21--35.
+
 \bibitem[\protect\citeauthoryear{De~Leeuw, Hox, Huisman, et~al.}{De~Leeuw
   et~al.}{2003}]{de2003prevention}
 De~Leeuw, E.~D., J.~Hox, M.~Huisman, et~al. (2003).
 \newblock Prevention and treatment of item nonresponse.
 \newblock {\em Journal of Official Statistics\/}~{\em 19\/}(2), 153--176.
+
+\bibitem[\protect\citeauthoryear{De~Marchi, Gelpi, and Grynaviski}{De~Marchi
+  et~al.}{2004}]{de2004}
+De~Marchi, S., C.~Gelpi, and J.~D. Grynaviski (2004).
+\newblock Untangling neural nets.
+\newblock {\em American Political Science Review\/}~{\em 98\/}(02), 371--378.
 
 \bibitem[\protect\citeauthoryear{Heskes, Wiegerinck, and Kappen}{Heskes
   et~al.}{1997}]{heskes1997}
@@ -19,6 +32,12 @@ Heskes, T., W.~Wiegerinck, and H.~Kappen (1997).
 \newblock Practical confidence and prediction intervals for prediction tasks.
 \newblock In {\em Advances in Neural Information Processing Systems 9:
   Proceedingss of the 1996 Conference}. MIT Press.
+
+\bibitem[\protect\citeauthoryear{Hill and Jones}{Hill and
+  Jones}{2014}]{hill2014}
+Hill, D.~W. and Z.~M. Jones (2014).
+\newblock An empirical evaluation of explanations for state repression.
+\newblock {\em American Political Science Review\/}~{\em 108\/}(03), 661--687.
 
 \bibitem[\protect\citeauthoryear{Hinton, Srivastava, Krizhevsky, Sutskever, and
   Salakhutdinov}{Hinton et~al.}{2012}]{hinton2012}
@@ -107,6 +126,13 @@ Snoek, J., H.~Larochelle, and R.~P. Adams (2012).
 Tsiatis, A. (2007).
 \newblock {\em Semiparametric Theory and Missing Data}.
 \newblock Springer Science \& Business Media.
+
+\bibitem[\protect\citeauthoryear{Wager, Wang, and Liang}{Wager
+  et~al.}{2013}]{wager2013}
+Wager, S., S.~Wang, and P.~S. Liang (2013).
+\newblock Dropout training as adaptive regularization.
+\newblock In {\em Advances in neural information processing systems}, pp.\
+  351--359.
 
 \bibitem[\protect\citeauthoryear{Wang and Manning}{Wang and
   Manning}{2013}]{wang2013}

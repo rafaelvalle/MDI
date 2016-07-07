@@ -1,6 +1,8 @@
-This is LuaTeX, Version beta-0.80.0 (TeX Live 2015) (rev 5238)  (format=lualatex 2015.5.24)  6 JUL 2016 13:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  6 JUL 2016 22:19
+entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
+ %&-line parsing enabled.
 **mdi-supp.tex
 (./mdi-supp.tex
 LaTeX2e <2015/01/01>
@@ -105,33 +107,35 @@ Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
 
+
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
 Package hobsub Info: Skipping package `infwarerr' (already loaded).
 Package hobsub Info: Skipping package `ltxcmds' (already loaded).
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX detected.
+Package ifluatex Info: LuaTeX not detected.
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-Package: luatex-loader 2010/03/09 v0.4 Lua module loader (HO)
-
-(/usr/local/texlive/2015/texmf-dist/scripts/oberdiek/oberdiek.luatex.lua)
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
-
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks17
 Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
-Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO)
-
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
 Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
 Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
 )
@@ -207,8 +211,8 @@ File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
-2.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
 )
 \Hy@SectionHShift=\skip58
 )
@@ -222,12 +226,13 @@ Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 )
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 )))
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
@@ -239,7 +244,7 @@ Package: amstext 2000/06/29 v2.01
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks18
+\@emptytoks=\toks17
 \ex@=\dimen113
 ))
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty
@@ -269,21 +274,21 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \dotsspace@=\muskip11
 \c@parentequation=\count108
 \dspbrk@lvl=\count109
-\tag@help=\toks19
+\tag@help=\toks18
 \row@=\count110
 \column@=\count111
 \maxfields@=\count112
-\andhelp@=\toks20
+\andhelp@=\toks19
 \eqnshift@=\dimen116
 \alignsep@=\dimen117
 \tagshift@=\dimen118
 \tagwidth@=\dimen119
 \totwidth@=\dimen120
 \lineht@=\dimen121
-\@envbody=\toks21
+\@envbody=\toks20
 \multlinegap=\skip60
 \multlinetaggap=\skip61
-\mathdisplay@stack=\toks22
+\mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
@@ -299,15 +304,15 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2015/03/04 v2.20.2
-\thm@style=\toks23
-\thm@bodyfont=\toks24
-\thm@headfont=\toks25
-\thm@notefont=\toks26
-\thm@headpunct=\toks27
+\thm@style=\toks22
+\thm@bodyfont=\toks23
+\thm@headfont=\toks24
+\thm@notefont=\toks25
+\thm@headpunct=\toks26
 \thm@preskip=\skip62
 \thm@postskip=\skip63
 \thm@headsep=\skip64
-\dth@everypar=\toks28
+\dth@everypar=\toks27
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
@@ -317,15 +322,15 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks29
-\XKV@tempa@toks=\toks30
+\XKV@toks=\toks28
+\XKV@tempa@toks=\toks29
 )
 \XKV@depth=\count113
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/adjcalc.sty
-Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-
-ends (calc, etex, pgfmath)
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/adjustbox/trimclip.sty
 Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
@@ -370,18 +375,13 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 (/usr/local/texlive/2015/texmf-dist/tex/latex/tools/xr.sty
 Package: xr 1994/05/28 v5.02 eXternal References (DPC)
 )
+Package xr Info: IMPORTING LABELS FROM mdi.aux on input line 39.
+ (./mdi-supp.aux
 
-Package xr Warning: 
-No file mdi-ss.aux
-LABELS NOT IMPORTED.
- on input line 39.
-
-(./mdi-supp.aux
-
-LaTeX Warning: Label `fig:correlation-adult' multiply defined.
+LaTeX Warning: Label `3.1' multiply defined.
 
 )
-\openout1 = mdi-supp.aux
+\openout1 = `mdi-supp.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
 LaTeX Font Info:    ... okay on input line 53.
@@ -404,12 +404,12 @@ LaTeX Font Info:    ... okay on input line 53.
 \scratchbox=\box31
 \nofMPsegments=\count124
 \nofMParguments=\count125
-\everyMPshowfont=\toks31
+\everyMPshowfont=\toks30
 \MPscratchCnt=\count126
 \MPscratchDim=\dimen133
 \MPnumerator=\count127
 \makeMPintoPDFobject=\count128
-\everyMPtoPDFconversion=\toks32
+\everyMPtoPDFconversion=\toks31
 )
 \AtBeginShipoutBox=\box32
 Package hyperref Info: Link coloring OFF on input line 53.
@@ -427,8 +427,8 @@ LaTeX Info: Redefining \nameref on input line 53.
 
 (./mdi-supp.out) (./mdi-supp.out)
 \@outlinefile=\write3
+\openout3 = `mdi-supp.out'.
 
-\openout3 = mdi-supp.out
 LaTeX Font Info:    Try loading font information for U+msa on input line 71.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -444,12 +444,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 Package epstopdf Info: Source file: <figure/correlation-adult.eps>
 (epstopdf)                    date: 2016-07-06 11:10:26
 (epstopdf)                    size: 32754 bytes
-(epstopdf)             Output file: <figure/correlation-adult-eps-converted-to.p
-df>
+(epstopdf)             Output file: <figure/correlation-adult-eps-converted-to.
+pdf>
 (epstopdf)                    date: 2016-07-06 11:32:57
 (epstopdf)                    size: 15889 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/correlation-adult-ep
-s-converted-to.pdf figure/correlation-adult.eps>
+(epstopdf)             Command: <repstopdf --outfile=figure/correlation-adult-e
+ps-converted-to.pdf figure/correlation-adult.eps>
 (epstopdf)             \includegraphics on input line 107.
 Package epstopdf Info: Output file is already uptodate.
 
@@ -457,18 +457,18 @@ Package epstopdf Info: Output file is already uptodate.
 File: figure/correlation-adult-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figure/correlation-adult-eps-converted-to.pdf>
-Package pdftex.def Info: figure/correlation-adult-eps-converted-to.pdf used on i
-nput line 107.
+Package pdftex.def Info: figure/correlation-adult-eps-converted-to.pdf used on 
+input line 107.
 (pdftex.def)             Requested size: 379.41655pt x 379.41655pt.
 Package epstopdf Info: Source file: <figure/correlation-votes.eps>
 (epstopdf)                    date: 2016-07-06 11:10:21
 (epstopdf)                    size: 41496 bytes
-(epstopdf)             Output file: <figure/correlation-votes-eps-converted-to.p
-df>
+(epstopdf)             Output file: <figure/correlation-votes-eps-converted-to.
+pdf>
 (epstopdf)                    date: 2016-07-06 11:32:57
 (epstopdf)                    size: 17864 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/correlation-votes-ep
-s-converted-to.pdf figure/correlation-votes.eps>
+(epstopdf)             Command: <repstopdf --outfile=figure/correlation-votes-e
+ps-converted-to.pdf figure/correlation-votes.eps>
 (epstopdf)             \includegraphics on input line 113.
 Package epstopdf Info: Output file is already uptodate.
 
@@ -476,8 +476,8 @@ Package epstopdf Info: Output file is already uptodate.
 File: figure/correlation-votes-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figure/correlation-votes-eps-converted-to.pdf>
-Package pdftex.def Info: figure/correlation-votes-eps-converted-to.pdf used on i
-nput line 113.
+Package pdftex.def Info: figure/correlation-votes-eps-converted-to.pdf used on 
+input line 113.
 (pdftex.def)             Requested size: 379.41655pt x 379.41655pt.
 
 
@@ -486,22 +486,22 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Package epstopdf Info: Source file: <figure/proportion-missing-adult.eps>
 (epstopdf)                    date: 2016-07-06 11:11:29
 (epstopdf)                    size: 7946 bytes
-(epstopdf)             Output file: <figure/proportion-missing-adult-eps-convert
-ed-to.pdf>
+(epstopdf)             Output file: <figure/proportion-missing-adult-eps-conver
+ted-to.pdf>
 (epstopdf)                    date: 2016-07-06 11:32:58
 (epstopdf)                    size: 12020 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/proportion-missing-a
-dult-eps-converted-to.pdf figure/proportion-missing-adult.eps>
+(epstopdf)             Command: <repstopdf --outfile=figure/proportion-missing-
+adult-eps-converted-to.pdf figure/proportion-missing-adult.eps>
 (epstopdf)             \includegraphics on input line 119.
 Package epstopdf Info: Output file is already uptodate.
 
 <figure/proportion-missing-adult-eps-converted-to.pdf, id=26, 505.89pt x 505.89
 pt>
-File: figure/proportion-missing-adult-eps-converted-to.pdf Graphic file (type pd
-f)
+File: figure/proportion-missing-adult-eps-converted-to.pdf Graphic file (type p
+df)
  <use figure/proportion-missing-adult-eps-converted-to.pdf>
-Package pdftex.def Info: figure/proportion-missing-adult-eps-converted-to.pdf us
-ed on input line 119.
+Package pdftex.def Info: figure/proportion-missing-adult-eps-converted-to.pdf u
+sed on input line 119.
 (pdftex.def)             Requested size: 379.41655pt x 379.41655pt.
 
 
@@ -510,67 +510,67 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Package epstopdf Info: Source file: <figure/proportion-missing-votes.eps>
 (epstopdf)                    date: 2016-07-06 11:11:25
 (epstopdf)                    size: 38808 bytes
-(epstopdf)             Output file: <figure/proportion-missing-votes-eps-convert
-ed-to.pdf>
+(epstopdf)             Output file: <figure/proportion-missing-votes-eps-conver
+ted-to.pdf>
 (epstopdf)                    date: 2016-07-06 11:32:58
 (epstopdf)                    size: 15729 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/proportion-missing-v
-otes-eps-converted-to.pdf figure/proportion-missing-votes.eps>
+(epstopdf)             Command: <repstopdf --outfile=figure/proportion-missing-
+votes-eps-converted-to.pdf figure/proportion-missing-votes.eps>
 (epstopdf)             \includegraphics on input line 125.
 Package epstopdf Info: Output file is already uptodate.
 
 <figure/proportion-missing-votes-eps-converted-to.pdf, id=27, 505.89pt x 505.89
 pt>
-File: figure/proportion-missing-votes-eps-converted-to.pdf Graphic file (type pd
-f)
+File: figure/proportion-missing-votes-eps-converted-to.pdf Graphic file (type p
+df)
  <use figure/proportion-missing-votes-eps-converted-to.pdf>
-Package pdftex.def Info: figure/proportion-missing-votes-eps-converted-to.pdf us
-ed on input line 125.
+Package pdftex.def Info: figure/proportion-missing-votes-eps-converted-to.pdf u
+sed on input line 125.
 (pdftex.def)             Requested size: 379.41655pt x 379.41655pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[2<./figure/correlation-adult-eps-converted-to.pdf>] [3<./figure/correlation-vot
-es-eps-converted-to.pdf>] [4<./figure/proportion-missing-adult-eps-converted-to.
-pdf>] [5<./figure/proportion-missing-votes-eps-converted-to.pdf>]
+[2 <./figure/correlation-adult-eps-converted-to.pdf>] [3 <./figure/correlation-
+votes-eps-converted-to.pdf>] [4 <./figure/proportion-missing-adult-eps-converte
+d-to.pdf>] [5 <./figure/proportion-missing-votes-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <figure/params3d_adult.eps>
 (epstopdf)                    date: 2016-07-06 11:35:34
 (epstopdf)                    size: 94491 bytes
-(epstopdf)             Output file: <figure/params3d_adult-eps-converted-to.pdf>
-
+(epstopdf)             Output file: <figure/params3d_adult-eps-converted-to.pdf
+>
 (epstopdf)                    date: 2016-07-06 11:38:34
 (epstopdf)                    size: 79673 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/params3d_adult-eps-c
-onverted-to.pdf figure/params3d_adult.eps>
+(epstopdf)             Command: <repstopdf --outfile=figure/params3d_adult-eps-
+converted-to.pdf figure/params3d_adult.eps>
 (epstopdf)             \includegraphics on input line 137.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/params3d_adult-eps-converted-to.pdf, id=108, 1445.4pt x 722.7pt>
+<figure/params3d_adult-eps-converted-to.pdf, id=93, 1445.4pt x 722.7pt>
 File: figure/params3d_adult-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figure/params3d_adult-eps-converted-to.pdf>
-Package pdftex.def Info: figure/params3d_adult-eps-converted-to.pdf used on inpu
-t line 137.
+Package pdftex.def Info: figure/params3d_adult-eps-converted-to.pdf used on inp
+ut line 137.
 (pdftex.def)             Requested size: 578.14977pt x 289.07487pt.
 Package epstopdf Info: Source file: <figure/params3d_votes.eps>
 (epstopdf)                    date: 2016-07-06 11:34:35
 (epstopdf)                    size: 92607 bytes
-(epstopdf)             Output file: <figure/params3d_votes-eps-converted-to.pdf>
-
+(epstopdf)             Output file: <figure/params3d_votes-eps-converted-to.pdf
+>
 (epstopdf)                    date: 2016-07-06 11:38:35
 (epstopdf)                    size: 76148 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/params3d_votes-eps-c
-onverted-to.pdf figure/params3d_votes.eps>
+(epstopdf)             Command: <repstopdf --outfile=figure/params3d_votes-eps-
+converted-to.pdf figure/params3d_votes.eps>
 (epstopdf)             \includegraphics on input line 138.
 Package epstopdf Info: Output file is already uptodate.
 
-<figure/params3d_votes-eps-converted-to.pdf, id=109, 1445.4pt x 722.7pt>
+<figure/params3d_votes-eps-converted-to.pdf, id=94, 1445.4pt x 722.7pt>
 File: figure/params3d_votes-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figure/params3d_votes-eps-converted-to.pdf>
-Package pdftex.def Info: figure/params3d_votes-eps-converted-to.pdf used on inpu
-t line 138.
+Package pdftex.def Info: figure/params3d_votes-eps-converted-to.pdf used on inp
+ut line 138.
 (pdftex.def)             Requested size: 578.14977pt x 289.07487pt.
 
 
@@ -581,57 +581,47 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6
 
-] [7<./figure/params3d_adult-eps-converted-to.pdf><./figure/params3d_votes-eps-c
-onverted-to.pdf>]
+] [7 <./figure/params3d_adult-eps-converted-to.pdf> <./figure/params3d_votes-ep
+s-converted-to.pdf>]
 Package epstopdf Info: Source file: <figure/test-errors-adult-no-imp-mnar.eps>
-(epstopdf)                    date: 2016-07-06 13:41:49
-(epstopdf)                    size: 84814 bytes
-(epstopdf)             Output file: <figure/test-errors-adult-no-imp-mnar-eps-co
-nverted-to.pdf>
-(epstopdf)                    date: 2016-07-06 11:55:37
-(epstopdf)                    size: 32937 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-adult-no
--imp-mnar-eps-converted-to.pdf figure/test-errors-adult-no-imp-mnar.eps>
+(epstopdf)                    date: 2016-07-06 16:55:40
+(epstopdf)                    size: 81689 bytes
+(epstopdf)             Output file: <figure/test-errors-adult-no-imp-mnar-eps-c
+onverted-to.pdf>
+(epstopdf)                    date: 2016-07-06 17:09:35
+(epstopdf)                    size: 32231 bytes
+(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-adult-n
+o-imp-mnar-eps-converted-to.pdf figure/test-errors-adult-no-imp-mnar.eps>
 (epstopdf)             \includegraphics on input line 157.
-system(repstopdf --outfile=figure/test-errors-adult-no-imp-mnar-eps-converted-to
-.pdf figure/test-errors-adult-no-imp-mnar.eps) executed.
-Package epstopdf Info: Result file: <figure/test-errors-adult-no-imp-mnar-eps-co
-nverted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:43:24
-(epstopdf)                    size: 33131 bytes.
+Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-adult-no-imp-mnar-eps-converted-to.pdf, id=215, 505.89pt x 
+<figure/test-errors-adult-no-imp-mnar-eps-converted-to.pdf, id=196, 505.89pt x 
 505.89pt>
-File: figure/test-errors-adult-no-imp-mnar-eps-converted-to.pdf Graphic file (ty
-pe pdf)
+File: figure/test-errors-adult-no-imp-mnar-eps-converted-to.pdf Graphic file (t
+ype pdf)
  <use figure/test-errors-adult-no-imp-mnar-eps-converted-to.pdf>
-Package pdftex.def Info: figure/test-errors-adult-no-imp-mnar-eps-converted-to.p
-df used on input line 157.
+Package pdftex.def Info: figure/test-errors-adult-no-imp-mnar-eps-converted-to.
+pdf used on input line 157.
 (pdftex.def)             Requested size: 278.24034pt x 278.24034pt.
 Package epstopdf Info: Source file: <figure/test-errors-adult-imp-mnar.eps>
-(epstopdf)                    date: 2016-07-06 13:41:49
-(epstopdf)                    size: 246038 bytes
-(epstopdf)             Output file: <figure/test-errors-adult-imp-mnar-eps-conve
-rted-to.pdf>
-(epstopdf)                    date: 2016-07-06 11:55:38
-(epstopdf)                    size: 136812 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-adult-im
-p-mnar-eps-converted-to.pdf figure/test-errors-adult-imp-mnar.eps>
+(epstopdf)                    date: 2016-07-06 16:55:39
+(epstopdf)                    size: 415189 bytes
+(epstopdf)             Output file: <figure/test-errors-adult-imp-mnar-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2016-07-06 17:09:37
+(epstopdf)                    size: 141714 bytes
+(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-adult-i
+mp-mnar-eps-converted-to.pdf figure/test-errors-adult-imp-mnar.eps>
 (epstopdf)             \includegraphics on input line 158.
-system(repstopdf --outfile=figure/test-errors-adult-imp-mnar-eps-converted-to.pd
-f figure/test-errors-adult-imp-mnar.eps) executed.
-Package epstopdf Info: Result file: <figure/test-errors-adult-imp-mnar-eps-conve
-rted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:43:25
-(epstopdf)                    size: 127509 bytes.
+Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-adult-imp-mnar-eps-converted-to.pdf, id=216, 505.89pt x 505
+<figure/test-errors-adult-imp-mnar-eps-converted-to.pdf, id=197, 505.89pt x 505
 .89pt>
-File: figure/test-errors-adult-imp-mnar-eps-converted-to.pdf Graphic file (type 
-pdf)
+File: figure/test-errors-adult-imp-mnar-eps-converted-to.pdf Graphic file (type
+ pdf)
  <use figure/test-errors-adult-imp-mnar-eps-converted-to.pdf>
-Package pdftex.def Info: figure/test-errors-adult-imp-mnar-eps-converted-to.pdf 
-used on input line 158.
+Package pdftex.def Info: figure/test-errors-adult-imp-mnar-eps-converted-to.pdf
+ used on input line 158.
 (pdftex.def)             Requested size: 278.24034pt x 278.24034pt.
 
 
@@ -641,54 +631,44 @@ LaTeX Warning: Float too large for page by 68.03624pt on input line 161.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <figure/test-errors-votes-no-imp-mnar.eps>
-(epstopdf)                    date: 2016-07-06 13:41:50
-(epstopdf)                    size: 86736 bytes
-(epstopdf)             Output file: <figure/test-errors-votes-no-imp-mnar-eps-co
-nverted-to.pdf>
-(epstopdf)                    date: 2016-07-06 11:55:39
-(epstopdf)                    size: 32204 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-votes-no
--imp-mnar-eps-converted-to.pdf figure/test-errors-votes-no-imp-mnar.eps>
+(epstopdf)                    date: 2016-07-06 16:55:41
+(epstopdf)                    size: 70164 bytes
+(epstopdf)             Output file: <figure/test-errors-votes-no-imp-mnar-eps-c
+onverted-to.pdf>
+(epstopdf)                    date: 2016-07-06 17:09:37
+(epstopdf)                    size: 32881 bytes
+(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-votes-n
+o-imp-mnar-eps-converted-to.pdf figure/test-errors-votes-no-imp-mnar.eps>
 (epstopdf)             \includegraphics on input line 164.
-system(repstopdf --outfile=figure/test-errors-votes-no-imp-mnar-eps-converted-to
-.pdf figure/test-errors-votes-no-imp-mnar.eps) executed.
-Package epstopdf Info: Result file: <figure/test-errors-votes-no-imp-mnar-eps-co
-nverted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:43:26
-(epstopdf)                    size: 32770 bytes.
+Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-votes-no-imp-mnar-eps-converted-to.pdf, id=217, 505.89pt x 
+<figure/test-errors-votes-no-imp-mnar-eps-converted-to.pdf, id=198, 505.89pt x 
 505.89pt>
-File: figure/test-errors-votes-no-imp-mnar-eps-converted-to.pdf Graphic file (ty
-pe pdf)
+File: figure/test-errors-votes-no-imp-mnar-eps-converted-to.pdf Graphic file (t
+ype pdf)
  <use figure/test-errors-votes-no-imp-mnar-eps-converted-to.pdf>
-Package pdftex.def Info: figure/test-errors-votes-no-imp-mnar-eps-converted-to.p
-df used on input line 164.
+Package pdftex.def Info: figure/test-errors-votes-no-imp-mnar-eps-converted-to.
+pdf used on input line 164.
 (pdftex.def)             Requested size: 278.24034pt x 278.24034pt.
 Package epstopdf Info: Source file: <figure/test-errors-votes-imp-mnar.eps>
-(epstopdf)                    date: 2016-07-06 13:41:50
-(epstopdf)                    size: 254994 bytes
-(epstopdf)             Output file: <figure/test-errors-votes-imp-mnar-eps-conve
-rted-to.pdf>
-(epstopdf)                    date: 2016-07-06 11:55:39
-(epstopdf)                    size: 108820 bytes
-(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-votes-im
-p-mnar-eps-converted-to.pdf figure/test-errors-votes-imp-mnar.eps>
+(epstopdf)                    date: 2016-07-06 16:55:40
+(epstopdf)                    size: 224834 bytes
+(epstopdf)             Output file: <figure/test-errors-votes-imp-mnar-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2016-07-06 17:09:38
+(epstopdf)                    size: 102094 bytes
+(epstopdf)             Command: <repstopdf --outfile=figure/test-errors-votes-i
+mp-mnar-eps-converted-to.pdf figure/test-errors-votes-imp-mnar.eps>
 (epstopdf)             \includegraphics on input line 165.
-system(repstopdf --outfile=figure/test-errors-votes-imp-mnar-eps-converted-to.pd
-f figure/test-errors-votes-imp-mnar.eps) executed.
-Package epstopdf Info: Result file: <figure/test-errors-votes-imp-mnar-eps-conve
-rted-to.pdf>
-(epstopdf)                    date: 2016-07-06 13:43:26
-(epstopdf)                    size: 110666 bytes.
+Package epstopdf Info: Output file is already uptodate.
 
-<figure/test-errors-votes-imp-mnar-eps-converted-to.pdf, id=218, 505.89pt x 505
+<figure/test-errors-votes-imp-mnar-eps-converted-to.pdf, id=199, 505.89pt x 505
 .89pt>
-File: figure/test-errors-votes-imp-mnar-eps-converted-to.pdf Graphic file (type 
-pdf)
+File: figure/test-errors-votes-imp-mnar-eps-converted-to.pdf Graphic file (type
+ pdf)
  <use figure/test-errors-votes-imp-mnar-eps-converted-to.pdf>
-Package pdftex.def Info: figure/test-errors-votes-imp-mnar-eps-converted-to.pdf 
-used on input line 165.
+Package pdftex.def Info: figure/test-errors-votes-imp-mnar-eps-converted-to.pdf
+ used on input line 165.
 (pdftex.def)             Requested size: 278.24034pt x 278.24034pt.
 
 
@@ -700,10 +680,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 170.
 [8
 
-] [9<./figure/test-errors-adult-no-imp-mnar-eps-converted-to.pdf><./figure/test-
-errors-adult-imp-mnar-eps-converted-to.pdf>] [10<./figure/test-errors-votes-no-i
-mp-mnar-eps-converted-to.pdf><./figure/test-errors-votes-imp-mnar-eps-converted-
-to.pdf>]
+] [9 <./figure/test-errors-adult-no-imp-mnar-eps-converted-to.pdf> <./figure/te
+st-errors-adult-imp-mnar-eps-converted-to.pdf>] [10 <./figure/test-errors-votes
+-no-imp-mnar-eps-converted-to.pdf> <./figure/test-errors-votes-imp-mnar-eps-con
+verted-to.pdf>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 170.
  (./mdi-supp.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 170.
@@ -715,31 +695,29 @@ Package rerunfilecheck Info: File `mdi-supp.out' has not changed.
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 170.
-)
-
-Here is how much of LuaTeX's memory you used:
- 8241 strings out of 494693
- 100000,221844 words of node,token memory allocated
- 346 words of node memory still in use:
-   5 hlist, 2 vlist, 2 rule, 2 glue, 2 kern, 46 glue_spec, 1 write nodes
-   avail lists: 2:23,3:63,4:407,5:55,6:1334,7:57,8:7,9:116,10:137
- 11303 multiletter control sequences out of 65536+600000
- 55 fonts using 2172263 bytes
- 34i,12n,43p,789b,356s stack positions out of 5000i,500n,10000p,200000b,100000s
-<</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><<
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><</
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><</us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><</usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><</usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><</usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><</usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><</usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on mdi-supp.pdf (10 pages, 607917 bytes).
-
-PDF statistics: 386 PDF objects out of 1000 (max. 8388607)
- 189 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 131072)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ ) 
+Here is how much of TeX's memory you used:
+ 7522 strings out of 493089
+ 109383 string characters out of 6134842
+ 198171 words of memory out of 5000000
+ 10845 multiletter control sequences out of 15000+600000
+ 11542 words of font info for 45 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 34i,12n,43p,797b,345s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on mdi-supp.pdf (10 pages, 615366 bytes).
+PDF statistics:
+ 363 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
+ 22 named destinations out of 1000 (max. 500000)
+ 75 words of extra memory for PDF output out of 10000 (max. 10000000)
 
