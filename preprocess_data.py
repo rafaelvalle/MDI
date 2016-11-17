@@ -7,7 +7,7 @@ import random
 from scipy import delete
 from sklearn.preprocessing import StandardScaler
 from missing_data_imputation import Imputer
-from processing import impute, perturbate_data
+from processing import impute, perturb_data
 from params import adult_params, scalers_folder
 from params import feats_train_folder, labels_train_folder, perturb_folder
 from params import rand_num_seed
@@ -44,7 +44,7 @@ ratios = np.arange(0, .5, .1)
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
     if ratio > 0:
-        pert_data, _ = perturbate_data(x, adult_params['cat_cols'], ratio, monotone,
+        pert_data, _ = perturb_data(x, adult_params['cat_cols'], ratio, monotone,
                                        adult_params['miss_data_symbol'],
                                        adult_params['mnar_values'])
     else:
