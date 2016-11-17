@@ -6,7 +6,7 @@ import random
 from scipy import delete
 from sklearn.cross_validation import train_test_split
 from missing_data_imputation import Imputer
-from processing import impute, perturbate_data
+from processing import impute, perturb_data
 from params import votes_params
 from params import feats_train_folder, labels_train_folder, perturb_folder
 from params import feats_test_folder, labels_test_folder
@@ -60,7 +60,7 @@ ratios = np.arange(0, .5, .1)
 for ratio in ratios:
     print '\nPerturbing {}% of data'.format(ratio)
     if ratio > 0:
-        pert_data, _ = perturbate_data(
+        pert_data, _ = perturb_data(
             votes_train, votes_params['cat_cols'], ratio, monotone,
             votes_params['miss_data_symbol'], votes_params['mnar_values'])
     else:
