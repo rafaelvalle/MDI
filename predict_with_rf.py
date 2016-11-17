@@ -10,16 +10,10 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from params import feats_train_folder, feats_test_folder
-from params import MODEL_DIRECTORY, RESULTS_PATH
+from params import RESULTS_PATH
 
 
 dataname = 'votes'
-
-
-def set_trace():
-    from IPython.core.debugger import Pdb
-    import sys
-    Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
 
 
 def dumpclean(obj):
@@ -46,7 +40,7 @@ if __name__ == '__main__':
         help="Path to CSV file with rows as 'include ?, train_file, test_file'")
     args = parser.parse_args()
 
-    # store predictions on a dictionary
+    # store predictions in a dictionary
     model_preds = {}
     filepaths = np.loadtxt(args.include_path, dtype=object, delimiter=",")
     for (include, train_path, test_path) in filepaths:
@@ -62,52 +56,52 @@ if __name__ == '__main__':
 
             # Fit Tree Classifiers
             clfs = {
-            'DTC(max_depth=5)':
-                DecisionTreeClassifier(max_depth=5),
-            'DTC(max_depth=10)':
-                DecisionTreeClassifier(max_depth=10),
-            'DTC(max_depth=20)':
-                DecisionTreeClassifier(max_depth=20),
-            'DTC(max_depth=25)':
-                DecisionTreeClassifier(max_depth=25),
-            'DTC(max_depth=50)':
-                DecisionTreeClassifier(max_depth=50),
-            'DTC(max_depth=100)':
-                DecisionTreeClassifier(max_depth=100),
-            'DTC(max_depth=500)':
-                DecisionTreeClassifier(max_depth=500),
-            'DTC(max_depth=1000)':
-                DecisionTreeClassifier(max_depth=1000),
-            'DTC(max_depth=2000)':
-                DecisionTreeClassifier(max_depth=2000),
-            'DTC(max_depth=2500)':
-                DecisionTreeClassifier(max_depth=2500),
-            'RFC(n_estimators=10, max_features="sqrt")':
-                RandomForestClassifier(n_estimators=10, max_features="sqrt"),
-            'RFC(n_estimators=20, max_features="log2")':
-                RandomForestClassifier(n_estimators=20, max_features="log2"),
-            'RFC(n_estimators=25, max_features="sqrt")':
-                RandomForestClassifier(n_estimators=25, max_features="sqrt"),
-            'RFC(n_estimators=50, max_features="log2")':
-                RandomForestClassifier(n_estimators=50, max_features="log2"),
-            'RFC(n_estimators=100, max_features="sqrt")':
-                RandomForestClassifier(n_estimators=100, max_features="sqrt"),
-            'RFC(n_estimators=500, max_features="log2")':
-                RandomForestClassifier(n_estimators=500, max_features="log2"),
-            'RFC(n_estimators=1000, max_features="sqrt")':
-                RandomForestClassifier(n_estimators=1000, max_features="sqrt"),
-            'RFC(n_estimators=1500, max_features="log2")':
-                RandomForestClassifier(n_estimators=1500, max_features="log2"),
-            'RFC(n_estimators=2000, max_features="sqrt")':
-                RandomForestClassifier(n_estimators=2000, max_features="sqrt"),
-            'RFC(n_estimators=2500, max_features="log2")':
-                RandomForestClassifier(n_estimators=2500, max_features="log2")}
+                'DTC(max_depth=5)':
+                    DecisionTreeClassifier(max_depth=5),
+                'DTC(max_depth=10)':
+                    DecisionTreeClassifier(max_depth=10),
+                'DTC(max_depth=20)':
+                    DecisionTreeClassifier(max_depth=20),
+                'DTC(max_depth=25)':
+                    DecisionTreeClassifier(max_depth=25),
+                'DTC(max_depth=50)':
+                    DecisionTreeClassifier(max_depth=50),
+                'DTC(max_depth=100)':
+                    DecisionTreeClassifier(max_depth=100),
+                'DTC(max_depth=500)':
+                    DecisionTreeClassifier(max_depth=500),
+                'DTC(max_depth=1000)':
+                    DecisionTreeClassifier(max_depth=1000),
+                'DTC(max_depth=2000)':
+                    DecisionTreeClassifier(max_depth=2000),
+                'DTC(max_depth=2500)':
+                    DecisionTreeClassifier(max_depth=2500),
+                'RFC(n_estimators=10, max_features="sqrt")':
+                    RandomForestClassifier(n_estimators=10, max_features="sqrt"),
+                'RFC(n_estimators=20, max_features="log2")':
+                    RandomForestClassifier(n_estimators=20, max_features="log2"),
+                'RFC(n_estimators=25, max_features="sqrt")':
+                    RandomForestClassifier(n_estimators=25, max_features="sqrt"),
+                'RFC(n_estimators=50, max_features="log2")':
+                    RandomForestClassifier(n_estimators=50, max_features="log2"),
+                'RFC(n_estimators=100, max_features="sqrt")':
+                    RandomForestClassifier(n_estimators=100, max_features="sqrt"),
+                'RFC(n_estimators=500, max_features="log2")':
+                    RandomForestClassifier(n_estimators=500, max_features="log2"),
+                'RFC(n_estimators=1000, max_features="sqrt")':
+                    RandomForestClassifier(n_estimators=1000, max_features="sqrt"),
+                'RFC(n_estimators=1500, max_features="log2")':
+                    RandomForestClassifier(n_estimators=1500, max_features="log2"),
+                'RFC(n_estimators=2000, max_features="sqrt")':
+                    RandomForestClassifier(n_estimators=2000, max_features="sqrt"),
+                'RFC(n_estimators=2500, max_features="log2")':
+                    RandomForestClassifier(n_estimators=2500, max_features="log2")}
 
             for model_name, clf in clfs.items():
-                clf.fit(train_data[:,:-1], train_data[:, -1].astype(int))
-                y_test_hat = clf.predict(test_data[:,:-1])
+                clf.fit(train_data[:, :-1], train_data[:, -1].astype(int))
+                y_test_hat = clf.predict(test_data[:, :-1])
                 obj_val = (sum(y_test_hat != test_data[:, -1]) /
-                    float(len(test_data)))
+                           float(len(test_data)))
 
                 model_preds[model_name+imputation_name] = obj_val
                 print("{} on {} error rate on test set: {}").format(
@@ -115,7 +109,7 @@ if __name__ == '__main__':
 
     # dump dictionary
     pkl.dump(model_preds, open(
-        os.path.join(RESULTS_PATH, 'trees_{}_results.np'.format(dataname)), 
+        os.path.join(RESULTS_PATH, 'trees_{}_results.np'.format(dataname)),
         'wb'))
 
     # print dictionary
