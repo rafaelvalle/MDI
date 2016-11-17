@@ -2,8 +2,8 @@ import numpy as np
 # import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import NearestNeighbors
-from scipy.sparse.linalg import svds
 from scipy.stats import mode
+from scipy.linalg import svd
 from collections import defaultdict
 
 
@@ -29,7 +29,6 @@ class Imputer(object):
         x : np.ndarray
             Matrix with categorical data, where rows are observations and
             columns are features
-
         missing_data_cond : function
             Method that takes one value and returns True if it represents
             missing data or false otherwise.
@@ -46,7 +45,6 @@ class Imputer(object):
         x : np.ndarray
             Matrix with categorical data, where rows are observations and
             columns are features
-
         missing_data_cond : function
             Method that takes one value and returns True if it represents
             missing data or false otherwise.
@@ -58,8 +56,7 @@ class Imputer(object):
 
         for col in xrange(x.shape[1]):
             nan_ids = missing_data_cond(x[:, col])
-            val_ids = np.random.choice(np.where(nan_ids == False)[0],
-                                       np.sum(nan_ids == True))
+            val_ids = np.random.choice(np.where(~nan_ids)[0],  np.sum(nan_ids))
             data[nan_ids, col] = data[val_ids, col]
         return data
 
@@ -75,8 +72,9 @@ class Imputer(object):
         summary_func : function
             Summarization function to be used for imputation
             (mean, median, mode, max, min...)
-        data_types: tuple
-            Tuple with data types of each column
+        missing_data_cond : function
+            Method that takes one value and returns True if it represents
+            missing data or false otherwise.
         """
 
         if in_place:
@@ -106,7 +104,6 @@ class Imputer(object):
             missing data or false otherwise.
         weighted : bool
             Replaces one-hot by n_classes-hot.
-
 
         Returns
         -------
@@ -144,9 +141,19 @@ class Imputer(object):
 
         Parameters
         ----------
+        x : np.ndarray
+            Matrix with categorical data, where rows are observations and
+            columns are features
         k : int
             Number of nearest neighbors to be used
-
+        summary_func : function
+            Summarization function to be used for imputation
+            (mean, median, mode, max, min...)
+        missing_data_cond : function
+            Method that takes one value and returns True if it represents
+            missing data or false otherwise.
+        cat_cols : int tuple
+            Index of columns that are categorical
         """
         if in_place:
             data = x
@@ -203,8 +210,14 @@ class Imputer(object):
         Parameters
         ----------
         cat_cols : int tuple
-            index of columns that are categorical
-
+            Index of columns that are categorical
+        missing_data_cond : function
+            Method that takes one value and returns True if it represents
+            missing data or false otherwise.
+        clf : object
+            Object with fit and predict methods, e.g. sklearn's Decision Tree
+        inc_miss : bool
+            Include missing data in fitting the model?
         """
 
         if in_place:
@@ -265,13 +278,20 @@ class Imputer(object):
         return data
 
     def factor_analysis(self, x, cat_cols, missing_data_cond, threshold=0.9,
-                        technique='PCA', in_place=False):
-        """ Performs principal component analisis and replaces missing data with
-        values obtained from the data projected onto N principal components
+                        technique='SVD', in_place=False):
+        """ Performs low-rank matrix approximation via dimensioality reduction
+        and replaces missing data with values obtained from the data projected
+        onto N principal components or singular values or eigenvalues...
 
+        cat_cols : int tuple
+            Index of columns that are categorical
+        missing_data_cond : function
+            Method that takes one value and returns True if it represents
+            missing data or false otherwise.
         threshold : float
             Variance threshold that must be explained by eigen values.
-
+        technique : str
+            Technique used for low-rank approximation. 'SVD' is supported
         """
 
         if in_place:
@@ -279,32 +299,28 @@ class Imputer(object):
         else:
             data = np.copy(x)
 
-        # factorize valid cols
-        data_factorized = np.copy(data)
+        data_summarized = self.summarize(x, mode, missing_data_cond)
 
         # factorize categorical variables and store encoding
         factor_labels = {}
         for cat_col in cat_cols:
-            # factors, labels = pd.factorize(x[:, cat_col])
-            labels, factors = np.unique(x[:, cat_col], return_inverse=True)
+            labels, factors = np.unique(data_summarized[:, cat_col],
+                                        return_inverse=True)
             factor_labels[cat_col] = labels
-            data_factorized[:, cat_col] = factors
+            data_summarized[:, cat_col] = factors
 
-        data_factorized = data_factorized.astype(float)
-        if technique == 'PCA':
-            # questionable whether high variance = high importance.
-            u, s, vt = svds(data_factorized, data_factorized.shape[1] - 1,
-                            which='LM')
+        data_summarized = data_summarized.astype(float)
+        if technique == 'SVD`':
+            lsvec, sval, rsvec = svd(data_summarized)
+            # find number of singular values that explain 90% of variance
+            n_singv = 1
+            while np.sum(sval[:n_singv]) / np.sum(sval) < threshold:
+                n_singv += 1
 
-            # find number of eigenvalues that explain 90% of variance
-            n_pcomps = 1
-            while sum(s[-n_pcomps:]) / sum(s) < threshold:
-                n_pcomps += 1
-
-            # compute data projected onto principal components space
-            data_factor_proj = np.dot(
-                u[:, -n_pcomps:], np.dot(np.diag(s[-n_pcomps:]),
-                                         vt[-n_pcomps:, ]))
+            # compute low rank approximation
+            data_summarized = np.dot(
+                lsvec[:, :n_singv],
+                np.dot(np.diag(sval[:n_singv]), rsvec[:n_singv, ]))
         else:
             raise Exception("Technique {} is not supported".format(technique))
 
@@ -314,8 +330,10 @@ class Imputer(object):
         # update data given projection
         for col in np.unique(nans[:, 1]):
             obs_ids = nans[nans[:, 1] == col, 0]
+            # clip low rank approximation to be within factor labels
             proj_cats = np.clip(
-                data_factor_proj[obs_ids, col], 0, len(factor_labels[col])-1)
+                data_summarized[obs_ids, col], 0, len(factor_labels[col])-1)
+            # round categorical variable factors to int
             proj_cats = proj_cats.round().astype(int)
             data[obs_ids, col] = factor_labels[col][proj_cats]
 
@@ -328,7 +346,6 @@ class Imputer(object):
         ----------
         x : np.ndarray
             Matrix with categorical data
-
         cols: tuple <int>
             Index of columns with categorical data
 
@@ -361,7 +378,6 @@ class Imputer(object):
         x : np.ndarray
             Matrix with categorical data, where rows are observations and
             columns are features
-
         cols: tuple <int>
             Index of columns with categorical data
 
