@@ -42,11 +42,12 @@ def impute(data, imputer, imp_method, params_dict):
                                    params_dict['cat_cols'],
                                    params_dict['miss_data_cond'],
                                    clf)
-    elif imp_method == 'PCA':
+    elif imp_method == 'SVD':
         imp_data = imputer.factor_analysis(data,
                                            params_dict['cat_cols'],
                                            params_dict['miss_data_cond'],
-                                           technique='PCA')
+                                           technique='SVD')
+
     elif imp_method == 'KNN':
         imp_data = imputer.knn(data,
                                params_dict['n_neighbors'],
@@ -60,8 +61,8 @@ def impute(data, imputer, imp_method, params_dict):
     return imp_data
 
 
-def perturbate_data(x, cols, ratio, monotone, missing_data_symbol, mnar=None,
-                    in_place=False):
+def perturb_data(x, cols, ratio, monotone, missing_data_symbol, mnar=None,
+                 in_place=False):
     """Perturbs data by substituting existing values with missing data symbol
     such that each feature has a minimum missing data ratio
 
