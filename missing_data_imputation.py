@@ -7,12 +7,6 @@ from scipy.linalg import svd
 from collections import defaultdict
 
 
-def set_trace():
-    from IPython.core.debugger import Pdb
-    import sys
-    Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
-
-
 class Imputer(object):
     def __init__(self):
         """
@@ -294,12 +288,15 @@ class Imputer(object):
             Technique used for low-rank approximation. 'SVD' is supported
         """
 
+        def _mode(d):
+            return mode(d)[0].flatten()
+
         if in_place:
             data = x
         else:
             data = np.copy(x)
 
-        data_summarized = self.summarize(x, mode, missing_data_cond)
+        data_summarized = self.summarize(x, _mode, missing_data_cond)
 
         # factorize categorical variables and store encoding
         factor_labels = {}
@@ -310,7 +307,7 @@ class Imputer(object):
             data_summarized[:, cat_col] = factors
 
         data_summarized = data_summarized.astype(float)
-        if technique == 'SVD`':
+        if technique == 'SVD':
             lsvec, sval, rsvec = svd(data_summarized)
             # find number of singular values that explain 90% of variance
             n_singv = 1
