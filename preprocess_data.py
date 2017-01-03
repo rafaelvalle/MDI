@@ -13,11 +13,6 @@ from params import feats_train_folder, labels_train_folder, perturb_folder
 from params import rand_num_seed
 
 
-def set_trace():
-    from IPython.core.debugger import Pdb
-    import sys
-    Pdb(color_scheme='Linux').set_trace(sys._getframe().f_back)
-
 np.random.seed(rand_num_seed)
 random.seed(rand_num_seed)
 
@@ -50,7 +45,7 @@ for ratio in ratios:
     else:
         pert_data = x
     print "\tRatio is {} of {}".format(
-            np.sum(pert_data == adult_params['miss_data_symbol']), 
+            np.sum(pert_data == adult_params['miss_data_symbol']),
             len(pert_data) * len(adult_params['cat_cols']))
 
     path = os.path.join(perturb_folder,
