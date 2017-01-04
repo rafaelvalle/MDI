@@ -24,8 +24,8 @@ adult_params = {
       'Amer-Indian-Eskimo', 'Other', 'Black',
       'Male',
       'Cambodia', 'Puerto-Rico', 'Outlying-US(Guam-USVI-etc)', 'India', 'China', 'Cuba', 'Iran', 'Honduras', 'Philippines', 'Jamaica', 'Vietnam', 'Mexico', 'Dominican-Republic', 'Laos', 'Ecuador', 'Taiwan', 'Haiti', 'Columbia',"Guatemala", "Nicaragua", "Scotland", "Thailand", "El-Salvador", "Trinadad&Tobago", "Peru", "Hong"),
-    'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression',
-               'SVM', 'KNN','PCA', 'Identity'),
+    'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression', 'SVD',
+               'SVM', 'KNN','Identity'),
     'n_neighbors': 5,
     'knn_summary_func': np.mean,
     'summary_func': lambda x: mode(x)[0],
@@ -37,8 +37,8 @@ votes_params = {
     'cat_cols': np.arange(0, 16), # labels are not included in imputation
     'non_cat_cols': (),
     'mnar_values': ('n'),
-    'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression', #no KNN
-               'SVM', 'PCA', 'Identity'), 
+    'imp_methods':('RandomReplace', 'Summary', 'RandomForest', 'LogisticRegression', 'SVD', #no KNN
+               'SVM', 'Identity'), 
     'summary_func': lambda x: mode(x)[0]
 }
 
