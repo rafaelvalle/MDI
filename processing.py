@@ -111,7 +111,7 @@ def perturb_data(x, cols, ratio, monotone, missing_data_symbol, mnar=None,
         coords = np.array(mask[mask_rows], ndmin=2)
         data[coords[:, 0], coords[:, 1]] = missing_data_symbol
         miss_dict = defaultdict(list)
-        [miss_dict[i[1]].extend(i[0]) for i in coords]
+        [miss_dict[i[1]].append(i[0]) for i in coords]
     elif monotone:
         missing_mask = np.random.choice((0, 1), data[:, cols].shape, True,
                                         (1-ratio, ratio)).astype(bool)
