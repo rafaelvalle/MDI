@@ -1,7 +1,17 @@
 # MDI
-Missing Data Imputation Python Library (version 0.1)
 
-This repository offers techniques for handling missing data and encoding categorical data such that it is appropriate to neural network classifiers and other tasks. We provide six different imputation strategies and include examples using the Adult dataset. Will soon include data, python and latex code for a wip paper on MDI, Random Forest and Neural Networks.
+This repository is associated with the paper ["Missing Data Imputation for Supervised Learning"](https://arxiv.org/abs/1610.09075), which compares methods for imputing missing categorical data for supervised learning tasks.
+
+Please cite the paper if you use this code for academic research:
+
+```
+@article{poulos2016missing,
+  title={Missing Data Imputation for Supervised Learning},
+  author={Poulos, Jason and Valle, Rafael},
+  journal={arXiv preprint arXiv:1610.09075},
+  year={2016}
+}
+```
 
 ## Techniques for handling categorical missing data
 We categorize proposed imputation methods into six groups listed below:
@@ -35,13 +45,3 @@ Code can be found [here](example_adult.py)
 Code can be found [here](example_votes.py)
 
 ![Congresssional voting records dataset imputation](images/votes_hist.png)
-
-## TO DO
-
-**Compute error bars for prediction accuracy for each classifier/method - J**
-
-**Make sure that PCA only operates on complete features - R**
-
-**Use Non-Negative Matrix Factorization instead of PCA - R**
-
-
