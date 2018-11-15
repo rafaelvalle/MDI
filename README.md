@@ -1,15 +1,19 @@
 # MDI
 
-This repository is associated with the paper ["Missing Data Imputation for Supervised Learning"](https://arxiv.org/abs/1610.09075), which compares methods for imputing missing categorical data for supervised learning tasks.
+This repository is associated with the paper ["Missing Data Imputation for Supervised Learning"](https://doi.org/10.1080/08839514.2018.1448143) [arXiv](https://arxiv.org/abs/1610.09075), which compares methods for imputing missing categorical data for supervised learning tasks.
 
 Please cite the paper if you use this code for academic research:
 
 ```
-@article{poulos2016missing,
-  title={Missing Data Imputation for Supervised Learning},
+@article{poulos2018missing,
+  title={Missing data imputation for supervised learning},
   author={Poulos, Jason and Valle, Rafael},
-  journal={arXiv preprint arXiv:1610.09075},
-  year={2016}
+  journal={Applied Artificial Intelligence},
+  volume={32},
+  number={2},
+  pages={186--196},
+  year={2018},
+  publisher={Taylor \& Francis}
 }
 ```
 
