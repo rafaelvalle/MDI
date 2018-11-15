@@ -1,6 +1,6 @@
 # MDI
 
-This repository is associated with the paper ["Missing Data Imputation for Supervised Learning"](https://doi.org/10.1080/08839514.2018.1448143) [arXiv](https://arxiv.org/abs/1610.09075), which compares methods for imputing missing categorical data for supervised learning tasks.
+This repository is associated with the paper ["Missing Data Imputation for Supervised Learning"](https://doi.org/10.1080/08839514.2018.1448143) [(arXiv)](https://arxiv.org/abs/1610.09075), which empirically evaluates methods for imputing missing categorical data for supervised learning tasks.
 
 Please cite the paper if you use this code for academic research:
 
