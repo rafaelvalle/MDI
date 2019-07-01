@@ -191,8 +191,10 @@ class Imputer(object):
         def substituteValues(i):
             row = missing.keys()[i]
             cols = missing[row]
-            data[row, cols] = mode(data[mask][ids[i]][:, cols])[0].flatten()
-
+            #data[row, cols] = mode(data[mask][ids[i]][:, cols])[0].flatten()
+            nn_missing_dat=data[mask][ids[i]][:, cols]
+            for missing_col in range(nn_missing_dat.shape[1]):
+                data[row, cols[missing_col]]=mode(nn_missing_dat[:,missing_col])[0][0]
         print 'Substituting missing values'
         map(substituteValues, xrange(len(missing)))
         return data
