@@ -16,6 +16,9 @@ Please cite the paper if you use this code for academic research:
   publisher={Taylor \& Francis}
 }
 ```
+## Prerequisites
+
+**Python 2**
 
 ## Techniques for handling categorical missing data
 We categorize proposed imputation methods into six groups listed below:
@@ -40,8 +43,7 @@ Perform factor analysis (e.g., principal component analysis (PCA)) on the design
 
 ## Adult Dataset example ##
 The figure below shows frequency of job category in the Adult dataset before
-and after the imputation techniques above were used.  
-Code can be found [here](example_adult.py)
+and after the imputation techniques above were used. Code can be found [here](example_adult.py)
 
 ![Adult dataset Imputation](images/adult_hist.png)
 
